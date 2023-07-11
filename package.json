@@ -1,0 +1,22 @@
+{
+  "name": "web-legos",
+  "version": "1.0.0",
+  "description": "r2pen2's React web design toolkit using NextUI and MaterialUI",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/r2pen2/Web-Legos.git"
+  },
+  "author": "r2pen2",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/r2pen2/Web-Legos/issues"
+  },
+  "homepage": "https://github.com/r2pen2/Web-Legos#readme",
+  "dependencies": {
+    "browser-image-compression": "^2.0.2"
+  }
+}
