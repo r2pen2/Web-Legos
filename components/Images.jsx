@@ -1,6 +1,5 @@
 // Library Imports
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import { IconButton } from "@mui/material";
 import { Card, Text } from "@nextui-org/react";
 
 /**

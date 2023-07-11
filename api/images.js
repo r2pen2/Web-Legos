@@ -18,30 +18,25 @@ export class ImageCompressor {
    */
   static defaultCompressionOptions = {
     maxSizeMb: ImageCompressor.defaultMaxSizeMb,
-    maxWidthOrHeight: ImageCompressor.defaultMaxSizeMb,
+    maxWidthOrHeight: ImageCompressor.defaultMaxWidthOrHeight,
   }
 
   /**
-   * Options for {@link imageCompression} library, initialized to the default values
-   */
-  compressionOptions = ImageCompressor.defaultCompressionOptions;
-
-  /**
    * Create an {@link ImageCompressor} with the specified options
-   * @param _maxSizeMb - the maximum size of the image after compression
-   * @param _maxWidthOrHeight - the maximum width or height of the image after compression
+   * @param {number} _maxSizeMb - the maximum size of the image after compression
+   * @param {number} _maxWidthOrHeight - the maximum width or height of the image after compression
    */
-  constructor(_maxSizeMb: number, _maxWidthOrHeight: number) {
+  constructor(_maxSizeMb, _maxWidthOrHeight) {
     this.compressionOptions.maxSizeMb = _maxSizeMb;
     this.compressionOptions.maxWidthOrHeight = _maxWidthOrHeight;
   }
 
   /**
    * Compresses an HTMLImageElement with {@link defaultCompressionOptions} and returns the resulting (hopefully) smaller file
-   * @param imageFile - the HTMLImageElement to compress
+   * @param {File} imageFile - the HTMLImageElement to compress
    * @returns A promise resolved with a File after compression has been applied.
    */
-  static async compressImage(imageFile: File) {
+  static async compressImage(imageFile) {
     return new Promise(async (resolve, reject) => {
       try {
         const compressedFile = await imageCompression(imageFile, ImageCompressor.defaultCompressionOptions);
@@ -55,10 +50,10 @@ export class ImageCompressor {
 
   /**
    * Compresses an HTMLImageElement with the current {@link ImageCompressor} instance's options and returns the resulting (hopefully) smaller file
-   * @param imageFile - the HTMLImageElement to compress
+   * @param {File} imageFile - the HTMLImageElement to compress
    * @returns A promise resolved with a File after compression has been applied.
    */
-  async compressImage(imageFile: File) {
+  async compressImage(imageFile) {
     return new Promise(async (resolve, reject) => {
       try {
         const compressedFile = await imageCompression(imageFile, ImageCompressor.defaultCompressionOptions);
