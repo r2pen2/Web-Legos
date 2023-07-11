@@ -10,9 +10,6 @@ const socialIconClasses = "MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-tzssek-M
 /** Size for social icons when not otherwise specified */
 const defaultIconSize = "40px";
 
-/** Whether to always color social icons */
-const coloredIcons = true;
-
 /**
  * @enum {string} 
  * Brand hex colors for all supported socials 
