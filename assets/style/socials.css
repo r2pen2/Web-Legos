@@ -1,0 +1,23 @@
+.color-hover {
+  transition: all .5s ease;
+}
+
+.color-hover:hover {
+  transform: scale(1.1);
+}
+
+.youtube:hover {
+  color: #FF0000;
+}
+
+.instagram:hover {
+  color: #E4405F;
+}
+
+.facebook:hover {
+  color: #1877F2;
+}
+
+.tiktok:hover {
+  color: #15cbc5;
+}

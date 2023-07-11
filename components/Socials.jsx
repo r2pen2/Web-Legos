@@ -1,5 +1,4 @@
 import { Button } from "@nextui-org/react";
-import { facebookLink, instagramLink, tiktokLink, youtubeLink } from "../api/links";
 
 import "../assets/style/socials.css";
 
@@ -96,46 +95,46 @@ function FacebookIcon({size}) {
 }
 
 
-export function YouTubeButton({size}) {
+export function YouTubeButton({size, link}) {
   return (
     <Button
       light
       auto
       icon={<YouTubeIcon size={size} />}
-      onClick={() => window.open(youtubeLink, "_blank")}
+      onClick={() => window.open(link, "_blank")}
     />
   )
 }
 
-export function TikTokButton({size}) {
+export function TikTokButton({size, link}) {
   return (
     <Button
       light
       auto
       icon={<TikTokIcon size={size} />}
-      onClick={() => window.open(tiktokLink, "_blank")}
+      onClick={() => window.open(link, "_blank")}
     />
   )
 }
 
-export function InstagramButton({size}) {
+export function InstagramButton({size, link}) {
   return (
     <Button
       light
       auto
       icon={<InstagramIcon size={size} />}
-      onClick={() => window.open(instagramLink, "_blank")}
+      onClick={() => window.open(link, "_blank")}
     />
   )
 }
 
-export function FacebookButton({size}) {
+export function FacebookButton({size, link}) {
   return (
     <Button
       light
       auto
       icon={<FacebookIcon size={size} />}
-      onClick={() => window.open(facebookLink, "_blank")}
+      onClick={() => window.open(link, "_blank")}
     />
   )
 }
