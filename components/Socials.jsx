@@ -79,22 +79,13 @@ function SocialIcon({platformKey, size, color}) {
 }
 
 /**
- * A Web-Legos custom YouTube icon
- * @param {number} params.size - icon size in pixels
- * @returns A {@link SocialIcon} with the YouTube logo
- */
-function YouTubeIcon({color, size}) { 
-  return <SocialIcon platformKey="youtube" size={size} color={color} />;
-}
-
-/**
- * A Web-Legos custom TikTok icon
+ * A Web-Legos custom Facebook icon
  * @param {string} params.color - icon fill color override
  * @param {number} params.size - icon size in pixels
- * @returns A {@link SocialIcon} with the TikTok logo
+ * @returns A {@link SocialIcon} with the Facebook logo
  */
-function TikTokIcon({color, size}) {
-  return <SocialIcon platformKey="tiktok" size={size} color={color} />;
+function FacebookIcon({color, size}) {
+  return <SocialIcon platformKey="facebook" size={size} color={color} />;
 }
 
 /**
@@ -108,13 +99,22 @@ function InstagramIcon({color, size}) {
 }
 
 /**
- * A Web-Legos custom Facebook icon
+ * A Web-Legos custom TikTok icon
  * @param {string} params.color - icon fill color override
  * @param {number} params.size - icon size in pixels
- * @returns A {@link SocialIcon} with the Facebook logo
+ * @returns A {@link SocialIcon} with the TikTok logo
  */
-function FacebookIcon({color, size}) {
-  return <SocialIcon platformKey="facebook" size={size} color={color} />;
+function TikTokIcon({color, size}) {
+  return <SocialIcon platformKey="tiktok" size={size} color={color} />;
+}
+
+/**
+ * A Web-Legos custom YouTube icon
+ * @param {number} params.size - icon size in pixels
+ * @returns A {@link SocialIcon} with the YouTube logo
+ */
+function YouTubeIcon({color, size}) { 
+  return <SocialIcon platformKey="youtube" size={size} color={color} />;
 }
 
 /**
@@ -128,14 +128,14 @@ function SocialButton({socialIcon, socialLink}) {
 }
 
 /**
- * A Web-Legos custom YouTube button
+ * A Web-Legos custom Facebook button
  * @param {string} params.color - icon fill color override
  * @param {number} params.iconSize - icon size in pixels
- * @param {string} params.youtubeLink - a link to somewhere on YouTube
- * @returns A {@link SocialButton} with the YouTube logo
+ * @param {string} params.facebookLink - a link to somewhere on Facebook
+ * @returns A {@link SocialButton} with the Facebook logo
  */
-export function YouTubeButton({color, iconSize, youtubeLink}) {
-  return <SocialButton socialIcon={<YouTubeIcon size={iconSize} color={color} />} socialLink={youtubeLink} />;
+export function FacebookButton({color, iconSize, facebookLink}) {
+  return <SocialButton socialIcon={<FacebookIcon size={iconSize} color={color} />} socialLink={facebookLink} />;
 }
 
 /**
@@ -161,12 +161,12 @@ export function InstagramButton({color, iconSize, instagramLink}) {
 }
 
 /**
- * A Web-Legos custom Facebook button
+ * A Web-Legos custom YouTube button
  * @param {string} params.color - icon fill color override
  * @param {number} params.iconSize - icon size in pixels
- * @param {string} params.facebookLink - a link to somewhere on Facebook
- * @returns A {@link SocialButton} with the Facebook logo
+ * @param {string} params.youtubeLink - a link to somewhere on YouTube
+ * @returns A {@link SocialButton} with the YouTube logo
  */
-export function FacebookButton({color, iconSize, facebookLink}) {
-  return <SocialButton socialIcon={<FacebookIcon size={iconSize} color={color} />} socialLink={facebookLink} />;
+export function YouTubeButton({color, iconSize, youtubeLink}) {
+  return <SocialButton socialIcon={<YouTubeIcon size={iconSize} color={color} />} socialLink={youtubeLink} />;
 }
