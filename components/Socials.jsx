@@ -5,7 +5,7 @@ import { Button } from "@nextui-org/react";
 import "../assets/style/socials.css";
 
 /** MUI & Bootstrap class list for social icons— for some reason they straight up don't display without these */
-const socialIconClasses = "MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-tzssek-MuiSvgIcon-root color-hover ";
+const socialIconClasses = "MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-tzssek-MuiSvgIcon-root web-legos-social-icon-hover-effect ";
 
 /** Size for social icons when not otherwise specified */
 const defaultIconSize = "40px";
@@ -66,7 +66,7 @@ function SocialIcon({platformKey, size, color}) {
       role="img" 
       viewBox="0 0 24 24" 
       xmlns="http://www.w3.org/2000/svg" 
-      className={socialIconClasses + platformKey}
+      className={socialIconClasses + `web-legos-${platformKey}`}
       style={{
         width: size ? size : defaultIconSize,
         height: "auto",
