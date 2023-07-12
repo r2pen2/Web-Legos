@@ -88,6 +88,10 @@ export function WLText(props) {
       }),
     });
     setShowSaved(true);
+    setTimeout(() => {
+      setEditMode(false);
+      setShowSaved(false);
+    }, 3000);
   }
 
   if (editMode) {
