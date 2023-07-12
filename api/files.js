@@ -12,6 +12,8 @@ export async function openFileBrowser() {
 }
 
 export function getFileExtension(file) {
+  if (!file) { return "" ; }
+  if (!file.name) { return ""; }
   return file.name.split('.').pop();
 }
 
