@@ -5,3 +5,9 @@
 .web-legos-span-intent {
   width: 2rem;
 }
+
+.web-legos-text-editable:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: .5rem;
+  cursor: pointer;
+}
