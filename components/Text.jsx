@@ -11,3 +11,27 @@ export function TextBlock(props) {
     </Text>
   )
 }
+
+export function WLText(props) {
+
+
+  function getWLTextClasses() {
+    let classes = "";
+    if (props.indent) {
+      classes += "web-legos-text-indent ";
+    }
+    return classes;
+  }
+
+  return (
+    <Text
+     p 
+     align={props.align} 
+     size={props.size} 
+     color={props.color}
+     className={getWLTextClasses()}
+    >
+      {props.children}
+    </Text>
+  )
+}
