@@ -37,6 +37,7 @@ export class ImageCompressor {
    * @returns A promise resolved with a File after compression has been applied.
    */
   static async compressImage(imageFile) {
+    if (!imageFile) { return null; }
     return new Promise(async (resolve, reject) => {
       try {
         const compressedFile = await imageCompression(imageFile, ImageCompressor.defaultCompressionOptions);
