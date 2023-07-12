@@ -1,5 +1,5 @@
 // Library Imports
-import { Text, Textarea } from "@nextui-org/react";
+import { Button, Text, Textarea } from "@nextui-org/react";
 
 // Style Imports
 import "../assets/style/text.css";
@@ -45,6 +45,23 @@ export function WLText(props) {
       ref.current.innerHTML = paragraphText;
     })
 
+    if (props.headerLevel) {
+      switch (props.headerLevel) {
+        case 1: 
+          return <Text ref={ref} h1 align={props.align} size={props.size} color={props.color} className={getWLTextClasses()}/>;
+        case 2: 
+          return <Text ref={ref} h2 align={props.align} size={props.size} color={props.color} className={getWLTextClasses()}/>;
+        case 3: 
+          return <Text ref={ref} h3 align={props.align} size={props.size} color={props.color} className={getWLTextClasses()}/>;
+        case 4: 
+          return <Text ref={ref} h4 align={props.align} size={props.size} color={props.color} className={getWLTextClasses()}/>;
+        case 5: 
+          return <Text ref={ref} h5 align={props.align} size={props.size} color={props.color} className={getWLTextClasses()}/>;
+        default:
+          return;
+      }
+    }
+
     return <Text ref={ref} p align={props.align} size={props.size} color={props.color} className={getWLTextClasses()}/>;
   }
 
@@ -75,7 +92,7 @@ export function WLText(props) {
   }
 
   function sendTextUpdateToServer() {
-    if (editableText === originalText) { return; }
+    if (editableText === originalText) { setEditMode(false); return; }
     setOriginalText(editableText);
     fetch(`/site-text`, {
       method: "POST",
@@ -89,13 +106,20 @@ export function WLText(props) {
     });
     setShowSaved(true);
     setTimeout(() => {
-      setEditMode(false);
-      setShowSaved(false);
-    }, 3000);
+      window.location.reload();
+    }, 1000);
   }
 
   if (editMode) {
-    return <Textarea helperColor={showSaved ? "success" : null} status={showSaved ? "success" : null} helperText={showSaved ? "Your changes have been saved!" : null} label={`Editing Text: ${props.firestoreId}`} value={editableText} onChange={handleTextareaChange} onBlur={sendTextUpdateToServer}/>
+    return (
+      <div className="d-flex flex-column align-items-center justify-content-center w-100 gap-2">
+        <Textarea fullWidth helperColor={showSaved ? "success" : null} status={showSaved ? "success" : null} helperText={showSaved ? "Your changes have been saved!" : null} label={`Editing Text: ${props.firestoreId}`} value={editableText} onChange={handleTextareaChange}/>
+        <div className="d-flex flex-row gap-2">
+          { editMode && <Button color="error" onClick={() => setEditMode(false)} flat>Cancel</Button> }
+          { editMode && <Button color="success" onClick={sendTextUpdateToServer} flat>Save Changes</Button> }
+        </div>
+      </div>
+    )
   }
 
   function renderParagraphs() {
@@ -105,12 +129,17 @@ export function WLText(props) {
   }
 
   return (
-    <div className={"d-flex flex-column gap-2 " + (props.editable ? "web-legos-text-editable" : "")} onClick={() => setEditMode(props.editable)}>
+    <div className={"d-flex flex-column gap-2 w-100 " + (props.editable ? "web-legos-text-editable" : "")} onClick={() => setEditMode(props.editable)}>
       { renderParagraphs() }
+      { editMode && <Button color="success" onClick={sendTextUpdateToServer}>Save Changes</Button> }
     </div>
   )
 }
 
 export function WLTextBlock(props) {
   return <WLText indent={true} align="left" color={props.color} size={props.size} firestoreId={props.firestoreId} editable={props.editable} />;
+}
+
+export function WLHeader(props) {
+  return <WLText color={props.color} size={props.size} firestoreId={props.firestoreId} editable={props.editable} headerLevel={1}/>;
 }
