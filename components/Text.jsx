@@ -29,6 +29,7 @@ export function TextBlock(props) {
 export function WLText(props) {
 
   function WLParagraph({paragraphText}) {
+
     const ref = useRef(null);
 
     /**

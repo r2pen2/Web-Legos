@@ -24,10 +24,10 @@ export function HTMLToMarkdown(string) {
   newString = newString.replaceAll("</strong>", "**");
 
   // Handle links
-  while (newString.includes("<Link") && newString.includes("</Link")) {
+  while (newString.includes("<a") && newString.includes("</a")) {
     
-    const linkStart = newString.indexOf("<Link");
-    const linkEnd = newString.indexOf("</Link>");
+    const linkStart = newString.indexOf("<a");
+    const linkEnd = newString.indexOf("</a>");
 
     const nameStart = newString.indexOf(">", linkStart);
     const nameEnd = newString.indexOf("<", nameStart);
@@ -39,7 +39,7 @@ export function HTMLToMarkdown(string) {
     
     const markdownString = `[${nameText}](${href})`;
 
-    newString = newString.substring(0, linkStart) + markdownString + newString.substring(linkEnd + "</Link>".length);
+    newString = newString.substring(0, linkStart) + markdownString + newString.substring(linkEnd + "</a>".length);
   }
 
   return newString;
@@ -67,9 +67,7 @@ export function markdownToHTML(markdownString) {
     const hrefEnd = newString.indexOf(")", hrefStart);
     const href = newString.substring(hrefStart + 1, hrefEnd);
     
-    const isExternal = href.includes(window.location.hostname) ? "isExternal" : ""; 
-
-    const linkElementString = `<Link ${isExternal} href="${href}" target="blank">${nameText}</Link>`;
+    const linkElementString = `<a href="${href}" target="blank">${nameText}</a>`;
 
     newString = newString.substring(0, nameStart) + linkElementString + newString.substring(hrefEnd + 1);
   }
