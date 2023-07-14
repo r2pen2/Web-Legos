@@ -78,17 +78,24 @@ export function WLImage(props) {
     })
   })
 
+  function getCss() {
+    if (props.halfWidth) {
+      return {width: "100%", maxWidth: "80vw", maxHeight: "50vh", objectFit: "cover"};
+    }
+    return props.imageCss;
+  }
+
   return (
     <img 
       src={imageSource} 
       alt={props.firestoreId} 
-      className={`img-shadow ${props.editable ? "web-legos-image-edit" : ""}`}
+      className={`img-shadow ${props.editable ? "web-legos-image-edit" : ""} ${props.shadow ? "web-legos-image-shadow" : ""} ${props.round ? "web-legos-image-round" : ""}`}
       onClick={() => {
         if (props.editable) {
           uploadImage()
         }
       }}
-      style={props.imgCss}
+      style={getCss()}
     />
   )
 }
