@@ -82,7 +82,7 @@ export function WLImage(props) {
     if (props.halfWidth) {
       return {width: "100%", maxWidth: "80vw", maxHeight: "50vh", objectFit: "cover"};
     }
-    return props.imageCss;
+    return props.imgCss;
   }
 
   return (
