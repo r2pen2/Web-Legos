@@ -14,13 +14,15 @@ export class WLNavSocials extends Component {
    * @param {string} playformKey - platform to display button for 
    * @param {string} color - alternative color for button 
    * @param {string} href - link to social platform 
-   * @param {number} size - size of button 
+   * @param {number} size - size of button
+   * @param {boolean} bordered - whether to include a border around the button 
    * @default
    * size = 32
+   * bordered = false
    * @returns 
    */
-  static Button({platformKey, color, href, size}) {
-    return <SocialButton socialIcon={<SocialIcon platformKey={platformKey} color={color} size={size ? size : 32} />} color={color} socialLink={href} />
+  static Button({platformKey, color, href, size, bordered}) {
+    return <SocialButton bordered={bordered} borderColor={color} socialIcon={<SocialIcon platformKey={platformKey} color={color} size={size ? size : 32} />} color={color} socialLink={href} />
   }
 
   render() {

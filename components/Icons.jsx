@@ -14,7 +14,7 @@ const defaultIconSize = "40px";
  * @enum {string} 
  * Brand hex colors for all supported icons 
  */
-const iconColors = {
+export const iconColors = {
   calendar: "#000000",
   faceblock: "#1877F2",
   facebook: "#1877F2",
@@ -204,12 +204,13 @@ function YouTubeIcon({color, size}) {
  * @see {@link SocialButton} if you would don't want to allow onClick events
  * @param {string} socialIcon - icon for the button ({@link TikTokIcon}, {@link InstagramIcon}, etc.)
  * @param {number} socialLink - redirect link for onClick event
- * @param {number} bordered - whether to include border around icon
+ * @param {boolean} bordered - whether to include border around icon
+ * @param {string} borderColor - color for border
  * @default
  * bordered = false
  */
-export function SocialButton({socialIcon, socialLink, bordered}) {
-  return <Button bordered={bordered} light auto icon={socialIcon} onClick={() => window.open(socialLink, "_blank")} />;
+export function SocialButton({socialIcon, socialLink, bordered, borderColor}) {
+  return <Button bordered={bordered} css={{borderColor: borderColor}} light auto icon={socialIcon} onClick={() => window.open(socialLink, "_blank")} />;
 }
 
 /**
