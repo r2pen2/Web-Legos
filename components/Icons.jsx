@@ -77,9 +77,9 @@ export const platformKeys = {
 /**
  * Parent component for all social icons: {@link TikTokIcon}, {@link InstagramIcon}, etc.
  * @see {@link SocialButton} if you would like to redirect the user on click.
- * @param {string} params.platformKey - playform key for interfacing with {@link iconColors}, {@link iconTitles}, and {@link iconSvgPaths}
- * @param {number} params.size - icon size in pixels
- * @param {string} params.color - SVG fill color override
+ * @param {string} platformKey - playform key for interfacing with {@link iconColors}, {@link iconTitles}, and {@link iconSvgPaths}
+ * @param {number} size - icon size in pixels
+ * @param {string} color - SVG fill color override
  * @default
  * const defaultIconSize = "40px";
  */
@@ -111,8 +111,8 @@ export function SocialIcon({platformKey, size, color}) {
 
 /**
  * A Web-Legos custom calendar icon
- * @param {string} params.color - icon fill color override
- * @param {number} params.size - icon size in pixels
+ * @param {string} color - icon fill color override
+ * @param {number} size - icon size in pixels
  * @returns A {@link SocialIcon} with the calendar logo
  */
 export function CalendarIcon({color, size}) {
@@ -122,8 +122,8 @@ export function CalendarIcon({color, size}) {
 
 /**
  * A Web-Legos custom square Facebook icon
- * @param {string} params.color - icon fill color override
- * @param {number} params.size - icon size in pixels
+ * @param {string} color - icon fill color override
+ * @param {number} size - icon size in pixels
  * @returns A {@link SocialIcon} with the Faceblock logo
  */
 export function FaceblockIcon({color, size}) {
@@ -132,8 +132,8 @@ export function FaceblockIcon({color, size}) {
 
 /**
  * A Web-Legos custom Facebook icon
- * @param {string} params.color - icon fill color override
- * @param {number} params.size - icon size in pixels
+ * @param {string} color - icon fill color override
+ * @param {number} size - icon size in pixels
  * @returns A {@link SocialIcon} with the Facebook logo
  */
 export function FacebookIcon({color, size}) {
@@ -142,8 +142,8 @@ export function FacebookIcon({color, size}) {
 
 /**
  * A Web-Legos custom Instagram icon
- * @param {string} params.color - icon fill color override
- * @param {number} params.size - icon size in pixels
+ * @param {string} color - icon fill color override
+ * @param {number} size - icon size in pixels
  * @returns A {@link SocialIcon} with the Instagram logo
  */
 export function InstagramIcon({color, size}) {
@@ -152,8 +152,8 @@ export function InstagramIcon({color, size}) {
 
 /**
  * A Web-Legos custom Location icon
- * @param {string} params.color - icon fill color override
- * @param {number} params.size - icon size in pixels
+ * @param {string} color - icon fill color override
+ * @param {number} size - icon size in pixels
  * @returns A {@link SocialIcon} with the Location logo
  */
 export function LocationIcon({color, size}) {
@@ -162,8 +162,8 @@ export function LocationIcon({color, size}) {
 
 /**
  * A Web-Legos custom Mail icon
- * @param {string} params.color - icon fill color override
- * @param {number} params.size - icon size in pixels
+ * @param {string} color - icon fill color override
+ * @param {number} size - icon size in pixels
  * @returns A {@link SocialIcon} with the Mail logo
  */
 export function MailIcon({color, size}) {
@@ -172,8 +172,8 @@ export function MailIcon({color, size}) {
 
 /**
  * A Web-Legos custom Phone icon
- * @param {string} params.color - icon fill color override
- * @param {number} params.size - icon size in pixels
+ * @param {string} color - icon fill color override
+ * @param {number} size - icon size in pixels
  * @returns A {@link SocialIcon} with the Phone logo
  */
 export function PhoneIcon({color, size}) {
@@ -182,8 +182,8 @@ export function PhoneIcon({color, size}) {
 
 /**
  * A Web-Legos custom TikTok icon
- * @param {string} params.color - icon fill color override
- * @param {number} params.size - icon size in pixels
+ * @param {string} color - icon fill color override
+ * @param {number} size - icon size in pixels
  * @returns A {@link SocialIcon} with the TikTok logo
  */
 export function TikTokIcon({color, size}) {
@@ -192,7 +192,7 @@ export function TikTokIcon({color, size}) {
 
 /**
  * A Web-Legos custom YouTube icon
- * @param {number} params.size - icon size in pixels
+ * @param {number} size - icon size in pixels
  * @returns A {@link SocialIcon} with the YouTube logo
  */
 function YouTubeIcon({color, size}) { 
@@ -202,18 +202,21 @@ function YouTubeIcon({color, size}) {
 /**
  * Parent component for all social buttons: {@link TikTokButton}, {@link InstagramButton}, etc.
  * @see {@link SocialButton} if you would don't want to allow onClick events
- * @param {string} params.socialIcon - icon for the button ({@link TikTokIcon}, {@link InstagramIcon}, etc.)
- * @param {number} params.socialLink - redirect link for onClick event
+ * @param {string} socialIcon - icon for the button ({@link TikTokIcon}, {@link InstagramIcon}, etc.)
+ * @param {number} socialLink - redirect link for onClick event
+ * @param {number} bordered - whether to include border around icon
+ * @default
+ * bordered = false
  */
-export function SocialButton({socialIcon, socialLink}) {
-  return <Button light auto icon={socialIcon} onClick={() => window.open(socialLink, "_blank")} />;
+export function SocialButton({socialIcon, socialLink, bordered}) {
+  return <Button bordered={bordered} light auto icon={socialIcon} onClick={() => window.open(socialLink, "_blank")} />;
 }
 
 /**
  * A Web-Legos custom calendar button
- * @param {string} params.color - icon fill color override
- * @param {number} params.iconSize - icon size in pixels
- * @param {string} params.calendarLink - a link to some calendar related thing
+ * @param {string} color - icon fill color override
+ * @param {number} iconSize - icon size in pixels
+ * @param {string} calendarLink - a link to some calendar related thing
  * @returns A {@link SocialButton} with the YouTube logo
  */
 export function CalendarButton({color, iconSize, calendarLink}) {
@@ -222,9 +225,9 @@ export function CalendarButton({color, iconSize, calendarLink}) {
 
 /**
  * A Web-Legos custom Faceblock button
- * @param {string} params.color - icon fill color override
- * @param {number} params.iconSize - icon size in pixels
- * @param {string} params.faceblockLink - a link to somewhere on Faceblock
+ * @param {string} color - icon fill color override
+ * @param {number} iconSize - icon size in pixels
+ * @param {string} faceblockLink - a link to somewhere on Faceblock
  * @returns A {@link SocialButton} with the Faceblock logo
  */
 export function FaceblockButton({color, iconSize, faceblockLink}) {
@@ -233,9 +236,9 @@ export function FaceblockButton({color, iconSize, faceblockLink}) {
 
 /**
  * A Web-Legos custom Facebook button
- * @param {string} params.color - icon fill color override
- * @param {number} params.iconSize - icon size in pixels
- * @param {string} params.facebookLink - a link to somewhere on Facebook
+ * @param {string} color - icon fill color override
+ * @param {number} iconSize - icon size in pixels
+ * @param {string} facebookLink - a link to somewhere on Facebook
  * @returns A {@link SocialButton} with the Facebook logo
  */
 export function FacebookButton({color, iconSize, facebookLink}) {
@@ -244,9 +247,9 @@ export function FacebookButton({color, iconSize, facebookLink}) {
 
 /**
  * A Web-Legos custom TikTok button
- * @param {string} params.color - icon fill color override
- * @param {number} params.iconSize - icon size in pixels
- * @param {string} params.tikTokLink - a link to somewhere on TikTok
+ * @param {string} color - icon fill color override
+ * @param {number} iconSize - icon size in pixels
+ * @param {string} tikTokLink - a link to somewhere on TikTok
  * @returns A {@link SocialButton} with the TikTok logo
  */
 export function TikTokButton({color, iconSize, tiktokLink}) {
@@ -255,9 +258,9 @@ export function TikTokButton({color, iconSize, tiktokLink}) {
 
 /**
  * A Web-Legos custom Instagram button
- * @param {string} params.color - icon fill color override
- * @param {number} params.iconSize - icon size in pixels
- * @param {string} params.instagramLink - a link to somewhere on Instagram
+ * @param {string} color - icon fill color override
+ * @param {number} iconSize - icon size in pixels
+ * @param {string} instagramLink - a link to somewhere on Instagram
  * @returns A {@link SocialButton} with the Instagram logo
  */
 export function InstagramButton({color, iconSize, instagramLink}) {
@@ -266,9 +269,9 @@ export function InstagramButton({color, iconSize, instagramLink}) {
 
 /**
  * A Web-Legos custom Location button
- * @param {string} params.color - icon fill color override
- * @param {number} params.iconSize - icon size in pixels
- * @param {string} params.locationLink - a link to somewhere on Location
+ * @param {string} color - icon fill color override
+ * @param {number} iconSize - icon size in pixels
+ * @param {string} locationLink - a link to somewhere on Location
  * @returns A {@link SocialButton} with the Location logo
  */
 export function LocationButton({color, iconSize, locationLink}) {
@@ -277,9 +280,9 @@ export function LocationButton({color, iconSize, locationLink}) {
 
 /**
  * A Web-Legos custom Mail button
- * @param {string} params.color - icon fill color override
- * @param {number} params.iconSize - icon size in pixels
- * @param {string} params.mailLink - a link to somewhere on Mail
+ * @param {string} color - icon fill color override
+ * @param {number} iconSize - icon size in pixels
+ * @param {string} mailLink - a link to somewhere on Mail
  * @returns A {@link SocialButton} with the Mail logo
  */
 export function MailButton({color, iconSize, mailLink}) {
@@ -288,9 +291,9 @@ export function MailButton({color, iconSize, mailLink}) {
 
 /**
  * A Web-Legos custom Phone button
- * @param {string} params.color - icon fill color override
- * @param {number} params.iconSize - icon size in pixels
- * @param {string} params.phoneLink - a link to somewhere on Phone
+ * @param {string} color - icon fill color override
+ * @param {number} iconSize - icon size in pixels
+ * @param {string} phoneLink - a link to somewhere on Phone
  * @returns A {@link SocialButton} with the Phone logo
  */
 export function PhoneButton({color, iconSize, phoneLink}) {
@@ -299,9 +302,9 @@ export function PhoneButton({color, iconSize, phoneLink}) {
 
 /**
  * A Web-Legos custom YouTube button
- * @param {string} params.color - icon fill color override
- * @param {number} params.iconSize - icon size in pixels
- * @param {string} params.youtubeLink - a link to somewhere on YouTube
+ * @param {string} color - icon fill color override
+ * @param {number} iconSize - icon size in pixels
+ * @param {string} youtubeLink - a link to somewhere on YouTube
  * @returns A {@link SocialButton} with the YouTube logo
  */
 export function YouTubeButton({color, iconSize, youtubeLink}) {
