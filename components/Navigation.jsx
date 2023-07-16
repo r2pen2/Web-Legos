@@ -16,9 +16,11 @@ export class WLNavSocials extends Component {
    * @param {string} href - link to social platform 
    * @param {number} size - size of button
    * @param {boolean} bordered - whether to include a border around the button 
+   * @param {boolean} noHide - whether socials will stay visible at all widths 
    * @default
    * size = 32
    * bordered = false
+   * noHide = false
    * @returns 
    */
   static Button({platformKey, color, href, size, bordered}) {
@@ -27,11 +29,26 @@ export class WLNavSocials extends Component {
 
   render() {
     return (
-      <div className={`d-flex flex-row align-items-center justify-content-start gap-2 d-none d-${this.props.showIn ? this.props.showIn : "xxl"}-flex`}>  
+      <div className={`d-flex flex-row align-items-center justify-content-start gap-2 ${!this.props.noHide ? "d-none" : ""} d${!this.props.noHide ? (this.props.showIn ? "-" + this.props.showIn : "-xxl") : ""}-flex`}>  
           { this.props.lineLeft && <Divider className="d-none d-xxl-inline mx-2" css={{width: "3rem"}}/> }
           { this.props.children }
           { this.props.lineRight && <Divider className="d-none d-xxl-inline mx-2" css={{width: "3rem"}}/> }
       </div>
     )
+  }
+}
+
+export class WLNavContent extends Component {
+  
+  static Left(props) {
+    return <div className="d-flex flex-row align-items-center justify-content-start">{props.children}</div>
+  }
+  
+  static Right(props) {
+    return <div className="d-flex flex-row align-items-center justify-content-end">{props.children}</div>
+  }
+  
+  render () {
+    return this.props.children;
   }
 }
