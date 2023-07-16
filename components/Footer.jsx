@@ -23,11 +23,10 @@ export class WLFooterSocials extends Component {
    * @param {string} playformKey - platform to display button for 
    * @param {string} color - alternative color for button 
    * @param {string} href - link to social platform 
-   * @param {number} size - size of button 
-   * @returns 
+   * @param {number} size - size of button
    */
   static Button({platformKey, color, href, size}) {
-    return <SocialButton socialIcon={<SocialIcon platformKey={platformKey} color={color} size={size} />} color={color} socialLink={href} />
+    return <SocialButton socialIcon={<SocialIcon platformKey={platformKey} color={color} size={size ? size : 48} />} color={color} socialLink={href} />
   }
 
   render() {
