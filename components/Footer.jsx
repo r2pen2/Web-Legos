@@ -24,9 +24,13 @@ export class WLFooterSocials extends Component {
    * @param {string} color - alternative color for button 
    * @param {string} href - link to social platform 
    * @param {number} size - size of button
+   * @param {boolean} bordered - whether to include a border around the button
+   * @default
+   * size = 48
+   * bordered = false
    */
-  static Button({platformKey, color, href, size}) {
-    return <SocialButton socialIcon={<SocialIcon platformKey={platformKey} color={color} size={size ? size : 48} />} color={color} socialLink={href} />
+  static Button({platformKey, color, href, size, bordered}) {
+    return <SocialButton bordered={bordered} socialIcon={<SocialIcon platformKey={platformKey} color={color} size={size ? size : 48} />} color={color} socialLink={href} />
   }
 
   render() {
