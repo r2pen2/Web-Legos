@@ -32,10 +32,12 @@ export function TextBlock(props) {
  * @param {number} size - text size  
  * @param {boolean} editable - whether this text is currently editable  
  * @param {string} firestoreId - id for this text in its firestoreCollection  
+ * @param {boolean} showSpinner - whether to show a loading spinner
+ * @default
+ * shopSpinner = false;  
  * @returns 
  */
 export function WLText(props) {
-
   
   // Create states
   const [originalText, setOriginalText] = useState("");   // Text first received from DB
@@ -175,7 +177,7 @@ export function WLText(props) {
 
   return (
     <div className={"d-flex flex-column gap-2 w-100 px-2 px-md-3 " + (props.editable ? "web-legos-text-editable" : "")} onClick={() => setEditMode(props.editable)}>
-      { paragraphs ? renderParagraphs() : <Loading color="primary" /> }
+      { paragraphs ? renderParagraphs() : (props.showSpinner && <Loading color="primary" />) }
       { editMode && <Button color="success" onClick={sendTextUpdateToServer}>Save Changes</Button> }
       { props.children && <WLParagraph paragraphText={props.children} /> }
     </div>
@@ -193,6 +195,7 @@ export function WLText(props) {
  * @param {boolean} editable - whether the current user has permission to edit this header
  * @param {string} textClasses - classes to apply on text inside the returned {@link WLText} component
  * @param {React.ReactNode} children - component children (static text)
+ * @param {boolean} showSpinner - whether to show a loading spinner
  * @default
  * indent = true
  * align = "left"  
@@ -200,7 +203,7 @@ export function WLText(props) {
  * @returns 
  */
 export function WLTextBlock(props) {
-  return <WLText setLoaded={props.setLoaded} indent={true} align="left" color={props.color} size={props.size} firestoreId={props.firestoreId} editable={props.editable} textClasses="web-legos-scaling-text-block">{props.children}</WLText>;
+  return <WLText showSpinner={props.showSpinner} setLoaded={props.setLoaded} indent={true} align="left" color={props.color} size={props.size} firestoreId={props.firestoreId} editable={props.editable} textClasses="web-legos-scaling-text-block">{props.children}</WLText>;
 }
 
 /**
@@ -214,13 +217,14 @@ export function WLTextBlock(props) {
  * @param {number} headerLevel - level of header to display (ex. 1, 2, 3, etc.)
  * @param {string} textClasses - classes to apply on text inside the returned {@link WLText} component
  * @param {React.ReactNode} children - component children (static text)
+ * @param {boolean} showSpinner - whether to show a loading spinner
  * @default
  * align = "center"  
  * headerLevel = 1
  * @returns 
  */
 export function WLHeader(props) {
-  return <WLText setLoaded={props.setLoaded} align={props.align} color={props.color} size={props.size} firestoreId={props.firestoreId} editable={props.editable} headerLevel={props.headerLevel ? props.headerLevel : 1} textClasses="web-legos-scaling-header">{props.children}</WLText>;
+  return <WLText showSpinner={props.showSpinner} setLoaded={props.setLoaded} align={props.align} color={props.color} size={props.size} firestoreId={props.firestoreId} editable={props.editable} headerLevel={props.headerLevel ? props.headerLevel : 1} textClasses="web-legos-scaling-header">{props.children}</WLText>;
 }
 
 /**
