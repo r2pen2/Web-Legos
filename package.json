@@ -17,15 +17,13 @@
   },
   "homepage": "https://github.com/r2pen2/Web-Legos#readme",
   "dependencies": {
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
-    "@mui/material": "^5.13.7",
-    "@nextui-org/react": "^1.0.0-beta.13",
+    "@emotion/react": "file:../../../node_modules/@emotion/react",
+    "@emotion/styled": "file:../../../node_modules/@emotion/styled",
+    "@mui/material": "file:../../../node_modules/@mui/material",
     "bootstrap": "^5.3.0",
-    "browser-image-compression": "^2.0.2"
-  },
-  "peerDependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "browser-image-compression": "^2.0.2",
+    "react": "file:../../../node_modules/react",
+    "react-dom": "file:../../../node_modules/react-dom",
+    "@nextui-org/react": "file:../../../node_modules/@nextui-org/react"
   }
 }
