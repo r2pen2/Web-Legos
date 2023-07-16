@@ -4,7 +4,8 @@ import { SocialButton, SocialIcon } from "./Icons";
 
 /**
  * @param {string} showin - breakpoint to start showing WLNavSocials
- * @param {boolean} left - whether this is shown on the left side of the navbar
+ * @param {boolean} lineLeft - whether to show a line on the left side
+ * @param {boolean} lineRight - whether to show a line on the right side
  */
 export class WLNavSocials extends Component {
 
@@ -14,10 +15,12 @@ export class WLNavSocials extends Component {
    * @param {string} color - alternative color for button 
    * @param {string} href - link to social platform 
    * @param {number} size - size of button 
+   * @default
+   * size = 32
    * @returns 
    */
   static Button({platformKey, color, href, size}) {
-    return <SocialButton socialIcon={<SocialIcon platformKey={platformKey} color={color} size={size} />} color={color} socialLink={href} />
+    return <SocialButton socialIcon={<SocialIcon platformKey={platformKey} color={color} size={size ? size : 32} />} color={color} socialLink={href} />
   }
 
   render() {
