@@ -1,6 +1,6 @@
 // Library Imports
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import { Card, Text } from "@nextui-org/react";
+import { Card, Loading, Text } from "@nextui-org/react";
 import { getFileNameByCurrentTime, openFileBrowser } from '../api/files';
 import { useEffect, useState } from 'react';
 import { ImageCompressor } from '../api/images';
@@ -80,12 +80,13 @@ export function WLImage(props) {
 
   function getCss() {
     if (props.halfWidth) {
-      return {width: "100%", maxWidth: "80vw", maxHeight: "50vh", objectFit: "cover"};
+      return {width: "100%", maxWidth: "95vw", maxHeight: "50vh", objectFit: "cover"};
     }
     return props.imgCss;
   }
 
   return (
+    imageSource ?
     <img 
       src={imageSource} 
       alt={props.firestoreId} 
@@ -97,5 +98,7 @@ export function WLImage(props) {
       }}
       style={getCss()}
     />
+    :
+    <Loading color="primary" />
   )
 }
