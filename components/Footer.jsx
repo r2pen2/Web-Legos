@@ -45,3 +45,11 @@ export class WLFooterSocials extends Component {
     )
   }
 }
+
+/**
+ * Styled icon for Web-Legos site footers
+ * @param {ImageSource} source - source for footer icon
+ */
+export function WLFooterLogo({source}) {
+  return <img src={source} alt="footer-logo" className="m-2" style={{maxHeight: 150, width: "auto"}}/>
+}
