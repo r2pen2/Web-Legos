@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Divider } from "@nextui-org/react";
+import { Divider, Dropdown, Navbar } from "@nextui-org/react";
 import { SocialButton, SocialIcon } from "./Icons";
 
 /**
@@ -50,5 +50,61 @@ export class WLNavContent extends Component {
   
   render () {
     return this.props.children;
+  }
+}
+
+/**
+ * @param {boolean} buttonBordered - whether to display bordered button for dropdown menu
+ * @param {string} buttonText - text to display in button
+ * @param {string} buttonFontSize - font size inside button
+ */
+export class WLNavDropdownMenu extends Component {
+
+  render() {
+
+    return (
+      <Navbar.Content>
+        <Dropdown isBordered>
+          <Navbar.Item
+            css={{
+              fontSize: this.props.buttonFontSize
+            }}
+          >
+            <Dropdown.Button auto bordered={this.props.buttonBordered}>
+              {this.props.buttonText}
+            </Dropdown.Button>
+          </Navbar.Item>
+          <Dropdown.Menu
+            aria-label="navbar-dropdown-menu"
+            css={{
+              $$dropdownMenuWidth: "340px",
+              $$dropdownItemHeight: "70px",
+              "& .nextui-dropdown-item": {
+                py: "$4",
+                // dropdown item left icon
+                svg: {
+                  color: "$secondary",
+                  mr: "$4",
+                },
+                // dropdown item title
+                "& .nextui-dropdown-item-content": {
+                  w: "100%",
+                  fontWeight: "$semibold",
+                },
+              },
+            }}
+            onAction={(key) => {
+              for (const link of this.props.links) {
+                if (link.key === key) {
+                  window.open(link.href, "_blank");
+                }
+              }
+            }}
+          >
+            {this.props.children}
+          </Dropdown.Menu>
+        </Dropdown>
+      </Navbar.Content>
+    )
   }
 }
