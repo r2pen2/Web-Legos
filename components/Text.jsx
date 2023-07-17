@@ -277,7 +277,7 @@ export class WLBlockHeader extends Component {
           </WLHeader>
           { this.props.children && (
             <div className="container">
-              <div className="row d-flex flex-row justify-content-center">
+              <div className="row d-flex flex-row justify-content-center" style={{color: "white"}}>
                 { this.props.children }
               </div>
             </div>
