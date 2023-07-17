@@ -171,15 +171,17 @@ export function WLLoading() {
  */
 export function WLSpinnerPage(props) {
 
+  /** How long to spin loaded until just hiding it anyway */
+  const loadingTimeoutTimeMs = 1000;
+
   /** We need a loading timeout for some older devices because the dependencies don't get updated */
   const [loadingTimeout, setLoadingTimeout] = useState(false);
-
   const [pageReady, setPageReady] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
       setLoadingTimeout(true);
-    }, 1000);
+    }, loadingTimeoutTimeMs);
   });
 
   useEffect(() => {
