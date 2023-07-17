@@ -1,6 +1,51 @@
 import { Component } from "react";
-import { Divider, Dropdown, Navbar } from "@nextui-org/react";
+import { Divider, Dropdown, Image, Navbar, Text } from "@nextui-org/react";
 import { SocialButton, SocialIcon } from "./Icons";
+
+import "../assets/style/navigation.css";
+
+export class WLNav extends Component {
+  
+  static Toggle() {
+    return <Navbar.Toggle className="px-2 d-inline d-lg-none" />
+  }
+
+  static Left(props) {
+    return (
+      <div className="d-flex flex-row align-items-center justify-content-start gap-2" style={{flex: 1}}>
+        {props.children}
+      </div>
+    )
+  }
+
+  static Center(props) {
+    return (
+      <div className="d-flex d-lg-none flex-row align-items-center justify-content-center gap-2" style={{flex: 1}} >
+        {props.children}
+      </div>
+    )
+  }
+
+  static Right(props) {
+    return (
+      <div className="d-flex flex-row align-items-center justify-content-end gap-2" style={{flex: 1}}>
+        {props.children}
+      </div>
+    )
+  }
+
+  render() {
+    return (
+      <Navbar
+        height={this.props.height ? this.props.height : "80px"}
+        variant={this.props.variant ? this.props.variant : "sticky"}
+        maxWidth="fluid"
+      >
+        {this.props.children}
+      </Navbar>
+    )
+  }
+}
 
 /**
  * @param {string} showin - breakpoint to start showing WLNavSocials
@@ -57,6 +102,8 @@ export class WLNavContent extends Component {
  * @param {boolean} buttonBordered - whether to display bordered button for dropdown menu
  * @param {string} buttonText - text to display in button
  * @param {string} buttonFontSize - font size inside button
+ * @param {React.ReactNode} buttonIcon - icon to place in button when text is too large
+ * @param {string} hideTextIn - breakpoint to switch from text to image
  */
 export class WLNavDropdownMenu extends Component {
 
@@ -66,6 +113,7 @@ export class WLNavDropdownMenu extends Component {
       <Navbar.Content>
         <Dropdown isBordered>
           <Navbar.Item
+            className={this.props.hideTextIn ? `d-none d-${this.props.hideTextIn}-flex` : "d-flex"}
             css={{
               fontSize: this.props.buttonFontSize
             }}
@@ -104,7 +152,84 @@ export class WLNavDropdownMenu extends Component {
             {this.props.children}
           </Dropdown.Menu>
         </Dropdown>
+        <Dropdown isBordered>
+          <Navbar.Item
+            className={this.props.hideTextIn ? `d-flex d-${this.props.hideTextIn}-none` : "d-none"}
+            css={{
+              fontSize: this.props.buttonFontSize
+            }}
+          >
+            <Dropdown.Button auto bordered={this.props.buttonBordered} iconRight={this.props.buttonIcon}/>
+          </Navbar.Item>
+          <Dropdown.Menu
+            aria-label="navbar-dropdown-menu"
+            css={{
+              $$dropdownMenuWidth: "340px",
+              $$dropdownItemHeight: "70px",
+              "& .nextui-dropdown-item": {
+                py: "$4",
+                // dropdown item left icon
+                svg: {
+                  color: "$secondary",
+                  mr: "$4",
+                },
+                // dropdown item title
+                "& .nextui-dropdown-item-content": {
+                  w: "100%",
+                  fontWeight: "$semibold",
+                },
+              },
+            }}
+            onAction={(key) => {
+              for (const link of this.props.links) {
+                if (link.key === key) {
+                  window.open(link.href, "_blank");
+                }
+              }
+            }}
+          >
+            {this.props.children}
+          </Dropdown.Menu>
+        </Dropdown>
       </Navbar.Content>
     )
   }
+}
+
+export function WLNavBrandLeft({title, imageSize, source, showIn}) {
+  return (
+    <Navbar.Brand
+      className={`${showIn ? `d-none d-${showIn}-flex` : "d-lg-flex"} flex-row justify-content-start web-legos-nav-brand`}
+      onClick={() => window.location = "/"}
+    >
+        <Image
+          width={imageSize ? imageSize : 40}
+          height={imageSize ? imageSize : 40}
+          src={source}
+          alt="navbar-brand"
+        />
+        <Text b css={{fontSize: 20, marginLeft: "0.5em"}}>
+          {title}
+        </Text>
+    </Navbar.Brand>
+  )
+}
+
+export function WLNavBrandCenter({title, imageSize, source, hideIn}) {
+  return (
+    <Navbar.Brand
+      className={`${hideIn ? `d-flex d-${hideIn}-none` : "d-lg-none"} flex-row justify-content-start gap-2 web-legos-nav-brand`}
+      onClick={() => window.location = "/"}
+    >
+        <Image
+          width={imageSize ? imageSize : 40}
+          height={imageSize ? imageSize : 40}
+          src={source}
+          alt="navbar-brand"
+        />
+        <Text b css={{fontSize: 20, marginLeft: "0.5em"}}>
+          {title}
+        </Text>
+    </Navbar.Brand>
+  )
 }
