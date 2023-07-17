@@ -6,6 +6,15 @@
   width: 2rem;
 }
 
+.web-legos-header-block-color {
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 .web-legos-text-editable:hover {
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: .5rem;
