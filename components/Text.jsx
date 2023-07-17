@@ -270,8 +270,8 @@ export class WLBlockHeader extends Component {
 
   render() {
     return (
-      <section style={{marginBottom: "2rem"}} className={`${this.props.short ? "web-legos-header-block-short" : ""} web-legos-header-block web-legos-header-block-background-` + this.props.backgroundVariant} >
-        <div className="web-legos-header-block-color" style={{backgroundColor: this.props.color}}>
+      <section style={{marginBottom: "2rem"}} className={`web-legos-header-block web-legos-header-block-background-` + this.props.backgroundVariant} >
+        <div className={`${this.props.short ? "web-legos-header-block-short" : ""} web-legos-header-block-color`} style={{backgroundColor: this.props.color}}>
           <WLHeader color="white">
             {this.props.text}
           </WLHeader>
