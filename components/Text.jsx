@@ -90,7 +90,7 @@ export function WLText(props) {
     }
 
     // Return paragraph 
-    return <Text ref={ref} align={props.align} size={props.size} color={props.color} className={getWLTextClasses()}>{props.children}</Text>;
+    return <Text ref={ref} align={props.align} size={props.size ? props.size : "$md"} color={props.color} className={getWLTextClasses()}>{props.children}</Text>;
   }
 
   // When the component mounts, request the necessary siteText from server and let all parent components know that data has been loaded.
