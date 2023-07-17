@@ -99,6 +99,7 @@ export class WLNavContent extends Component {
 }
 
 /**
+ * @param {boolean} buttonLight - whether to display light button for dropdown menu
  * @param {boolean} buttonBordered - whether to display bordered button for dropdown menu
  * @param {string} buttonText - text to display in button
  * @param {string} buttonFontSize - font size inside button
@@ -110,15 +111,15 @@ export class WLNavDropdownMenu extends Component {
   render() {
 
     return (
-      <Navbar.Content>
+      <div>
         <Dropdown isBordered>
           <Navbar.Item
             className={this.props.hideTextIn ? `d-none d-${this.props.hideTextIn}-flex` : "d-flex"}
             css={{
-              fontSize: this.props.buttonFontSize
+              fontSize: this.props.buttonFontSize,
             }}
           >
-            <Dropdown.Button auto bordered={this.props.buttonBordered}>
+            <Dropdown.Button auto style={{padding: (this.props.buttonLight ? 0 : "1rem")}} light={this.props.buttonLight} bordered={this.props.buttonBordered}>
               {this.props.buttonText}
             </Dropdown.Button>
           </Navbar.Item>
@@ -126,7 +127,7 @@ export class WLNavDropdownMenu extends Component {
             aria-label="navbar-dropdown-menu"
             css={{
               $$dropdownMenuWidth: "340px",
-              $$dropdownItemHeight: "70px",
+              $$dropdownItemHeight: "fit-content",
               "& .nextui-dropdown-item": {
                 py: "$4",
                 // dropdown item left icon
@@ -138,6 +139,10 @@ export class WLNavDropdownMenu extends Component {
                 "& .nextui-dropdown-item-content": {
                   w: "100%",
                   fontWeight: "$semibold",
+                },
+                // dropdown item description
+                "& .nextui-dropdown-item-description": {
+                  fontSize: this.props.descriptionFontSize ? this.props.descriptionFontSize : "1rem",
                 },
               },
             }}
@@ -191,7 +196,7 @@ export class WLNavDropdownMenu extends Component {
             {this.props.children}
           </Dropdown.Menu>
         </Dropdown>
-      </Navbar.Content>
+      </div>
     )
   }
 }

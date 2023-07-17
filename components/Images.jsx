@@ -39,6 +39,7 @@ export function UploadImageCard({onClick, size}) {
  * @param {string} firestoreId
  * @param {boolean} editable 
  * @param {Object} imgCss - css to apply on image
+ * @param {string} imgClasses - classes to apply on image
  * @returns 
  */
 export function WLImage(props) {
@@ -91,7 +92,7 @@ export function WLImage(props) {
     <img 
       src={imageSource} 
       alt={props.firestoreId} 
-      className={`img-shadow ${props.editable ? "web-legos-image-edit" : ""} ${props.shadow ? "web-legos-image-shadow" : ""} ${props.round ? "web-legos-image-round" : ""}`}
+      className={`${props.imgClasses} img-shadow ${props.editable ? "web-legos-image-edit" : ""} ${props.shadow ? "web-legos-image-shadow" : ""} ${props.round ? "web-legos-image-round" : ""}`}
       onClick={() => {
         if (props.editable) {
           uploadImage()
