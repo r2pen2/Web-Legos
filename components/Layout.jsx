@@ -174,26 +174,33 @@ export function WLSpinnerPage(props) {
   /** We need a loading timeout for some older devices because the dependencies don't get updated */
   const [loadingTimeout, setLoadingTimeout] = useState(false);
 
+  const [pageReady, setPageReady] = useState(false);
+
   useEffect(() => {
     setTimeout(() => {
       setLoadingTimeout(true);
     }, 1000);
-  })
+  });
 
-  /** Check if all dependencies are resolved */
-  function getDependenciesLoaded() {
-    for (const dep of props.dependencies) {
-      if (!dep) {
-        return dep;
+  useEffect(() => {
+
+    /** Check if all dependencies are resolved */
+    function getDependenciesLoaded() {
+      for (const dep of props.dependencies) {
+        if (!dep) {
+          return dep;
+        }
       }
+      return true;
     }
-    return true;
-  }
+
+    setPageReady(getDependenciesLoaded())
+  }, [props.dependencies])
   
   return (
     <div className={"d-flex flex-column w-100 align-items-center"}>
-      { !getDependenciesLoaded() && !loadingTimeout && <WLLoading /> }
-      <div className={`d-${getDependenciesLoaded() ? "flex" : "none"} flex-column ` + props.itemsCentered ? "w-100 align-items-center" : ""}>
+      { !pageReady && !loadingTimeout && <WLLoading /> }
+      <div className={`d-${pageReady ? "flex" : "none"} flex-column ` + props.itemsCentered ? "w-100 align-items-center" : ""}>
         { props.children }
       </div>
     </div>
