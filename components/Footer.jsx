@@ -35,9 +35,9 @@ export class WLFooterSocials extends Component {
 
   render() {
     return (
-      <div className={`d-flex flex-column align-items-center justify-content-center gap-2 py-2`}>  
+      <div className={`d-flex flex-column align-items-center justify-content-center gap-2`}>  
         { this.props.lineTop && <Divider /> }
-        <div className={`d-flex flex-row align-items-center justify-content-center gap-10`}>  
+        <div className={`d-flex flex-row align-items-center justify-content-center py-2`} style={{gap: "1rem"}}>  
           { this.props.children }
         </div>
         { this.props.lineBottom && <Divider /> }

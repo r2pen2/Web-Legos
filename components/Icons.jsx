@@ -210,7 +210,7 @@ function YouTubeIcon({color, size}) {
  * bordered = false
  */
 export function SocialButton({socialIcon, socialLink, bordered, borderColor}) {
-  return <Button bordered={bordered} css={{borderColor: borderColor}} light auto icon={socialIcon} onClick={() => window.open(socialLink, "_blank")} />;
+  return <Button bordered={bordered} css={{borderColor: borderColor, overflow: "visible"}} light auto icon={socialIcon} onClick={() => window.open(socialLink, "_blank")} />;
 }
 
 /**

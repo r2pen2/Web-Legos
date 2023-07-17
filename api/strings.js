@@ -1,15 +1,41 @@
+/**
+ * 
+      resultHtml += (workingString.substring(0, closer + 1) + "/");
+      workingString = workingString.substring(closer + 1);
+ */
+
 function addClosingTags(htmlString) {
-  let lastOpener = -1;
-  let resultHtml = htmlString;
-  for (let i in resultHtml) {
-    if (resultHtml[i] === '>' && resultHtml[i - 1] !== '/') {
-      lastOpener = i;
-    }
-    if (resultHtml[i] === '<' && lastOpener !== -1) {
-      i++;
-      resultHtml = resultHtml.substring(0, i) + "/" + resultHtml.substring(i);
-    }
+
+  let workingString = htmlString;
+  let resultHtml = "";
+
+  /**
+   * Holy shit I cannot believe this works
+   */
+  function getValidOpener() {
+    let lastFound = 0;
+    while (true) {
+      const newOpener = workingString.indexOf("<", lastFound);
+      if (newOpener === -1) { break ; }
+      const nextLineBreak = workingString.indexOf("<br/>", lastFound);
+      if (newOpener !== nextLineBreak) {
+        return newOpener;
+      } else {
+        lastFound = nextLineBreak + "<br/>".length;
+      }
+    } 
+    return -1;
   }
+
+  while (workingString.indexOf("<") !== -1) {
+    const opener = getValidOpener();
+    if (opener === -1) { break; }
+    const closer = workingString.indexOf("<", opener + 1);
+    resultHtml += (workingString.substring(0, closer + 1) + "/");
+    workingString = workingString.substring(closer + 1);
+  }
+  resultHtml += workingString;
+
   // Replace line breaks that may have been changed by accident
   resultHtml = resultHtml.replaceAll("</br/>", "<br/>");
   return resultHtml;

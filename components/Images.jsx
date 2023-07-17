@@ -38,7 +38,7 @@ export function UploadImageCard({onClick, size}) {
  * 
  * @param {string} firestoreId
  * @param {boolean} editable 
- * @param {Object} imageCss - css to apply on image
+ * @param {Object} imgCss - css to apply on image
  * @returns 
  */
 export function WLImage(props) {
