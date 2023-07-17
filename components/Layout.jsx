@@ -171,6 +171,15 @@ export function WLLoading() {
  */
 export function WLSpinnerPage(props) {
 
+  /** We need a loading timeout for some older devices because the dependencies don't get updated */
+  const [loadingTimeout, setLoadingTimeout] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoadingTimeout(true);
+    }, 1000);
+  })
+
   /** Check if all dependencies are resolved */
   function getDependenciesLoaded() {
     for (const dep of props.dependencies) {
@@ -183,7 +192,7 @@ export function WLSpinnerPage(props) {
   
   return (
     <div className={"d-flex flex-column w-100 align-items-center"}>
-      { !getDependenciesLoaded() && <WLLoading /> }
+      { !getDependenciesLoaded() && !loadingTimeout && <WLLoading /> }
       <div className={`d-${getDependenciesLoaded() ? "flex" : "none"} flex-column ` + props.itemsCentered ? "w-100 align-items-center" : ""}>
         { props.children }
       </div>
