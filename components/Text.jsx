@@ -3,7 +3,7 @@ import { Button, Link, Loading, Text, Textarea } from "@nextui-org/react";
 
 // Style Imports
 import "../assets/style/text.css";
-import { useEffect, useRef, useState, Component } from "react";
+import { useEffect, useRef, useState, useLayoutEffect, Component } from "react";
 import { HTMLToMarkdown, markdownToHTML } from "../api/strings";
 
 /**
@@ -94,7 +94,7 @@ export function WLText(props) {
   }
 
   // When the component mounts, request the necessary siteText from server and let all parent components know that data has been loaded.
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!props.firestoreId) { 
       // No need to query DB if there's no firestoreId defined
       setParagraphs([]);
