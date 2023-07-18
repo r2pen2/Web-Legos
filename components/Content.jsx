@@ -127,7 +127,7 @@ export function WLAliceCarousel(props) {
       activeIndex={activeIndex}
       onSlideChanged={syncActiveIndex}
     />,
-    <div className="b-refs-buttons d-flex flex-row gap-10">
+    <div className="b-refs-buttons d-flex flex-row gap-10 my-2">
         { (!props.pagination || props.forceButtons) && <div className="d-inline" onClick={slidePrev}>{ getLeftButton() }</div> }
         { (!props.pagination || props.forceButtons) && <div className="d-inline" onClick={slideNext}>{ getRightButton() }</div> }
     </div>,
