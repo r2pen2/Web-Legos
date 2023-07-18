@@ -26,3 +26,13 @@
 .item-inner.underline-color {
   padding-bottom: 20px;
 }
+
+.carousel-button {
+  padding: 1rem;
+  border-radius: 50%;
+  background-color: #494949;
+}
+
+.carousel-button:hover {
+  background-color: #737373;
+}
