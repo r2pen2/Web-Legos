@@ -1,0 +1,27 @@
+.alice-carousel__prev-btn-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.alice-carousel__next-btn-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.alice-carousel__stage-item {
+  padding: 2rem;
+}
+
+.__target .item {
+  border-width: 0px;
+  border-bottom-width: .2rem;
+  border-style: solid;
+}
+
+.item-inner.underline-color {
+  padding-bottom: 20px;
+}
