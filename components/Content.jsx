@@ -5,7 +5,7 @@ import { getChildrenList } from "../api/reactQuirks";
 
 import "../assets/style/content.css";
 import { getLargestNumber } from "../api/math";
-import { Button, IconButton } from "@mui/material";
+import { Button, IconButton, Pagination } from "@mui/material";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
@@ -14,18 +14,19 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
  * @param {string} inlineWidth - width to display carousel as inline
  * @param {boolean} buttonBlock - whether to display block buttons
  * @param {number} buttonSpacing - distance between inline buttons
+ * @param {string} buttonSize - size of inline buttons
  * @default
  * autoPlay = false;
  * infinute = true;
  * buttonBlock = false;
- * buttonSpacing = 100;
+ * buttonSpacing = 20;
  */
 export function WLAliceCarousel(props) { 
     
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const slidePrev = () => setActiveIndex(activeIndex !== 0 ? activeIndex - 1 : activeIndex);
-  const slideNext = () => setActiveIndex(activeIndex !== props.items.length - 1 ? activeIndex + 1 : activeIndex);
+  const slidePrev = () => setActiveIndex(activeIndex !== 0 ? activeIndex - 1 : (props.breakpoints ? activeIndex : props.items.length - 1));
+  const slideNext = () => setActiveIndex(activeIndex !== props.items.length - 1 ? activeIndex + 1 : (props.breakpoints ? activeIndex : 0));
   const syncActiveIndex = ({ item }) => setActiveIndex(item);
   
   const createItems = (length, [handleClick]) => {
@@ -61,7 +62,7 @@ export function WLAliceCarousel(props) {
     if (props.buttonBlock) {
       return <Button variant="outlined" style={{minWidth: 100}} color={props.buttonColor ? props.buttonColor : "inherit"} onClick={slidePrev}>Previous</Button>;
     }
-    return <IconButton style={{paddingInline: props.buttonSpacing ? props.buttonSpacing / 2 : 50}}><ChevronLeftIcon /></IconButton>;
+    return <IconButton sx={{backgroundColor: "#494949", color: "white", filter: "drop-shadow(1px 1px 3px rgba(0,0,0,0.5))"}} size={props.buttonSize ? props.buttonSize : "large"} style={{marginInline: props.buttonSpacing ? props.buttonSpacing / 2 : 10}}><ChevronLeftIcon /></IconButton>;
   }
 
   function getRightButton() {
@@ -71,20 +72,21 @@ export function WLAliceCarousel(props) {
     if (props.buttonBlock) {
       return <Button variant="outlined" style={{minWidth: 100}} color={props.buttonColor ? props.buttonColor : "inherit"} onClick={slideNext}>Next</Button>;
     }
-    return <IconButton style={{paddingInline: props.buttonSpacing ? props.buttonSpacing / 2 : 50}}><ChevronRightIcon /></IconButton>;
+    return <IconButton sx={{backgroundColor: "#494949", color: "white", filter: "drop-shadow(1px 1px 3px rgba(0,0,0,0.5))"}} size={props.buttonSize ? props.buttonSize : "large"} style={{marginInline: props.buttonSpacing ? props.buttonSpacing / 2 : 10}}><ChevronRightIcon /></IconButton>;
   }
   
   if (props.inlineWidth) {
     return (
-      <div className="d-flex w-100 flex-row align-items-center justify-content-center">
-      <div className="d-inline" onClick={slidePrev}>
-        { getLeftButton() }
-      </div>
-        <div className="d-inline" style={{width: props.inlineWidth}}>
+      <div className="d-flex flex-column align-items-center justify-content-center" >
+        <div className="d-flex flex-row align-items-center justify-content-between" style={{zIndex: 2, position: "absolute", width: "100%", maxWidth: props.buttonSpacingInline ? props.buttonSpacingInline : props.inlineWidth}}>
+          { !props.pagination && <div className="d-flex" onClick={slidePrev}>{ getLeftButton() }</div> }
+          { !props.pagination && <div className="d-flex" onClick={slideNext}>{ getRightButton() }</div> }
+        </div>
+        <div className="d-flex" style={{width: props.inlineWidth, maxWidth: props.inlineWidth}}>
           <AliceCarousel
             mouseTracking
-            autoW
             disableDotsControls
+            controlsStrategy="alternate"
             disableButtonsControls
             autoplay={props.autoPlay}
             items={items}
@@ -93,9 +95,7 @@ export function WLAliceCarousel(props) {
             onSlideChanged={syncActiveIndex}
           />
         </div>
-        <div className="d-inline" onClick={slideNext}>
-          { getRightButton() }
-        </div>
+        { props.pagination && <Pagination hideNextButton hidePrevButton count={props.items.length} page={activeIndex + 1} onChange={(e, v) => { setActiveIndex(v - 1)}} /> }
       </div>
     )
   }
@@ -104,6 +104,7 @@ export function WLAliceCarousel(props) {
     <AliceCarousel
       mouseTracking
       disableDotsControls
+      controlsStrategy="alternate"
       disableButtonsControls
       autoplay={props.autoPlay}
       items={items}
@@ -112,13 +113,12 @@ export function WLAliceCarousel(props) {
       onSlideChanged={syncActiveIndex}
     />,
     <div className="b-refs-buttons d-flex flex-row gap-10">
-        <div className="d-inline" onClick={slidePrev}>
-          { getLeftButton() }
-        </div>
-        <div className="d-inline" onClick={slideNext}>
-          { getRightButton() }
-        </div>
+        { !props.pagination && <div className="d-inline" onClick={slidePrev}>{ getLeftButton() }</div> }
+        { !props.pagination && <div className="d-inline" onClick={slideNext}>{ getRightButton() }</div> }
     </div>,
+    <div>      
+      { props.pagination && <Pagination count={props.items.length} page={activeIndex + 1} onChange={(e, v) => { setActiveIndex(v - 1)}} /> }
+    </div>
   ]
 }
 

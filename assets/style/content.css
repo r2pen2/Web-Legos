@@ -13,7 +13,8 @@
 }
 
 .alice-carousel__stage-item {
-  padding: 2rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 .__target .item {
