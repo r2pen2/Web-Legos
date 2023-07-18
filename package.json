@@ -20,10 +20,12 @@
     "@emotion/react": "file:../../../node_modules/@emotion/react",
     "@emotion/styled": "file:../../../node_modules/@emotion/styled",
     "@mui/material": "file:../../../node_modules/@mui/material",
+    "@nextui-org/react": "file:../../../node_modules/@nextui-org/react",
     "bootstrap": "^5.3.0",
     "browser-image-compression": "^2.0.2",
     "react": "file:../../../node_modules/react",
+    "react-alice-carousel": "^2.7.1",
     "react-dom": "file:../../../node_modules/react-dom",
-    "@nextui-org/react": "file:../../../node_modules/@nextui-org/react"
+    "react-material-ui-carousel": "^3.4.2"
   }
 }
