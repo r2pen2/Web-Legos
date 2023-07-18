@@ -25,3 +25,7 @@ export async function fetchModelData(collection) {
     })
   })
 }
+
+export function sortByOrder(array) {
+  return array.sort((a, b) => a.order - b.order);
+}
