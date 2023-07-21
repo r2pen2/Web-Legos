@@ -3,7 +3,7 @@ import { Component, useEffect, useState} from "react";
 import LaunchIcon from '@mui/icons-material/Launch';
 import { WLHeader } from "./Text";
 // @ts-ignore
-import { SiteModel, createModel, deleteModel, sendModelData } from "../api/models.ts";
+import { createModel, deleteModel, sendModelData } from "../api/models.ts";
 import "../assets/style/modals.css";
 import { getFileNameByCurrentTime, openFileBrowser } from "../api/files";
 import { UploadImageCard } from "./Images";
@@ -222,6 +222,54 @@ export function ModelEditModal({open, setOpen, model}) {
     }
   }
 
+  function DeleteButton() {
+    return (
+      
+      <div className="d-flex flex-row col-lg-2 col-12 py-2 justify-content-start align-items-center">
+      <Dropdown>
+        <Dropdown.Button flat color="error" icon={<DeleteForeverTwoToneIcon />} />
+        <Dropdown.Menu
+      aria-label="navbar-dropdown-menu"
+      css={{
+        $$dropdownMenuWidth: "340px",
+        $$dropdownItemHeight: "fit-content",
+        "& .nextui-dropdown-item": {
+          py: "$4",
+          svg: {
+            color: "$secondary",
+            mr: "$4",
+          },
+          "& .nextui-dropdown-item-content": {
+            w: "100%",
+            fontWeight: "$semibold",
+          },
+        },
+      }}
+      onAction={handleDeleteClick}
+    >
+      <Dropdown.Item
+        icon={<DeleteForeverTwoToneIcon fontSize="large" style={{color: "red"}} />}
+        showFullDescription
+        description="Warning: This action cannot be undone."
+        key="confirm"
+      >
+        Delete this "{model.name}"
+      </Dropdown.Item>
+      <Dropdown.Item
+        icon={<FavoriteTwoToneIcon fontSize="large" style={{color: "limegreen"}} />}
+        showFullDescription
+        description="Oops! That's not what I meant to do."
+        withDivider
+        key="cancel"
+      >
+        Nevermind
+      </Dropdown.Item>
+    </Dropdown.Menu>
+      </Dropdown>
+    </div>
+    )
+  }
+
   return (
     <Modal
       open={open}
@@ -231,7 +279,8 @@ export function ModelEditModal({open, setOpen, model}) {
       css={{marginInline:"3rem"}}
       onClose={() => setOpen(false)}
     >
-      <Modal.Header>
+      <Modal.Header className="d-flex flex-column align-items-center justify-content-start">
+        { model.id && <DeleteButton /> }
         <WLHeader headerLevel={4}>
           {`${model.id ? "Edit" : "New"}: "${model.name}"`}
         </WLHeader>
@@ -258,58 +307,13 @@ export function ModelEditModal({open, setOpen, model}) {
           </div>
         </div>
       </Modal.Body>
-      <Modal.Footer className="container-fluid">
-        <div className="row w-100">
-          <div className="d-flex flex-row gap-2 col-lg-2 col-md-12 py-2">
-            <Dropdown>
-              <Dropdown.Button flat color="error">
-                Delete
-              </Dropdown.Button>
-              <Dropdown.Menu
-            aria-label="navbar-dropdown-menu"
-            css={{
-              $$dropdownMenuWidth: "340px",
-              $$dropdownItemHeight: "fit-content",
-              "& .nextui-dropdown-item": {
-                py: "$4",
-                svg: {
-                  color: "$secondary",
-                  mr: "$4",
-                },
-                "& .nextui-dropdown-item-content": {
-                  w: "100%",
-                  fontWeight: "$semibold",
-                },
-              },
-            }}
-            onAction={handleDeleteClick}
-          >
-            <Dropdown.Item
-              icon={<DeleteForeverTwoToneIcon fontSize="large" style={{color: "red"}} />}
-              showFullDescription
-              description="Warning: This action cannot be undone."
-              key="confirm"
-            >
-              Delete this "{model.name}"
-            </Dropdown.Item>
-            <Dropdown.Item
-              icon={<FavoriteTwoToneIcon fontSize="large" style={{color: "limegreen"}} />}
-              showFullDescription
-              description="Oops! That's not what I meant to do."
-              withDivider
-              key="cancel"
-            >
-              Nevermind
-            </Dropdown.Item>
-          </Dropdown.Menu>
-            </Dropdown>
+      <Modal.Footer className="container-fluid d-flex flex-column align-items-center">
+        <div className="row w-100 d-flex flex-row justify-content-end">
+          <div className="col-lg-4 py-2 col-md-12 d-flex flex-row justify-content-end">
+            <Button flat style={{width: "100%"}} color="" onClick={() => setOpen(false)}>Discard</Button>
           </div>
-          <div className="d-flex flex-row col-lg-10 col-md-12 py-2 justify-content-center">
-            <div className="d-none d-lg-flex" style={{width: '100%'}}/>
-            <div className="d-flex flex-row gap-2">            
-              <Button flat color="success" onClick={saveModelChanges}>Save Changes</Button>
-              <Button flat color="" onClick={() => setOpen(false)}>Discard Edits</Button>
-            </div>
+          <div className="col-lg-4 py-2 col-md-12 d-flex flex-row justify-content-end">
+            <Button flat style={{width: "100%"}} color="success" onClick={saveModelChanges}>Save</Button>
           </div>
         </div>
       </Modal.Footer>
