@@ -8,6 +8,7 @@ import { getLargestNumber } from "../api/math";
 import { Button, IconButton, Pagination } from "@mui/material";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { Text } from "@nextui-org/react";
 
 /**
  * @param {boolean} autoPlay - whether to autoplay the carousel
@@ -16,7 +17,9 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
  * @param {number} buttonSpacing - distance between inline buttons
  * @param {string} buttonSize - size of inline buttons
  * @param {string} backgroundColor - background color of carousel (not pagination)
+ * @param {string} controlsStrategy - set a strategy for gallery controls (default, alternate, or responsive)
  * @param {boolean} forceButtons - show buttons even when pagination is enabled
+ * @param {boolean} scaleActive - whether to scale down un-targeted elements
  * @default
  * autoPlay = false;
  * infinute = true;
@@ -52,7 +55,7 @@ export function WLAliceCarousel(props) {
               onMouseUp={(e) => (difference = Math.abs(e.pageX - deltaX))}
               onClick={() => (difference < swipeDelta) && handleClick(i)}
           >
-            <div className={"item-inner " + props.underlineColor ? "underline-color" : ""} >
+            <div className={"item-inner " + (props.underlineColor ? "underline-color " : "") + (props.scaleActive ? "scale-active " : "")} >
               {item}
             </div>
           </div>
@@ -95,7 +98,7 @@ export function WLAliceCarousel(props) {
             style={{backgroundColor: props.backgroundColor}}
             mouseTracking
             disableDotsControls
-            controlsStrategy="alternate"
+            controlsStrategy={props.controlsStrategy ? props.controlsStrategy : "alternate"}
             disableButtonsControls
             autoPlay={props.autoPlay}
             items={items}
@@ -117,7 +120,7 @@ export function WLAliceCarousel(props) {
       style={{backgroundColor: props.backgroundColor}}
       mouseTracking
       disableDotsControls
-      controlsStrategy="alternate"
+      controlsStrategy={props.controlsStrategy ? props.controlsStrategy : "alternate"}
       disableButtonsControls
       autoPlay={props.autoPlay}
       items={items}
