@@ -97,7 +97,7 @@ export function WLAliceCarousel(props) {
             disableDotsControls
             controlsStrategy="alternate"
             disableButtonsControls
-            autoplay={props.autoPlay}
+            autoPlay={props.autoPlay}
             items={items}
             responsive={props.breakpoints}
             activeIndex={activeIndex}
@@ -119,7 +119,7 @@ export function WLAliceCarousel(props) {
       disableDotsControls
       controlsStrategy="alternate"
       disableButtonsControls
-      autoplay={props.autoPlay}
+      autoPlay={props.autoPlay}
       items={items}
       responsive={props.breakpoints}
       activeIndex={activeIndex}

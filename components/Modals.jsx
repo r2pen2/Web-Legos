@@ -3,7 +3,7 @@ import { Component, useEffect, useState} from "react";
 import LaunchIcon from '@mui/icons-material/Launch';
 import { WLHeader } from "./Text";
 // @ts-ignore
-import { createModel, deleteModel, sendModelData } from "../api/models.ts";
+import { SiteModel, createModel, deleteModel, sendModelData } from "../api/models.ts";
 import "../assets/style/modals.css";
 import { getFileNameByCurrentTime, openFileBrowser } from "../api/files";
 import { UploadImageCard } from "./Images";
@@ -253,7 +253,7 @@ export function ModelEditModal({open, setOpen, model}) {
         description="Warning: This action cannot be undone."
         key="confirm"
       >
-        Delete this "{model.name}"
+        Delete this "{model.modelName}"
       </Dropdown.Item>
       <Dropdown.Item
         icon={<FavoriteTwoToneIcon fontSize="large" style={{color: "limegreen"}} />}
@@ -269,7 +269,7 @@ export function ModelEditModal({open, setOpen, model}) {
     </div>
     )
   }
-
+  
   return (
     <Modal
       open={open}
@@ -282,7 +282,7 @@ export function ModelEditModal({open, setOpen, model}) {
       <Modal.Header className="d-flex flex-column align-items-center justify-content-start">
         { model.id && <DeleteButton /> }
         <WLHeader headerLevel={4}>
-          {`${model.id ? "Edit" : "New"}: "${model.name}"`}
+          {`${model.id ? "Edit" : "New"}: "${model.modelName}"`}
         </WLHeader>
       </Modal.Header>
       <Modal.Body>
@@ -291,8 +291,6 @@ export function ModelEditModal({open, setOpen, model}) {
           { (Object.keys(model.shortStrings).length !== 0 || Object.keys(model.longStrings).length !== 0) && <Divider />}
           <div className="row d-flex flex-row align-items-center justify-content-start">
             <TextEdit />
-          </div>
-          <div className="row d-flex flex-row align-items-center justify-content-start">
             <BigTextEdit />
           </div>
           { Object.keys(model.numbers).length !== 0 && <Text h4>Numbers</Text>}
@@ -309,10 +307,10 @@ export function ModelEditModal({open, setOpen, model}) {
       </Modal.Body>
       <Modal.Footer className="container-fluid d-flex flex-column align-items-center">
         <div className="row w-100 d-flex flex-row justify-content-end">
-          <div className="col-lg-4 py-2 col-md-12 d-flex flex-row justify-content-end">
+          <div className="col-lg-6 py-2 col-md-12 d-flex flex-row justify-content-end">
             <Button flat style={{width: "100%"}} color="" onClick={() => setOpen(false)}>Discard</Button>
           </div>
-          <div className="col-lg-4 py-2 col-md-12 d-flex flex-row justify-content-end">
+          <div className="col-lg-6 py-2 col-md-12 d-flex flex-row justify-content-end">
             <Button flat style={{width: "100%"}} color="success" onClick={saveModelChanges}>Save</Button>
           </div>
         </div>
@@ -347,7 +345,8 @@ function EditableTextField({setTextState, setEditedText, stringKey, textState, e
 
   return (
     <div className="py-2 d-flex flex-column align-items-center justify-content-center col-lg-4 col-md-6 col-sm-12">
-      <TextField label={stringKey} style={{width: "100%"}} value={currentText} onChange={handleTextChange} onBlur={saveChanges} onKeyDown={checkEnter}/>
+      <Text h5>{stringKey}</Text>
+      <TextField style={{width: "100%"}} value={currentText} onChange={handleTextChange} onBlur={saveChanges} onKeyDown={checkEnter}/>
     </div>
   )
 }
@@ -380,7 +379,8 @@ function EditableNumberField({setNumbersState, setEditedNumbers, numberKey, numb
 
   return (
     <div className="py-2 d-flex flex-column align-items-center justify-content-center col-lg-4 col-md-6 col-sm-12">
-      <TextField label={numberKey} numeric style={{width: "100%"}} value={currentNumber ? currentNumber : ""} onChange={handleNumbersChange} onBlur={saveChanges} onKeyDown={checkEnter}/>
+      <Text h5>{numberKey}</Text>
+      <TextField numeric style={{width: "100%"}} value={currentNumber ? currentNumber : ""} onChange={handleNumbersChange} onBlur={saveChanges} onKeyDown={checkEnter}/>
     </div>
   )
 }
@@ -410,8 +410,28 @@ function EditableTextBlock({setTextState, setEditedText, stringKey, textState, e
   }
 
   return (
-    <div className="py-2 d-flex flex-column align-items-center justify-content-center col-12">
-      <Textarea fullWidth label={stringKey} style={{width: "100%"}} value={currentText} onChange={handleTextChange} onBlur={saveChanges} onKeyDown={checkEnter}/>
+    <div className="py-2 d-flex flex-column align-items-center justify-content-center col-lg-4 col-md-6 col-sm-12">
+      <Text h5>{stringKey}</Text>
+      <Textarea fullWidth style={{width: "100%"}} value={currentText} onChange={handleTextChange} onBlur={saveChanges} onKeyDown={checkEnter}/>
     </div>
   )
+}
+
+/**
+ * Component for opening model adder
+ * @param {boolean} userCanEdit - whether current user can edit this model type
+ * @param {SiteModel} model - model to create
+ * @param {Function} setCurrentModel - current model setter function
+ * @param {Function} setEditModalOpen - edit modal open setter function
+ */
+export function AddModelButton({userCanEdit, model, setCurrentModel, setEditModalOpen}) {
+  
+  const modelInstance = new model();
+
+  function handleClick() {
+    setCurrentModel(modelInstance);
+    setEditModalOpen(true);
+  }
+
+  return userCanEdit && <Button flat onClick={handleClick}>Add a "{modelInstance.modelName}"</Button>;
 }
