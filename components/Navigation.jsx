@@ -119,9 +119,10 @@ export class WLNavDropdownMenu extends Component {
             className={this.props.hideTextIn ? `d-none d-${this.props.hideTextIn}-flex` : "d-flex"}
             css={{
               fontSize: this.props.buttonFontSize,
+              padding: this.props.buttonLight
             }}
           >
-            <Dropdown.Button auto style={{padding: (this.props.buttonLight ? 0 : "1rem")}} light={this.props.buttonLight} bordered={this.props.buttonBordered}>
+            <Dropdown.Button auto light={this.props.buttonLight} bordered={this.props.buttonBordered}>
               {this.props.buttonText}
             </Dropdown.Button>
           </Navbar.Item>
@@ -166,7 +167,7 @@ export class WLNavDropdownMenu extends Component {
               fontSize: this.props.buttonFontSize
             }}
           >
-            <Dropdown.Button auto light={this.props.buttonLight} bordered={this.props.buttonBordered} iconRight={this.props.buttonIcon} style={{padding: (this.props.buttonLight ? 0 : "1rem")}}/>
+            <Dropdown.Button auto light={this.props.buttonLight} bordered={this.props.buttonBordered} iconRight={this.props.buttonIcon}/>
           </Navbar.Item>
           <Dropdown.Menu
             aria-label="navbar-dropdown-menu"
