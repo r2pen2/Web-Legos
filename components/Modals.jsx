@@ -109,6 +109,8 @@ export function ModelEditModal({open, setOpen, model}) {
     setEditedText({shortStrings: {}, longStrings: {}});
     setNumbersState(model.numbers);
     setEditedNumbers({});
+    setBooleansState(model.booleans);
+    setEditedBooleans({});
   }, [open, setOpen, model])
 
   function ImageEdit() {
@@ -403,7 +405,7 @@ function EditableNumberField({setNumbersState, setEditedNumbers, numberKey, numb
   return (
     <div className="py-2 d-flex flex-column align-items-center justify-content-center col-lg-4 col-md-6 col-sm-12">
       <Text h5>{numberKey}</Text>
-      <TextField aria-label="number-edit" numeric style={{width: "100%"}} value={currentNumber ? currentNumber : ""} onChange={handleNumbersChange} onBlur={saveChanges} onKeyDown={checkEnter}/>
+      <TextField aria-label="number-edit" type="number" style={{width: "100%"}} value={currentNumber ? currentNumber : ""} onChange={handleNumbersChange} onBlur={saveChanges} onKeyDown={checkEnter}/>
     </div>
   )
 }
@@ -413,6 +415,7 @@ function EditableBooleanField({setBooleansState, setEditedBooleans, booleanKey, 
   
   const [currentBoolean, setCurrentBoolean] = useState(booleansState[booleanKey] ? booleansState[booleanKey] : "");
 
+  
   function handleBooleansChange(b) {
     setCurrentBoolean(b);
     const newBooleansState = {...booleansState};
