@@ -1,4 +1,4 @@
-import { Modal, Text, Button, Card, Divider, Textarea, Dropdown } from "@nextui-org/react";
+import { Modal, Text, Button, Card, Divider, Textarea, Dropdown, Checkbox } from "@nextui-org/react";
 import { Component, useEffect, useState} from "react";
 import LaunchIcon from '@mui/icons-material/Launch';
 import { WLHeader } from "./Text";
@@ -90,6 +90,9 @@ export function ModelEditModal({open, setOpen, model}) {
   
   const imageSize = 200;
 
+  const [booleansState, setBooleansState] = useState(model.booleans);
+  const [editedBooleans, setEditedBooleans] = useState({});
+
   const [imagesState, setImagesState] = useState(model.images);
   const [editedImages, setEditedImages] = useState({});
   
@@ -161,6 +164,16 @@ export function ModelEditModal({open, setOpen, model}) {
       )
     })
   }
+  
+  function BooleansEdit() {
+
+    if (Object.keys(model.booleans).length === 0) { return; }
+    return Object.keys(model.booleans).map((booleanKey, index) => {
+      return (
+        <EditableBooleanField booleansState={booleansState} editedBooleans={editedBooleans} setBooleansState={setBooleansState} setEditedBooleans={setEditedBooleans} booleanKey={booleanKey} key={index}/>
+      )
+    })
+  }
 
   
   function BigTextEdit() {
@@ -186,7 +199,12 @@ export function ModelEditModal({open, setOpen, model}) {
   }
 
   async function saveModelChanges() {
+    const booleans = model.booleans;
+    for (const key of Object.keys(booleansState)) {
+      booleans[key] = booleansState[key] ? true : false;
+    }
     const modelData = {
+      ...booleans,
       ...imagesState,
       ...textState.shortStrings,
       ...textState.longStrings,
@@ -225,7 +243,7 @@ export function ModelEditModal({open, setOpen, model}) {
   function DeleteButton() {
     return (
       
-      <div className="d-flex flex-row col-lg-2 col-12 py-2 justify-content-start align-items-center">
+      <div className="d-flex flex-row col-12 py-2 justify-content-start align-items-center">
       <Dropdown>
         <Dropdown.Button flat color="error" icon={<DeleteForeverTwoToneIcon />} />
         <Dropdown.Menu
@@ -287,6 +305,11 @@ export function ModelEditModal({open, setOpen, model}) {
       </Modal.Header>
       <Modal.Body>
         <div className="container-fluid">
+          { Object.keys(model.booleans).length !== 0 && <Text h4>Booleans</Text>}
+          { Object.keys(model.booleans).length !== 0 && <Divider />}
+          <div className="row d-flex flex-row align-items-center justify-content-start">
+            <BooleansEdit />
+          </div>
           { (Object.keys(model.shortStrings).length !== 0 || Object.keys(model.longStrings).length !== 0) && <Text h4>Text</Text>}
           { (Object.keys(model.shortStrings).length !== 0 || Object.keys(model.longStrings).length !== 0) && <Divider />}
           <div className="row d-flex flex-row align-items-center justify-content-start">
@@ -346,7 +369,7 @@ function EditableTextField({setTextState, setEditedText, stringKey, textState, e
   return (
     <div className="py-2 d-flex flex-column align-items-center justify-content-center col-lg-4 col-md-6 col-sm-12">
       <Text h5>{stringKey}</Text>
-      <TextField style={{width: "100%"}} value={currentText} onChange={handleTextChange} onBlur={saveChanges} onKeyDown={checkEnter}/>
+      <TextField aria-label="text-edit" style={{width: "100%"}} value={currentText} onChange={handleTextChange} onBlur={saveChanges} onKeyDown={checkEnter}/>
     </div>
   )
 }
@@ -380,7 +403,30 @@ function EditableNumberField({setNumbersState, setEditedNumbers, numberKey, numb
   return (
     <div className="py-2 d-flex flex-column align-items-center justify-content-center col-lg-4 col-md-6 col-sm-12">
       <Text h5>{numberKey}</Text>
-      <TextField numeric style={{width: "100%"}} value={currentNumber ? currentNumber : ""} onChange={handleNumbersChange} onBlur={saveChanges} onKeyDown={checkEnter}/>
+      <TextField aria-label="number-edit" numeric style={{width: "100%"}} value={currentNumber ? currentNumber : ""} onChange={handleNumbersChange} onBlur={saveChanges} onKeyDown={checkEnter}/>
+    </div>
+  )
+}
+
+
+function EditableBooleanField({setBooleansState, setEditedBooleans, booleanKey, booleansState, editedBooleans}) {
+  
+  const [currentBoolean, setCurrentBoolean] = useState(booleansState[booleanKey] ? booleansState[booleanKey] : "");
+
+  function handleBooleansChange(b) {
+    setCurrentBoolean(b);
+    const newBooleansState = {...booleansState};
+    newBooleansState[booleanKey] = b;
+    const newEditedBooleans = {...editedBooleans};
+    newEditedBooleans[booleanKey] = b;
+    setBooleansState(newBooleansState);
+    setEditedBooleans(newEditedBooleans);
+  }
+
+  return (
+    <div className="py-2 d-flex flex-column align-items-center justify-content-center col-lg-3 col-md-4 col-sm-6">
+      <Text h5>{booleanKey}</Text>
+      <Checkbox isSelected={currentBoolean} onChange={handleBooleansChange}/>
     </div>
   )
 }
@@ -412,7 +458,7 @@ function EditableTextBlock({setTextState, setEditedText, stringKey, textState, e
   return (
     <div className="py-2 d-flex flex-column align-items-center justify-content-center col-lg-4 col-md-6 col-sm-12">
       <Text h5>{stringKey}</Text>
-      <Textarea fullWidth style={{width: "100%"}} value={currentText} onChange={handleTextChange} onBlur={saveChanges} onKeyDown={checkEnter}/>
+      <Textarea aria-label="text-edit" fullWidth style={{width: "100%"}} value={currentText} onChange={handleTextChange} onBlur={saveChanges} onKeyDown={checkEnter}/>
     </div>
   )
 }
@@ -434,4 +480,23 @@ export function AddModelButton({userCanEdit, model, setCurrentModel, setEditModa
   }
 
   return userCanEdit && <Button flat onClick={handleClick}>Add a "{modelInstance.modelName}"</Button>;
+}
+
+/**
+ * Component for opening model edit modal
+ * @param {boolean} userCanEdit - whether current user can edit this model type
+ * @param {SiteModel} model - model to edit
+ * @param {any} data - current model data
+ * @param {Function} setCurrentModel - current model setter function
+ * @param {Function} setEditModalOpen - edit modal open setter function
+ */
+export function ModelEditButton({userCanEdit, model, data, setCurrentModel, setEditModalOpen}) {
+  
+  function handleClick() {
+    const modelInstance = new model();
+    setCurrentModel(modelInstance.fromFirestore(data));
+    setEditModalOpen(true);
+  }
+
+  return userCanEdit && <Button flat onClick={handleClick}>Edit</Button>;
 }
