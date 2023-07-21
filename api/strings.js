@@ -48,6 +48,9 @@ export function HTMLToMarkdown(string) {
   // Replace bolds
   newString = newString.replaceAll("<strong>", "**");
   newString = newString.replaceAll("</strong>", "**");
+  // Replace italics
+  newString = newString.replaceAll("<em>", "*");
+  newString = newString.replaceAll("</em>", "*");
 
   // Handle links
   while (newString.includes("<a") && newString.includes("</a")) {
@@ -82,6 +85,7 @@ export function markdownToHTML(markdownString) {
   newString = newString.replace(/\n+/g, "<br/>");
   // Replace bolds
   newString = newString.replaceAll("**", "<strong>");
+  newString = newString.replaceAll("*", "<em>");
   newString = addClosingTags(newString);
 
   // Handle links

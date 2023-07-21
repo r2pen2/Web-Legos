@@ -60,9 +60,7 @@ export function WLAliceCarousel(props) {
     };
 
     setItems(createItems([setActiveIndex]));
-  }, [props.items, props.underlineColor])
-  
-  console.log(items)
+  }, [props.items, props.underlineColor]);
 
   function getLeftButton() {
     if (props.leftButton) {

@@ -15,7 +15,7 @@ import "../assets/style/images.css";
  * @default
  * const size = 300;
  */
-export function UploadImageCard({onClick, size}) {
+export function UploadImageCard({onClick, size, fullSize}) {
   
   /** Adjusted card size to match parameters */
   const cardSize = size ? size : 300;
@@ -23,7 +23,7 @@ export function UploadImageCard({onClick, size}) {
   const iconSize = size ? size / 4.5 : 64;
 
   return (
-    <Card variant='bordered' isPressable isHoverable onClick={onClick} css={{height: cardSize, width: cardSize}}>
+    <Card variant='bordered' isPressable isHoverable onClick={onClick} css={{height: cardSize, width: fullSize ? "100%" : cardSize,}}>
       <Card.Body className="d-flex flex-column align-items-center justify-content-center gap-2">
         <Text b>
           Click to upload an image

@@ -210,3 +210,28 @@ export function WLSpinnerPage(props) {
     </div>
   )
 }
+
+/**
+ * 
+ * @param {number} height - height of divider 
+ * @param {number} padding - space around divider
+ * @param {string} color - color of divider
+ * @param {string} showIn - breakpoint to show divider
+ * @default
+ * padding = "0.5rem" 
+ * @returns 
+ */
+export function VerticalDivider(props) {
+  return (
+    <div 
+      style={{
+        height: props.height, 
+        marginLeft: props.padding ? props.padding : "0.5rem", 
+        marginRight: props.padding ? props.padding : "0.5rem"
+      }}
+      className={props.showIn ? `d-none d-${props.showIn}-inline` : null}
+    >
+      <div style={{height: props.height, width: props.width ? props.width : 1, backgroundColor: props.color}}/>
+    </div>
+  )
+}

@@ -111,8 +111,10 @@ export class WLNavDropdownMenu extends Component {
   render() {
 
     return (
-      <div>
-        <Dropdown isBordered>
+      <div className="d-flex flex-row align-items-center justify-content-center">
+        <Dropdown 
+          isBordered
+        >
           <Navbar.Item
             className={this.props.hideTextIn ? `d-none d-${this.props.hideTextIn}-flex` : "d-flex"}
             css={{
@@ -164,7 +166,7 @@ export class WLNavDropdownMenu extends Component {
               fontSize: this.props.buttonFontSize
             }}
           >
-            <Dropdown.Button auto bordered={this.props.buttonBordered} iconRight={this.props.buttonIcon}/>
+            <Dropdown.Button auto light={this.props.buttonLight} bordered={this.props.buttonBordered} iconRight={this.props.buttonIcon} style={{padding: (this.props.buttonLight ? 0 : "1rem")}}/>
           </Navbar.Item>
           <Dropdown.Menu
             aria-label="navbar-dropdown-menu"
