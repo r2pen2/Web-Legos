@@ -482,18 +482,19 @@ export function AddModelButton({userCanEdit, model, setCurrentModel, setEditModa
     setEditModalOpen(true);
   }
 
-  return userCanEdit && <Button flat onClick={handleClick}>Add a "{modelInstance.modelName}"</Button>;
+  return userCanEdit && <Button className="my-2" flat onClick={handleClick}>Add a "{modelInstance.modelName}"</Button>;
 }
 
 /**
  * Component for opening model edit modal
  * @param {boolean} userCanEdit - whether current user can edit this model type
+ * @param {boolean} solid - whether display button as solid
  * @param {SiteModel} model - model to edit
  * @param {any} data - current model data
  * @param {Function} setCurrentModel - current model setter function
  * @param {Function} setEditModalOpen - edit modal open setter function
  */
-export function ModelEditButton({userCanEdit, model, data, setCurrentModel, setEditModalOpen}) {
+export function ModelEditButton({solid, userCanEdit, model, data, setCurrentModel, setEditModalOpen}) {
   
   function handleClick() {
     const modelInstance = new model();
@@ -501,5 +502,5 @@ export function ModelEditButton({userCanEdit, model, data, setCurrentModel, setE
     setEditModalOpen(true);
   }
 
-  return userCanEdit && <Button flat onClick={handleClick}>Edit</Button>;
+  return userCanEdit && <Button className="my-2" flat={!solid} onClick={handleClick}>Edit</Button>;
 }

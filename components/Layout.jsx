@@ -170,6 +170,7 @@ export function WLLoading() {
  * @param {boolean[]} dependencies - displays spinner until all dependencies are true
  * @param {boolean} itemsCentered - whether to center items
  * @param {React.ReactNode} children - content to render inside of screen
+ * @param {string} containerClasses - classes to apply to rendered div
  */
 export function WLSpinnerPage(props) {
 
