@@ -76,6 +76,7 @@ export function WLResponsiveSection(props) {
  * @param {Function} setLoaded - function to tell parent components that all parts of section have been loaded
  * @param {boolean} headerBlack - whether to color header black
  * @param {boolean} headerWhite - whether to color header white
+ * @param {string} headerAlign - header flex alignment
  * @default
  * justifyTop = "center"
  * justifyLeft = "center"
@@ -90,7 +91,7 @@ export function WLResponsiveSectionEditable(params) {
   const [headerLoaded, setHeaderLoaded] = useState(false);  // Whether header has loaded
 
   /** Rendered header component */
-  const headerRender = params.header ? params.header : <WLHeader setLoaded={setHeaderLoaded} editable={params.editable} firestoreId={`${params.firestoreId}-header`} color={params.textColor ? params.textColor : (params.headerWhite ? "white" : (params.headerBlack ? "black" : "primary"))} headerLevel={1} />;
+  const headerRender = params.header ? params.header : <WLHeader align={params.headerAlign} setLoaded={setHeaderLoaded} editable={params.editable} firestoreId={`${params.firestoreId}-header`} color={params.textColor ? params.textColor : (params.headerWhite ? "white" : (params.headerBlack ? "black" : "primary"))} headerLevel={1} />;
   /** Rendered text component */
   const textRender = <WLTextBlock setLoaded={setTextLoaded} editable={params.editable} className="px-4 px-md-5" firestoreId={params.firestoreId} color={params.textColor} />;
   /** Rendered imagea component */
