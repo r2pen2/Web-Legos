@@ -11,7 +11,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { Text } from "@nextui-org/react";
 
 /**
- * @param {boolean} autoPlay - whether to autoplay the carousel
+ * @param {boolean} autoPlay - autoplay timer setting
  * @param {string} inlineWidth - width to display carousel as inline
  * @param {boolean} buttonBlock - whether to display block buttons
  * @param {number} buttonSpacing - distance between inline buttons
@@ -63,7 +63,7 @@ export function WLAliceCarousel(props) {
     };
 
     setItems(createItems([setActiveIndex]));
-  }, [props.items, props.underlineColor]);
+  }, [props.items, props.underlineColor, props.scaleActive]);
 
   function getLeftButton() {
     if (props.leftButton) {
@@ -88,7 +88,7 @@ export function WLAliceCarousel(props) {
   if (props.inlineWidth) {
     return (
       <div className="d-flex flex-column align-items-center justify-content-center" >
-        { props.pagination && props.paginationTop && <Pagination count={props.items.length} page={activeIndex + 1} onChange={(e, v) => { setActiveIndex(v - 1)}} /> }
+        { props.pagination && props.paginationTop && <Pagination hideNextButton={props.autoPlay} hidePrevButton={props.autoPlay} count={props.items.length} page={activeIndex + 1} onChange={(e, v) => { setActiveIndex(v - 1)}} /> }
         <div className="d-flex flex-row align-items-center justify-content-between" style={{zIndex: 2, position: "absolute", width: "100%", maxWidth: props.buttonSpacingInline ? props.buttonSpacingInline : props.inlineWidth}}>
           { (!props.pagination || props.forceButtons) && <div className="d-flex" onClick={slidePrev}>{ getLeftButton() }</div> }
           { (!props.pagination || props.forceButtons) && <div className="d-flex" onClick={slideNext}>{ getRightButton() }</div> }
@@ -100,21 +100,23 @@ export function WLAliceCarousel(props) {
             disableDotsControls
             controlsStrategy={props.controlsStrategy ? props.controlsStrategy : "alternate"}
             disableButtonsControls
+            infinite={props.autoPlay}
             autoPlay={props.autoPlay}
+            autoPlayInterval={props.autoPlay}
             items={items}
             responsive={props.breakpoints}
-            activeIndex={activeIndex}
+            activeIndex={!props.autoPlay ? activeIndex : null}
             onSlideChanged={syncActiveIndex}
           />
         </div>
-        { props.pagination && !props.paginationTop && <Pagination count={props.items.length} page={activeIndex + 1} onChange={(e, v) => { setActiveIndex(v - 1)}} /> }
+        { props.pagination && !props.paginationTop && <Pagination hideNextButton={props.autoPlay} hidePrevButton={props.autoPlay} count={props.items.length} page={activeIndex + 1} onChange={(e, v) => { setActiveIndex(v - 1)}} /> }
       </div>
     )
   }
 
   return [
     <div>      
-      { props.pagination && props.paginationTop && <Pagination count={props.items.length} page={activeIndex + 1} onChange={(e, v) => { setActiveIndex(v - 1)}} /> }
+      { props.pagination && props.paginationTop && <Pagination hideNextButton={props.autoPlay} hidePrevButton={props.autoPlay} count={props.items.length} page={activeIndex + 1} onChange={(e, v) => { setActiveIndex(v - 1)}} /> }
     </div>,
     <AliceCarousel
       style={{backgroundColor: props.backgroundColor}}
@@ -122,10 +124,12 @@ export function WLAliceCarousel(props) {
       disableDotsControls
       controlsStrategy={props.controlsStrategy ? props.controlsStrategy : "alternate"}
       disableButtonsControls
+      infinite={props.autoPlay}
       autoPlay={props.autoPlay}
+      autoPlayInterval={props.autoPlay}
       items={items}
       responsive={props.breakpoints}
-      activeIndex={activeIndex}
+      activeIndex={!props.autoPlay ? activeIndex : null}
       onSlideChanged={syncActiveIndex}
     />,
     <div className="b-refs-buttons d-flex flex-row gap-10 my-2">
@@ -133,7 +137,7 @@ export function WLAliceCarousel(props) {
         { (!props.pagination || props.forceButtons) && <div className="d-inline" onClick={slideNext}>{ getRightButton() }</div> }
     </div>,
     <div>      
-      { props.pagination && !props.paginationTop && <Pagination count={props.items.length} page={activeIndex + 1} onChange={(e, v) => { setActiveIndex(v - 1)}} /> }
+      { props.pagination && !props.paginationTop && <Pagination hideNextButton={props.autoPlay} hidePrevButton={props.autoPlay} count={props.items.length} page={activeIndex + 1} onChange={(e, v) => { setActiveIndex(v - 1)}} /> }
     </div>
   ]
 }

@@ -7,10 +7,12 @@ import { SiteModel, createModel, deleteModel, sendModelData } from "../api/model
 import "../assets/style/modals.css";
 import { getFileNameByCurrentTime, openFileBrowser } from "../api/files";
 import { UploadImageCard } from "./Images";
-import { TextField } from "@mui/material";
+import { IconButton, TextField } from "@mui/material";
 import DeleteForeverTwoToneIcon from '@mui/icons-material/DeleteForeverTwoTone';
 import FavoriteTwoToneIcon from '@mui/icons-material/FavoriteTwoTone';
 import { ImageCompressor } from "../api/images";
+
+import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 
 /**
  * @param {boolean} open - whether modal is open
@@ -482,7 +484,7 @@ export function AddModelButton({userCanEdit, model, setCurrentModel, setEditModa
     setEditModalOpen(true);
   }
 
-  return userCanEdit && <Button className="my-2" flat onClick={handleClick}>Add a "{modelInstance.modelName}"</Button>;
+  return userCanEdit && <Button className="my-2" flat onClick={handleClick}>New "{modelInstance.modelName}"</Button>;
 }
 
 /**
@@ -493,13 +495,18 @@ export function AddModelButton({userCanEdit, model, setCurrentModel, setEditModa
  * @param {any} data - current model data
  * @param {Function} setCurrentModel - current model setter function
  * @param {Function} setEditModalOpen - edit modal open setter function
+ * @param {boolean} small - whether to just display icon
  */
-export function ModelEditButton({solid, userCanEdit, model, data, setCurrentModel, setEditModalOpen}) {
+export function ModelEditButton({small, solid, userCanEdit, model, data, setCurrentModel, setEditModalOpen}) {
   
   function handleClick() {
     const modelInstance = new model();
     setCurrentModel(modelInstance.fromFirestore(data));
     setEditModalOpen(true);
+  }
+
+  if (small) {
+    return userCanEdit && <IconButton className="m-2" onClick={handleClick}><EditTwoToneIcon /></IconButton>
   }
 
   return userCanEdit && <Button className="my-2" flat={!solid} onClick={handleClick}>Edit</Button>;
