@@ -506,7 +506,7 @@ export function ModelEditButton({small, solid, userCanEdit, model, data, setCurr
   }
 
   if (small) {
-    return userCanEdit && <IconButton className="m-2" onClick={handleClick}><EditTwoToneIcon /></IconButton>
+    return userCanEdit && <div className="m-2 d-flex flex-row align-items-center justify-content-center"><IconButton onClick={handleClick}><EditTwoToneIcon /></IconButton></div>
   }
 
   return userCanEdit && <Button className="my-2" flat={!solid} onClick={handleClick}>Edit</Button>;

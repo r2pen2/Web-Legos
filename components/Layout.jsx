@@ -43,10 +43,10 @@ export function WLResponsiveSection(props) {
         {props.topContent} 
       </div>
       <div className="row">
-        <div className={`col-xxl-${leftCol} py-xl-4 py-3 col-xl-12 web-legos-responsive-section d-flex flex-column align-items-center justify-content-${leftJustification}`}>
+        <div className={`col-lg-${leftCol} py-xl-4 py-3 col-md-12 web-legos-responsive-section d-flex flex-column align-items-center justify-content-${leftJustification}`}>
           {props.leftContent}
         </div>
-        <div className={`col-xxl-${rightCol} py-xl-4 py-3 col-xl-12 web-legos-responsive-section d-flex flex-column align-items-center justify-content-${rightJustification}`} >
+        <div className={`col-lg-${rightCol} py-xl-4 py-3 col-md-12 web-legos-responsive-section d-flex flex-column align-items-center justify-content-${rightJustification}`} >
           {props.rightContent}
         </div>
       </div>

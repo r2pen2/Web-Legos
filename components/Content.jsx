@@ -98,6 +98,7 @@ export function WLAliceCarousel(props) {
             style={{backgroundColor: props.backgroundColor}}
             mouseTracking
             disableDotsControls
+            autoHeight={props.autoHeight}
             controlsStrategy={props.controlsStrategy ? props.controlsStrategy : "alternate"}
             disableButtonsControls
             infinite={props.autoPlay}
@@ -121,6 +122,7 @@ export function WLAliceCarousel(props) {
     <AliceCarousel
       style={{backgroundColor: props.backgroundColor}}
       mouseTracking
+      autoHeight={props.autoHeight}
       disableDotsControls
       controlsStrategy={props.controlsStrategy ? props.controlsStrategy : "alternate"}
       disableButtonsControls
