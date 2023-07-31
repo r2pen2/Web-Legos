@@ -45,6 +45,7 @@ export function WLText(props) {
   const [showSaved, setShowSaved] = useState(false);      // Whether to show the "Changes saved" message
   const [editMode, setEditMode] = useState(false);        // Whether the user is editing this WLText
   const [paragraphs, setParagraphs] = useState(null);     // Paragraphs from DB to present
+  const [fetched, setFetched] = useState(false);          // Whether we got a server response.
 
   /**
    * A formatted WLParagraph from the WLText props after pulling from DB
@@ -106,8 +107,12 @@ export function WLText(props) {
     // Ask DB for the right text
     fetch(`/site-text?id=${props.firestoreId}`).then((res) => {
       res.text().then((text) => {
+        const gotResponse = !text.includes("<!DOCTYPE html>");
+        setFetched(gotResponse);
         // Split into paragraphs at line breaks
-        setParagraphs(text.split("<br/>"));
+        if (gotResponse) {
+          setParagraphs(text.split("<br/>"));
+        }
         // And convert HTML into markdown for editing 
         const markdownText = HTMLToMarkdown(text);
         setOriginalText(markdownText);
@@ -179,7 +184,7 @@ export function WLText(props) {
     <div className={"d-flex flex-column gap-2 w-100 px-2 px-md-3 " + (props.editable ? "web-legos-text-editable" : "")} onClick={() => setEditMode(props.editable)}>
       { paragraphs ? renderParagraphs() : (props.showSpinner && <Loading color="primary" />) }
       { editMode && <Button color="success" onClick={sendTextUpdateToServer}>Save Changes</Button> }
-      { props.children && <WLParagraph paragraphText={props.children} /> }
+      { !fetched && props.children && <WLParagraph paragraphText={markdownToHTML(props.children)} /> }
     </div>
   )
 }
