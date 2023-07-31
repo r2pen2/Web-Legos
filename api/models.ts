@@ -71,6 +71,13 @@ export abstract class SiteModel implements FirestoreSerializable {
   }
 }
 
+export abstract class StaticSiteModel extends SiteModel {
+  /** State that this SiteModel is static; It cannot be deleted and no more can be created, but it is editable. */
+  static: boolean = true;
+  /** Text to display in the edit button for this StaticSiteModel */
+  editText: string = "";
+}
+
 export interface FirestoreSerializable {
   
   /**
@@ -119,8 +126,6 @@ export async function fetchModelData(collection: string) {
 export function sortByOrder(array: any[]) {
   return array.sort((a, b) => a.order - b.order);
 }
-
-
 
 export async function deleteModel(collection: string, id: string) {
   return new Promise((resolve, reject) => {

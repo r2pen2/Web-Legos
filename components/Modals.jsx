@@ -89,6 +89,13 @@ export class CardModal extends Component {
  * @returns 
  */
 export function ModelEditModal({open, setOpen, model}) {
+
+  // If this is a static model, we won't want to display order
+  if (model.static) {
+    const newNumbers = {...model.numbers}
+    delete newNumbers.order;
+    model.numbers = newNumbers;
+  }
   
   const imageSize = 200;
 
@@ -245,6 +252,10 @@ export function ModelEditModal({open, setOpen, model}) {
   }
 
   function DeleteButton() {
+    
+    // Do not allow delete if static
+    if (model.static) { return; }
+
     return (
       
       <div className="d-flex flex-row col-12 py-2 justify-content-start align-items-center">
@@ -304,7 +315,7 @@ export function ModelEditModal({open, setOpen, model}) {
       <Modal.Header className="d-flex flex-column align-items-center justify-content-start">
         { model.id && <DeleteButton /> }
         <WLHeader headerLevel={4}>
-          {`${model.id ? "Edit" : "New"}: "${model.modelName}"`}
+          {`${(model.id || model.static) ? "Edit" : "New"}: "${model.modelName}"`}
         </WLHeader>
       </Modal.Header>
       <Modal.Body>
@@ -335,7 +346,7 @@ export function ModelEditModal({open, setOpen, model}) {
       <Modal.Footer className="container-fluid d-flex flex-column align-items-center">
         <div className="row w-100 d-flex flex-row justify-content-end">
           <div className="col-lg-6 py-2 col-md-12 d-flex flex-row justify-content-end">
-            <Button flat style={{width: "100%"}} color="" onClick={() => setOpen(false)}>Discard</Button>
+            <Button flat style={{width: "100%"}} color="" onClick={() => setOpen(false)}>Cancel</Button>
           </div>
           <div className="col-lg-6 py-2 col-md-12 d-flex flex-row justify-content-end">
             <Button flat style={{width: "100%"}} color="success" onClick={saveModelChanges}>Save</Button>
@@ -499,15 +510,18 @@ export function AddModelButton({userCanEdit, model, setCurrentModel, setEditModa
  */
 export function ModelEditButton({small, solid, userCanEdit, model, data, setCurrentModel, setEditModalOpen}) {
   
+  const modelInstance = new model();
+  
   function handleClick() {
-    const modelInstance = new model();
     setCurrentModel(modelInstance.fromFirestore(data));
     setEditModalOpen(true);
   }
+
+  const editText = modelInstance.static ? modelInstance.editText : "Edit";
 
   if (small) {
     return userCanEdit && <div className="m-2 d-flex flex-row align-items-center justify-content-center"><IconButton onClick={handleClick}><EditTwoToneIcon /></IconButton></div>
   }
 
-  return userCanEdit && <Button className="my-2" flat={!solid} onClick={handleClick}>Edit</Button>;
+  return userCanEdit && <Button className="my-2" flat={!solid} onClick={handleClick}>{editText}</Button>;
 }
