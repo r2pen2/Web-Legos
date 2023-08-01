@@ -195,7 +195,7 @@ export function TikTokIcon({color, size}) {
  * @param {number} size - icon size in pixels
  * @returns A {@link SocialIcon} with the YouTube logo
  */
-function YouTubeIcon({color, size}) { 
+export function YouTubeIcon({color, size}) { 
   return <SocialIcon platformKey="youtube" size={size} color={color} />;
 }
 

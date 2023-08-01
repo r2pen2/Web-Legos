@@ -48,7 +48,7 @@ export class WLNav extends Component {
 }
 
 /**
- * @param {string} showin - breakpoint to start showing WLNavSocials
+ * @param {string} showIn - breakpoint to start showing WLNavSocials
  * @param {boolean} lineLeft - whether to show a line on the left side
  * @param {boolean} lineRight - whether to show a line on the right side
  */

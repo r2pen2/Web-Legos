@@ -22,12 +22,14 @@ export function FooterAuthButton({authManager, currentSignIn, setCurrentSignIn})
     if (authManager.auth.currentUser) {
       signOut(authManager.auth);
       setCurrentSignIn(null);
+      window.location.reload();
     } else {
       authManager.signInWithGoogle().then(authUser => {
         setCurrentSignIn(authUser);
         if (authUser) {
           const uid = authUser.uid;
-          authManager.createNewUser(uid);
+          const displayName = authUser.displayName;
+          authManager.createNewUser(uid, displayName);
         }
       }).catch((err) => {
         console.warn(err);
