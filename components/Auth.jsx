@@ -20,9 +20,10 @@ export function FooterAuthButton({authManager, currentSignIn, setCurrentSignIn})
 
   function handleSignInClick() {
     if (authManager.auth.currentUser) {
-      signOut(authManager.auth);
       setCurrentSignIn(null);
-      window.location.reload();
+      signOut(authManager.auth).then(() => {
+        window.location.reload();
+      });
     } else {
       authManager.signInWithGoogle().then(authUser => {
         setCurrentSignIn(authUser);
