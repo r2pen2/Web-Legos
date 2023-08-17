@@ -257,6 +257,7 @@ export class WLBlockHeader extends Component {
    * @returns 
    */
   static Section({title, sectionId}) {
+
     function handleClick() {
       window.location.hash = "";
       window.location.hash = `#${sectionId}`;
@@ -294,7 +295,7 @@ export class WLBlockHeader extends Component {
 }
 
 /**
- * A quote block with 
+ * A quote block with colors and author decorations
  */
 export class QuoteBlock extends Component {
   
@@ -345,4 +346,15 @@ export class QuoteBlock extends Component {
       </div>
     )
   }
+}
+  
+export async function getWLText(firestoreId) {
+  return new Promise((resolve, reject) => {
+    fetch(`/site-text?id=${firestoreId}`).then((res) => {
+      res.text().then((text) => {
+        const markdownText = HTMLToMarkdown(text);
+        resolve(markdownText);
+      })
+    })
+  })
 }
