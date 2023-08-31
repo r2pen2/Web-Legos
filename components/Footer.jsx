@@ -1,5 +1,5 @@
 // Library Imports
-import { Divider, Text } from "@nextui-org/react";
+import { Divider, Link, Text } from "@nextui-org/react";
 import { Component } from "react";
 import { SocialButton, SocialIcon } from "./Icons";
 
@@ -52,4 +52,14 @@ export class WLFooterSocials extends Component {
  */
 export function WLFooterLogo({source}) {
   return <img src={source} alt="footer-logo" className="m-2" style={{maxHeight: 150, width: "auto"}}/>
+}
+
+export function WLFooterSignature() {
+  return (
+    <div className="d-flex align-items-center justify-content-center flex-row">
+      <Text size="$xs">
+        Web Developer: <Link href="https://www.joed.dev/">Joe Dobbelaar</Link>
+      </Text>
+    </div>
+  )
 }

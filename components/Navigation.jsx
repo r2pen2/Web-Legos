@@ -173,7 +173,7 @@ export class WLNavDropdownMenu extends Component {
             aria-label="navbar-dropdown-menu"
             css={{
               $$dropdownMenuWidth: "340px",
-              $$dropdownItemHeight: "70px",
+              $$dropdownItemHeight: "fit-content",
               "& .nextui-dropdown-item": {
                 py: "$4",
                 // dropdown item left icon
