@@ -26,9 +26,7 @@ export class MailManager {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          fromAddress: this.fromAddress,
           toAddress: toAddress,
-          fromPassword: this.fromPassword,
           text: text,
           subject: subject
         }),
