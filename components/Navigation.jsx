@@ -229,12 +229,15 @@ export function WLNavBrandCenter({title, imageSize, source, hideIn}) {
       className={`${hideIn ? `d-flex d-${hideIn}-none` : "d-lg-none"} flex-row justify-content-start gap-2 web-legos-nav-brand`}
       onClick={() => window.location = "/"}
     >
-        <Image
-          width={imageSize ? imageSize : 40}
-          height={imageSize ? imageSize : 40}
-          src={source}
-          alt="navbar-brand"
-        />
+        {
+          source &&
+            <Image
+              width={imageSize ? imageSize : 40}
+              height={imageSize ? imageSize : 40}
+              src={source}
+              alt="navbar-brand"
+            />
+        }
         <Text b css={{fontSize: 20, marginLeft: "0.5em"}}>
           {title}
         </Text>
