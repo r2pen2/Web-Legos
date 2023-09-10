@@ -2,6 +2,8 @@ import { FirebaseApp, FirebaseOptions, initializeApp } from "firebase/app";
 import { FirebaseStorage, getStorage } from "firebase/storage";
 import { Firestore, getFirestore } from "firebase/firestore";
 import { Auth, getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+// @ts-ignore
+import { WLAdminPermissions, WLEditHistory } from "./admin.ts";
 
 export class AuthenticationManager {
   
@@ -92,9 +94,18 @@ export class WLPermissionsConfig {
   /** Whether user can edit WLSiteImages */
   images: string = "siteImages";
   
-  constructor(fields: {[key: string]: string}) {
+  constructor(fields?: {[key: string]: string}) {
+    if (!fields) { return; }
     for (const fieldKey of Object.keys(fields)) {
       this[fieldKey] = fields[fieldKey];
     }
   }
+}
+
+export class User {
+  displayName: String = "";
+  email: String = "";
+  permissions: WLPermissionsConfig = new WLPermissionsConfig();
+  adminPermissions: WLAdminPermissions = new WLAdminPermissions();
+  history: WLEditHistory[] = [];
 }
