@@ -20,7 +20,7 @@ siteModules[SiteKey.YouCanDoItGardening] = [SiteModule.analytics, SiteModule.use
 
 export class SupportTicket extends SiteModel implements FirestoreSerializable {
   constructor(subject?: String, siteKey?: string, message?: string) {
-    super("support-tickets", "SupportTickets")
+    super("support-tickets", "SupportTicket")
     this.createdAt = new Date();
   }
   booleans = {
@@ -201,4 +201,94 @@ export class WLEditHistory {
 
 export class AdminGateway {
   siteKey: SiteKey | null = null;
+}
+
+
+/**
+ * This class should be extended by each app to ensure that the content fields are correct
+ */
+export class FormResponse extends SiteModel implements FirestoreSerializable {
+
+  static largeFields = ["Message"]
+  static mediumFields = [""]
+
+  static getFieldWidth(fieldKey: string) {
+    if (FormResponse.largeFields.includes(fieldKey)) {
+      return 800;
+    }
+    if (FormResponse.mediumFields.includes(fieldKey)) {
+      return 400;
+    }
+    return null;
+  }
+
+  constructor(subject?: String, siteKey?: string, message?: string) {
+    super("form-responses", "FormResponse")
+    this.createdAt = new Date();
+  }
+  booleans = {
+  }
+  images = {
+  }
+  numbers = {
+  }
+  shortStrings = {
+    formId: "",
+    formTitle: ""
+  }
+  longStrings = {
+  }
+  createdAt: Date = new Date();
+  content = {}
+
+  fromFirestore(data: any) : FormResponse {
+    const instance = new FormResponse();
+    instance.shortStrings.formId = data.formId;
+    instance.shortStrings.formTitle = data.formTitle;
+    instance.content = data.content;
+    instance.createdAt = data.createdAt;
+    return instance;
+  }
+
+  static examples = {
+    default: (new FormResponse()).fillConstantExampleData().toFirestore(),
+    alternate: (new FormResponse()).fillConstantExampleData(true).toFirestore(),
+  }
+  
+  fillConstantExampleData(alt?: boolean) {
+    
+    const defaultContent = {
+      "Name": "Joe Dobbelaar",
+      "Phone Number": "7818799058",
+      "Email": "joedobbelaar@gmail.com",
+      "Preferred Contact Method": "phone",
+      "City, State": "Worcester, MA",
+      "Message": "You can't!",
+    }
+
+    const altContent = {
+      "Name": "Joseph Dobbelaar",
+      "Phone Number": "7818799058",
+      "Email": "joe@joed.dev",
+      "Preferred Contact Method": "email",
+      "City, State": "Winchester, MA",
+      "Message": "Help me.",
+    }
+
+    this.shortStrings.formId = alt ? "form-alternate" : "form-default";
+    this.shortStrings.formTitle = alt ? "Example Alternate Form" : "Example Default Form";
+    this.content = alt ? altContent : defaultContent;
+    this.createdAt = new Date();
+    console.log(this.createdAt)
+    return this;
+  }
+
+  
+  /**
+   * Turn this {@link FormResponse} into a Firestore compatible JSON object
+   * @returns Firestore compatible FormResponse
+   */
+  override toFirestore(): any {
+    return { ...this.booleans, ...this.images, ...this.shortStrings, ...this.longStrings, ...this.numbers, createdAt: this.createdAt, content: this.content}
+  }
 }
