@@ -55,19 +55,26 @@ export class AuthenticationManager {
     })
   }
 
-  async createNewUser(userId: string, displayName: string, email: string) {
+  async createNewUser(userId: string, displayName: string, email: string, adminPermissions?: WLAdminPermissions) {
+
+    const user = new User();
+    user.displayName = displayName;
+    user.email = email;
+    user.userId = userId;
+    if (this.permissions) {
+      user.permissions = this.permissions;
+    }
+    if (adminPermissions) {
+      user.adminPermissions = adminPermissions;
+    }
+
     return new Promise((resolve, reject) => {
       fetch(`/site-auth`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({
-          userId: userId,
-          email: email,
-          displayName: displayName,
-          permissions: this.permissions
-        }),
+        body: JSON.stringify(user.toJson()),
       }).then(res => {
         resolve(res.status);
       });
@@ -104,9 +111,32 @@ export class WLPermissionsConfig {
 }
 
 export class User {
+  userId: String = "";
   displayName: String = "";
   email: String = "";
   permissions: WLPermissionsConfig = new WLPermissionsConfig();
-  adminPermissions: WLAdminPermissions = new WLAdminPermissions();
+  adminPermissions: WLAdminPermissions | null = new WLAdminPermissions();
   history: WLEditHistory[] = [];
+
+  toJson() {
+    function serializeHistory() {
+      let historyJson: WLEditHistory[] = [];
+      for (const h of this.history) {
+        historyJson.push(h.toJson())
+      }
+    }
+
+    return {
+      userId: this.userId,
+      displayName: this.displayName,
+      email: this.email,
+      permissions: this.permissions,  // This is already JSON compatible
+      adminPermissioms: this.adminPermissions,  // This is already JSON compatibl
+      history: serializeHistory(),
+    }
+  }
+
+  fromJson() {
+    // To be implemented
+  }
 }
