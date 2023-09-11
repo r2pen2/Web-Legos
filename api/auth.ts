@@ -53,7 +53,7 @@ export class AuthenticationManager {
     })
   }
 
-  async createNewUser(userId: string, displayName: string) {
+  async createNewUser(userId: string, displayName: string, email: string) {
     return new Promise((resolve, reject) => {
       fetch(`/site-auth`, {
         method: "POST",
@@ -62,6 +62,7 @@ export class AuthenticationManager {
         },
         body: JSON.stringify({
           userId: userId,
+          email: email,
           displayName: displayName,
           permissions: this.permissions
         }),
