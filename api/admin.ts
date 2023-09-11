@@ -1,4 +1,6 @@
 // @ts-ignore
+import { Timestamp } from "firebase/firestore";
+// @ts-ignore
 import { FirestoreSerializable, SiteModel } from "./models.ts";
 
 export enum SiteKey {
@@ -224,7 +226,7 @@ export class FormResponse extends SiteModel implements FirestoreSerializable {
 
   constructor(subject?: String, siteKey?: string, message?: string) {
     super("form-responses", "FormResponse")
-    this.createdAt = new Date();
+    this.createdAt = Timestamp.now();
   }
   booleans = {
   }
@@ -238,7 +240,7 @@ export class FormResponse extends SiteModel implements FirestoreSerializable {
   }
   longStrings = {
   }
-  createdAt: Date = new Date();
+  createdAt: Timestamp = Timestamp.now();
   content = {}
 
   fromFirestore(data: any) : FormResponse {
@@ -278,7 +280,7 @@ export class FormResponse extends SiteModel implements FirestoreSerializable {
     this.shortStrings.formId = alt ? "form-alternate" : "form-default";
     this.shortStrings.formTitle = alt ? "Example Alternate Form" : "Example Default Form";
     this.content = alt ? altContent : defaultContent;
-    this.createdAt = new Date();
+    this.createdAt = Timestamp.now();
     console.log(this.createdAt)
     return this;
   }
@@ -290,5 +292,24 @@ export class FormResponse extends SiteModel implements FirestoreSerializable {
    */
   override toFirestore(): any {
     return { ...this.booleans, ...this.images, ...this.shortStrings, ...this.longStrings, ...this.numbers, createdAt: this.createdAt, content: this.content}
+  }
+
+  /**
+   * Send this form response to the server
+   */
+  sendFormData() {
+    return new Promise((resolve, reject) => {
+      fetch(`/site-forms`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          documentData: this.toFirestore(),
+        }),
+      }).then(res => {
+        resolve(res.status);
+      });
+    })
   }
 }
