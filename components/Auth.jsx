@@ -30,7 +30,7 @@ export function FooterAuthButton({authManager, currentSignIn, setCurrentSignIn})
         if (authUser) {
           const uid = authUser.uid;
           const displayName = authUser.displayName;
-          authManager.createNewUser(uid, displayName);
+          authManager.createNewUser(uid, displayName, authUser.email);
         }
       }).catch((err) => {
         console.warn(err);
