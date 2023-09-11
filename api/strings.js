@@ -107,7 +107,7 @@ export function markdownToHTML(markdownString) {
 
 /**
  * Formats a UTC date string so that it's easier to read
- * @param {String} date string representing a UTC date
+ * @param {Date} date string representing a UTC date
  * @returns {String} date formatted as a string in the format "month/day/year"
  */
 export function getSlashDateString(date) {
@@ -143,7 +143,7 @@ export function capitalizeFirstLetter(string) {
 
 /**
  * Formats a UTC date's time of day so that it's easier to read
- * @param {String} date string representing a UTC date
+ * @param {Date} date string representing a UTC date
  * @returns {String} time of day formatted as a string in the format "hh:mm"
  */
 export function getTimeOfDay(date) {
