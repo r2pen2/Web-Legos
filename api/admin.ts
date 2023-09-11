@@ -2,6 +2,7 @@
 import { Timestamp } from "firebase/firestore";
 // @ts-ignore
 import { FirestoreSerializable, SiteModel } from "./models.ts";
+import { getSlashDateString, getTimeOfDay } from "./strings.js";
 
 export enum SiteKey {
   BeyondTheBellEducation = "BTB",
@@ -227,13 +228,14 @@ export class FormResponse extends SiteModel implements FirestoreSerializable {
 
   constructor(subject?: String, siteKey?: string, message?: string) {
     super("form-responses", "FormResponse")
-    this.createdAt = Timestamp.now();
+    this.createdAt = `${getSlashDateString(new Date())} ${getTimeOfDay(new Date())}`
   }
   booleans = {
   }
   images = {
   }
   numbers = {
+    createdAtSeconds: -1
   }
   shortStrings = {
     formId: "",
@@ -241,7 +243,7 @@ export class FormResponse extends SiteModel implements FirestoreSerializable {
   }
   longStrings = {
   }
-  createdAt: Timestamp = Timestamp.now();
+  createdAt: String = `${getSlashDateString(new Date())} ${getTimeOfDay(new Date())}`
   content = {}
 
   fromFirestore(data: any) : FormResponse {
@@ -250,6 +252,7 @@ export class FormResponse extends SiteModel implements FirestoreSerializable {
     instance.shortStrings.formTitle = data.formTitle;
     instance.content = data.content;
     instance.createdAt = data.createdAt;
+    instance.numbers.createdAtSeconds = data.createdAtSeconds;
     return instance;
   }
 
@@ -281,7 +284,8 @@ export class FormResponse extends SiteModel implements FirestoreSerializable {
     this.shortStrings.formId = alt ? "form-alternate" : "form-default";
     this.shortStrings.formTitle = alt ? "Example Alternate Form" : "Example Default Form";
     this.content = alt ? altContent : defaultContent;
-    this.createdAt = Timestamp.now();
+    this.createdAt = `${getSlashDateString(new Date())} ${getTimeOfDay(new Date())}`
+    this.numbers.createdAtSeconds = (new Date()).getTime()/1000
     return this;
   }
 
