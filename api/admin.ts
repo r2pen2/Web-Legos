@@ -281,7 +281,6 @@ export class FormResponse extends SiteModel implements FirestoreSerializable {
     this.shortStrings.formTitle = alt ? "Example Alternate Form" : "Example Default Form";
     this.content = alt ? altContent : defaultContent;
     this.createdAt = Timestamp.now();
-    console.log(this.createdAt)
     return this;
   }
 
