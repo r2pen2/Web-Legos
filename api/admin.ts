@@ -13,13 +13,14 @@ export enum SiteModule {
   forms = "FORMS",
   analytics = "ANALYTICS",
   users = "USERS",
+  log = "LOG",
 }
 
 export const siteModules: { [key: string]: SiteModule[] } = {}
 // Load in BTB Modules
-siteModules[SiteKey.BeyondTheBellEducation] = [SiteModule.forms, SiteModule.analytics, SiteModule.users]
+siteModules[SiteKey.BeyondTheBellEducation] = [SiteModule.forms, SiteModule.analytics, SiteModule.users, SiteModule.log]
 // Load in YCD Modules
-siteModules[SiteKey.YouCanDoItGardening] = [SiteModule.analytics, SiteModule.users]
+siteModules[SiteKey.YouCanDoItGardening] = [SiteModule.analytics, SiteModule.users, SiteModule.log]
 
 export class SupportTicket extends SiteModel implements FirestoreSerializable {
   constructor(subject?: String, siteKey?: string, message?: string) {

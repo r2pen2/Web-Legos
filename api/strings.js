@@ -158,7 +158,7 @@ export function getTimeOfDay(date) {
   // Break it down into its' parts
   const hoursRaw = d.getHours();
   const hours = addZero(hoursRaw % 12);
-  const minutes = addZero(d.getTimezoneOffset()/10 - d.getMinutes());
+  const minutes = addZero(d.getMinutes());
 
   // Format and return string
   return `${hours}:${minutes} ${hoursRaw >= 12 ? "PM" : "AM"}`
