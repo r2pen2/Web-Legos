@@ -204,18 +204,18 @@ export class WLNavDropdownMenu extends Component {
   }
 }
 
-export function WLNavBrandLeft({title, imageSize, source, showIn}) {
+export function WLNavBrandLeft({title, imageSize, source, showIn, onClick}) {
   return (
     <Navbar.Brand
       className={`${showIn ? `d-none d-${showIn}-flex` : "d-lg-flex"} flex-row justify-content-start web-legos-nav-brand`}
-      onClick={() => window.location = "/"}
+      onClick={onClick ? onClick : () => window.location = "/"}
     >
-        <Image
+        { source && <Image
           width={imageSize ? imageSize : 40}
           height={imageSize ? imageSize : 40}
           src={source}
           alt="navbar-brand"
-        />
+        />}
         <Text b css={{fontSize: 20, marginLeft: "0.5em"}}>
           {title}
         </Text>
@@ -223,18 +223,18 @@ export function WLNavBrandLeft({title, imageSize, source, showIn}) {
   )
 }
 
-export function WLNavBrandCenter({title, imageSize, source, hideIn}) {
+export function WLNavBrandCenter({title, imageSize, source, hideIn, onClick}) {
   return (
     <Navbar.Brand
       className={`${hideIn ? `d-flex d-${hideIn}-none` : "d-lg-none"} flex-row justify-content-start gap-2 web-legos-nav-brand`}
-      onClick={() => window.location = "/"}
+      onClick={onClick ? onClick : () => window.location = "/"}
     >
-        <Image
+        { source && <Image
           width={imageSize ? imageSize : 40}
           height={imageSize ? imageSize : 40}
           src={source}
           alt="navbar-brand"
-        />
+        />}
         <Text b css={{fontSize: 20, marginLeft: "0.5em"}}>
           {title}
         </Text>

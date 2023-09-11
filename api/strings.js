@@ -104,3 +104,62 @@ export function markdownToHTML(markdownString) {
 
   return newString;
 }
+
+/**
+ * Formats a UTC date string so that it's easier to read
+ * @param {String} date string representing a UTC date
+ * @returns {String} date formatted as a string in the format "month/day/year"
+ */
+export function getSlashDateString(date) {
+  // Make sure we have a valid date object
+  const d = new Date(date);
+  
+  // Break it down into its' parts
+  const day = d.getUTCDate();
+  const month = d.getMonth();
+  const year = d.getFullYear();
+
+  // Format and return string
+  return `${month + 1}/${day}/${year}`
+}
+
+/**
+* Remove all non-numeric characters from a string via regex
+* @param {string} string string to remove all non-numeric chars
+* @returns string w/ only numbers
+*/
+export function makeNumeric(string) {
+  return string.replace(/\D+/g, '');
+}
+
+/**
+* Capitalize the first letter of a string
+* @param {string} string string to capitalize
+* @returns string with first letter capitalized
+*/
+export function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+/**
+ * Formats a UTC date's time of day so that it's easier to read
+ * @param {String} date string representing a UTC date
+ * @returns {String} time of day formatted as a string in the format "hh:mm"
+ */
+export function getTimeOfDay(date) {
+  // Make sure we have a valid date object
+  const d = new Date(date);
+  
+  function addZero(i) {
+    if (i < 10) {i = "0" + i}
+    return i;
+  }
+  
+  // Break it down into its' parts
+  const hoursRaw = d.getHours();
+  const hours = addZero(hoursRaw % 12);
+  const minutes = addZero(d.getMinutes());
+
+  // Format and return string
+  return `${hours}:${minutes} ${hoursRaw >= 12 ? "PM" : "AM"}`
+}
