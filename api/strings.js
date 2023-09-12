@@ -157,9 +157,31 @@ export function getTimeOfDay(date) {
   
   // Break it down into its' parts
   const hoursRaw = d.getHours();
-  const hours = addZero(hoursRaw % 12);
+  const hours = addZero(hoursRaw % 13);
   const minutes = addZero(d.getMinutes());
 
   // Format and return string
   return `${hours}:${minutes} ${hoursRaw >= 12 ? "PM" : "AM"}`
+}
+
+export class WLDateTime extends Date {
+
+  /** Create a Date with time 0 */
+  constructor() {
+    super(0)
+  }
+
+  /** Load in target time */
+  loadTime(seconds) {
+    this.setSeconds(seconds + this.getTimezoneOffset() * 60)
+  }
+
+  /**
+   * @override
+   * Get WLDateTime as a string representing time as dd/mm/yy hh:mm AM/PM
+   * @returns time string
+   */
+  toString() {
+    return `${getSlashDateString(this)} ${getTimeOfDay(this)}`;
+  }
 }
