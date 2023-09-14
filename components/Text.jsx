@@ -181,7 +181,7 @@ export function WLText(props) {
   }
 
   return (
-    <div data-testId={props["data-testId"]} className={"d-flex flex-column gap-2 w-100 px-2 px-md-3 " + (props.editable ? "web-legos-text-editable" : "")} onClick={() => setEditMode(props.editable)}>
+    <div data-testid={props["data-testid"]} className={"d-flex flex-column gap-2 w-100 px-2 px-md-3 " + (props.editable ? "web-legos-text-editable" : "")} onClick={() => setEditMode(props.editable)}>
       { paragraphs ? renderParagraphs() : (props.showSpinner && <Loading color="primary" />) }
       { editMode && <Button color="success" onClick={sendTextUpdateToServer}>Save Changes</Button> }
       { !fetched && props.children && <WLParagraph paragraphText={markdownToHTML(props.children)} /> }
@@ -229,7 +229,7 @@ export function WLTextBlock(props) {
  * @returns 
  */
 export function WLHeader(props) {
-  return <WLText data-testId={props["data-testId"]}showSpinner={props.showSpinner} setLoaded={props.setLoaded} align={props.align} color={props.color} size={props.size} firestoreId={props.firestoreId} editable={props.editable} headerLevel={props.headerLevel ? props.headerLevel : 1} textClasses="web-legos-scaling-header">{props.children}</WLText>;
+  return <WLText data-testid={props["data-testid"]}showSpinner={props.showSpinner} setLoaded={props.setLoaded} align={props.align} color={props.color} size={props.size} firestoreId={props.firestoreId} editable={props.editable} headerLevel={props.headerLevel ? props.headerLevel : 1} textClasses="web-legos-scaling-header">{props.children}</WLText>;
 }
 
 /**
