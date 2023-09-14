@@ -148,6 +148,8 @@ export class WLAdminPermissions {
   users: Boolean = false;
   /** Whether user can view site analytics */
   analytics: Boolean = false;
+  /** Whether user can view changelog */
+  changelog: Boolean = false;
 }
 
 export enum WLEditType {

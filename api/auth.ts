@@ -119,4 +119,5 @@ export class User {
   permissions: WLPermissionsConfig = new WLPermissionsConfig();
   adminPermissions: WLAdminPermissions | null = new WLAdminPermissions();
   history: WLEditHistory[] = [];
+  isOwner: Boolean = false;
 }
