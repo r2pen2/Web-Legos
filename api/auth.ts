@@ -110,13 +110,21 @@ export class WLPermissionsConfig {
       this[fieldKey] = fields[fieldKey];
     }
   }
+
+  toUserPermissions() {
+    return {
+      op: false,
+      test: false,
+      images: false
+    }
+  }
 }
 
 export class User {
   userId: String = "12345676890";
   displayName: String = "Display Name";
   email: String = "test@example.com";
-  permissions: WLPermissionsConfig = new WLPermissionsConfig();
+  permissions: {} = new WLPermissionsConfig().toUserPermissions();
   adminPermissions: WLAdminPermissions | null = new WLAdminPermissions();
   history: WLEditHistory[] = [];
   isOwner: Boolean = false;
