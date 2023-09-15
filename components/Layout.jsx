@@ -204,7 +204,7 @@ export function WLSpinnerPage(props) {
   }, [props.dependencies])
   
   return (
-    <div className={"d-flex flex-column w-100 align-items-center"}>
+    <div className={"d-flex flex-column w-100 align-items-center"} data-testid={props["data-testid"]}>
       { !pageReady && !loadingTimeout && <WLLoading /> }
       <div className={`d-${pageReady ? "flex" : "none"} flex-column ` + props.itemsCentered ? "w-100 align-items-center" : ""}>
         { props.children }

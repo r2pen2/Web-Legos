@@ -113,11 +113,21 @@ export class WLPermissionsConfig {
 }
 
 export class User {
-  userId: String = "";
-  displayName: String = "";
-  email: String = "";
+  userId: String = "12345676890";
+  displayName: String = "Display Name";
+  email: String = "test@example.com";
   permissions: WLPermissionsConfig = new WLPermissionsConfig();
   adminPermissions: WLAdminPermissions | null = new WLAdminPermissions();
   history: WLEditHistory[] = [];
   isOwner: Boolean = false;
+  
+  setIsOwner(newIsOwner: boolean): User {
+    this.isOwner = newIsOwner;
+    return this
+  }
+
+  static examples = {
+    default: new User(),
+    owner: new User().setIsOwner(true),
+  }
 }

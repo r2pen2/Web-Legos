@@ -5,6 +5,7 @@ import { FirestoreSerializable, SiteModel } from "./models.ts";
 import { getSlashDateString, getTimeOfDay } from "./strings.js";
 
 export enum SiteKey {
+  TestSiteNoForms = "TESTSITENOFORMS",
   BeyondTheBellEducation = "BTB",
   YouCanDoItGardening = "YCD"
 }
@@ -17,6 +18,8 @@ export enum SiteModule {
 }
 
 export const siteModules: { [key: string]: SiteModule[] } = {}
+// Load in TEST Modules
+siteModules[SiteKey.TestSiteNoForms] = [SiteModule.analytics, SiteModule.users, SiteModule.log]
 // Load in BTB Modules
 siteModules[SiteKey.BeyondTheBellEducation] = [SiteModule.forms, SiteModule.analytics, SiteModule.users, SiteModule.log]
 // Load in YCD Modules
