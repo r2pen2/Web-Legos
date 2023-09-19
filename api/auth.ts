@@ -1,6 +1,4 @@
 import { FirebaseApp, FirebaseOptions, initializeApp } from "firebase/app";
-import { FirebaseStorage, getStorage } from "firebase/storage";
-import { Firestore, getFirestore } from "firebase/firestore";
 import { Auth, getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 // @ts-ignore
 import { WLAdminPermissions, WLEditHistory } from "./admin.ts";
@@ -20,9 +18,7 @@ export class AuthenticationManager {
   }
 
   app: FirebaseApp | null = null;
-  firestore: Firestore | null = null;
   auth: Auth | null = null;
-  storage: FirebaseStorage | null = null;
 
   initialize() {
     if (!this.config) {
@@ -30,9 +26,7 @@ export class AuthenticationManager {
       return;
     }
     this.app = initializeApp(this.config);
-    this.firestore = getFirestore();
     this.auth = getAuth();
-    this.storage = getStorage()
   }
 
     /**
