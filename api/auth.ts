@@ -6,7 +6,7 @@ import { createContext } from "react";
 
 export class AuthenticationManager {
   
-  Context = createContext(null);
+  static Context = createContext(null);
 
   permissions: WLPermissionsConfig | null = null;
   config: FirebaseOptions | null = null;

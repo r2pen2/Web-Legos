@@ -4,7 +4,7 @@ import { createContext } from "react";
 
 export class AnalyticsManager {
   
-  Context = createContext(null);
+  static Context = createContext(null);
 
   config: FirebaseOptions | null = null;
 
