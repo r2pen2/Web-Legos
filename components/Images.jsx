@@ -48,7 +48,8 @@ export function WLImage(props) {
     openFileBrowser().then(async (img) => {
       if (img) {
         const fileName = getFileNameByCurrentTime(img);
-        const compressedImage = await ImageCompressor.compressImage(img);
+        const WLImageCompressor = new ImageCompressor(1, 1920)
+        const compressedImage = await WLImageCompressor.compressImage(img);
         const formData = new FormData();
         formData.append("file", compressedImage);
         formData.append("firestoreId", props.firestoreId);
