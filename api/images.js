@@ -7,7 +7,7 @@ import imageCompression from "browser-image-compression";
 export class ImageCompressor {
   
   /** @static Default max image size after compression */
-  static defaultMaxSizeMb = 1;
+  static defaultMaxSizeMb = 0.8;
 
   /** @static Default max image size after compression */
   static defaultMaxWidthOrHeight = 1920;
@@ -19,6 +19,8 @@ export class ImageCompressor {
   static defaultCompressionOptions = {
     maxSizeMb: ImageCompressor.defaultMaxSizeMb,
     maxWidthOrHeight: ImageCompressor.defaultMaxWidthOrHeight,
+    useWebWorker: true,
+    maxIteration: 5,
   }
 
   /**
@@ -40,7 +42,11 @@ export class ImageCompressor {
     if (!imageFile) { return null; }
     return new Promise(async (resolve, reject) => {
       try {
-        let compressedFile = await imageCompression(imageFile, ImageCompressor.defaultCompressionOptions);
+        let compressedFile = await imageCompression(imageFile, {
+          maxSizeMB: 1,
+          maxWidthOrHeight: 1920,
+          useWebWorker: true,
+        });
         resolve(compressedFile);
       } catch (error) {
         console.error(error);
