@@ -23,14 +23,16 @@ export class ImageCompressor {
     maxIteration: 5,
   }
 
+  compressionOptions = {}
+
   /**
    * Create an {@link ImageCompressor} with the specified options
    * @param {number} _maxSizeMb - the maximum size of the image after compression
    * @param {number} _maxWidthOrHeight - the maximum width or height of the image after compression
    */
   constructor(_maxSizeMb, _maxWidthOrHeight) {
-    this.compressionOptions.maxSizeMb = _maxSizeMb;
-    this.compressionOptions.maxWidthOrHeight = _maxWidthOrHeight;
+    this.compressionOptions["maxSizeMb"] = _maxSizeMb;
+    this.compressionOptions["maxWidthOrHeight"] = _maxWidthOrHeight;
   }
 
   /**
