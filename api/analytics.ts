@@ -1,8 +1,11 @@
 import { FirebaseApp, FirebaseOptions, initializeApp } from "firebase/app";
 import { Analytics, getAnalytics, logEvent } from "firebase/analytics";
+import { createContext } from "react";
 
 export class AnalyticsManager {
   
+  Context = createContext(null);
+
   config: FirebaseOptions | null = null;
 
   constructor(config: FirebaseOptions) {

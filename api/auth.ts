@@ -2,9 +2,12 @@ import { FirebaseApp, FirebaseOptions, initializeApp } from "firebase/app";
 import { Auth, getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 // @ts-ignore
 import { WLAdminPermissions, WLEditHistory } from "./admin.ts";
+import { createContext } from "react";
 
 export class AuthenticationManager {
   
+  Context = createContext(null);
+
   permissions: WLPermissionsConfig | null = null;
   config: FirebaseOptions | null = null;
 
