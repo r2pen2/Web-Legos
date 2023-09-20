@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import "../assets/style/layout.css";
 import { WLImage } from "./Images";
 import { WLHeader, WLTextBlock } from "./Text";
-import { Loading, Text } from "@nextui-org/react";
+import { Loading, Text, Tooltip } from "@nextui-org/react";
+
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 /**
  * Web-Legos section that renders from firestoreId
@@ -234,6 +237,35 @@ export function VerticalDivider(props) {
       className={props.showIn ? `d-none d-${props.showIn}-inline` : null}
     >
       <div style={{height: props.height, width: props.width ? props.width : 1, backgroundColor: props.color}}/>
+    </div>
+  )
+}
+
+/**
+ * A toggleable section that disappears when not logged in— unfinished
+ * @deprecated lol I don't ever use this or really intend on it
+ */
+export function WLToggleableSection(props) {
+  
+  // Needs to fetch from site-sections
+  const [toggledOff, setToggledOff] = useState(false);
+  // Needs to fetch from site-auth
+  const [editable, setEditable] = useState(true);
+
+  function handleClick() {
+    if (toggledOff) {
+      setToggledOff(false);
+    }
+  }
+  
+  return (
+    <div className={`wl-toggleable-section-container ${toggledOff ? "wl-toggleable-section-off" : "wl-toggleable-section-on"}  ${editable ? "wl-toggleable-section-editable" : "wl-toggleable-section-ineditable"}`}>
+      <Tooltip onClick={() => setToggledOff(!toggledOff)} placement="right" className="d-flex flex-row align-items-center justify-content-center" style={{position: "absolute", top: "1rem", left: "1rem"}} content={`Toggle visibility ${toggledOff ? "ON" : "OFF"}`}>
+        { !toggledOff && <VisibilityOffIcon fontSize="large" />}
+      </Tooltip>
+      <div className="wl-toggleable-section-content" onClick={handleClick}>
+        {props.children}
+      </div>
     </div>
   )
 }

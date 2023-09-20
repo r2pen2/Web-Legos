@@ -3,3 +3,40 @@
   padding-bottom: 3rem;
   gap: 1rem;
 }
+
+.wl-toggleable-section-container {
+  width: 100%;
+  height: 100%;
+}
+
+.wl-toggleable-section-content {
+  transition: all 0.5s ease-in-out;
+}
+
+.wl-toggleable-section-container.wl-toggleable-section-editable.wl-toggleable-section-off {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.wl-toggleable-section-container.wl-toggleable-section-editable.wl-toggleable-section-off .wl-toggleable-section-content {
+  transform: scale(0.2);
+  background-color: rgba(0,0,0,0.2);
+  border: 1px solid rgba(0,0,0,0.5);
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.wl-toggleable-section-container.wl-toggleable-section-editable.wl-toggleable-section-on {
+
+}
+
+.wl-toggleable-section-container.wl-toggleable-section-ineditable.wl-toggleable-section-off {
+  display: none;
+}
+
+.wl-toggleable-section-container.wl-toggleable-section-ineditable.wl-toggleable-section-on {
+  
+}
