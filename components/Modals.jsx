@@ -1,4 +1,4 @@
-import { Modal, Text, Button, Card, Divider, Textarea, Dropdown, Checkbox } from "@nextui-org/react";
+import { Modal, Text, Button, Card, Divider, Textarea, Dropdown, Checkbox, Loading } from "@nextui-org/react";
 import { Component, useEffect, useState} from "react";
 import LaunchIcon from '@mui/icons-material/Launch';
 import { WLHeader } from "./Text";
@@ -111,6 +111,8 @@ export function ModelEditModal({open, setOpen, model}) {
   const [numbersState, setNumbersState] = useState(model.numbers);
   const [editedNumbers, setEditedNumbers] = useState({});
 
+  const [compressing, setCompressing] = useState(false);
+
   useEffect(() => {
     setImagesState(model.images);
     setEditedImages({});
@@ -148,9 +150,10 @@ export function ModelEditModal({open, setOpen, model}) {
     return Object.keys(model.images).map((imageKey, index) => {
       return (
         <div key={index} className="py-2 px-lg-5 px-2 d-flex flex-column align-items-center justify-content-center col-xl-4 col-lg-6 col-md-12">
-          <Text h5>{imageKey}</Text>
-          { imagesState[imageKey] && <img onClick={() => handleImageClick(imageKey)} className="web-legos-editable-image" src={imagesState[imageKey]} alt={imageKey} style={{maxHeight: imageSize, width: "100%", height: "100%", objectFit:"contain",}}/> }
-          { !imagesState[imageKey] && <UploadImageCard size={imageSize} fullSize onClick={() => handleImageClick(imageKey)}/> }
+          <Text h5>{compressing ? "Compressing..." : imageKey}</Text>
+          { compressing && <Loading />}
+          { !compressing && imagesState[imageKey] && <img onClick={() => handleImageClick(imageKey)} className="web-legos-editable-image" src={imagesState[imageKey]} alt={imageKey} style={{maxHeight: imageSize, width: "100%", height: "100%", objectFit:"contain",}}/> }
+          { !compressing && !imagesState[imageKey] && <UploadImageCard size={imageSize} fullSize onClick={() => handleImageClick(imageKey)}/> }
         </div>
       )
     })
@@ -225,7 +228,9 @@ export function ModelEditModal({open, setOpen, model}) {
       const imageToReplace = model.images[newImageKey];
       const imageToReplaceFileName = imageToReplace.substring(imageToReplace.lastIndexOf("/") + 1);
       const newFileName = newImageKey + getFileNameByCurrentTime(editedImages[newImageKey]);
+      setCompressing(true);
       const compressedImage = await ImageCompressor.compressImage(editedImages[newImageKey]);
+      setCompressing(false);
       const formData = new FormData();
       const addPath = `images/${model.collection}/${newFileName}`;
       formData.append("file", compressedImage);

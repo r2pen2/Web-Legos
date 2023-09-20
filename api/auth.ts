@@ -1,12 +1,13 @@
 import { FirebaseApp, FirebaseOptions, initializeApp } from "firebase/app";
-import { FirebaseStorage, getStorage } from "firebase/storage";
-import { Firestore, getFirestore } from "firebase/firestore";
 import { Auth, getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 // @ts-ignore
 import { WLAdminPermissions, WLEditHistory } from "./admin.ts";
+import { createContext } from "react";
 
 export class AuthenticationManager {
   
+  static Context = createContext(null);
+
   permissions: WLPermissionsConfig | null = null;
   config: FirebaseOptions | null = null;
 
@@ -20,9 +21,7 @@ export class AuthenticationManager {
   }
 
   app: FirebaseApp | null = null;
-  firestore: Firestore | null = null;
   auth: Auth | null = null;
-  storage: FirebaseStorage | null = null;
 
   initialize() {
     if (!this.config) {
@@ -30,9 +29,7 @@ export class AuthenticationManager {
       return;
     }
     this.app = initializeApp(this.config);
-    this.firestore = getFirestore();
     this.auth = getAuth();
-    this.storage = getStorage()
   }
 
     /**
@@ -110,13 +107,21 @@ export class WLPermissionsConfig {
       this[fieldKey] = fields[fieldKey];
     }
   }
+
+  toUserPermissions() {
+    return {
+      op: false,
+      test: false,
+      images: false
+    }
+  }
 }
 
 export class User {
   userId: String = "12345676890";
   displayName: String = "Display Name";
   email: String = "test@example.com";
-  permissions: WLPermissionsConfig = new WLPermissionsConfig();
+  permissions: {} = new WLPermissionsConfig().toUserPermissions();
   adminPermissions: WLAdminPermissions | null = new WLAdminPermissions();
   history: WLEditHistory[] = [];
   isOwner: Boolean = false;

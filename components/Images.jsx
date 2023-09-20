@@ -44,11 +44,16 @@ export function UploadImageCard({onClick, size, fullSize}) {
  */
 export function WLImage(props) {
 
+  const [compressing, setCompressing] = useState(false);
+  
   function uploadImage() {
     openFileBrowser().then(async (img) => {
       if (img) {
         const fileName = getFileNameByCurrentTime(img);
-        const compressedImage = await ImageCompressor.compressImage(img);
+        setCompressing(true);
+        const WLImageCompressor = new ImageCompressor(1, 1920)
+        const compressedImage = await WLImageCompressor.compressImage(img);
+        setCompressing(false);
         const formData = new FormData();
         formData.append("file", compressedImage);
         formData.append("firestoreId", props.firestoreId);
@@ -85,6 +90,15 @@ export function WLImage(props) {
       return {width: "100%", maxWidth: "95vw", maxHeight: "50vh", objectFit: "cover"};
     }
     return props.imgCss;
+  }
+
+  if (compressing) {
+    return (
+      <div className="d-flex flex-column align-items-center justify-content-center">
+        <Text>Compressing...</Text>
+        <Loading color="primary" />
+      </div>
+    )
   }
 
   return (

@@ -10,7 +10,7 @@ export class ImageCompressor {
   static defaultMaxSizeMb = 1;
 
   /** @static Default max image size after compression */
-  static defaultMaxWidthOrHeight = 1920;
+  static defaultMaxWidthOrHeight = 600;
 
   /**
    * @static
@@ -19,7 +19,11 @@ export class ImageCompressor {
   static defaultCompressionOptions = {
     maxSizeMb: ImageCompressor.defaultMaxSizeMb,
     maxWidthOrHeight: ImageCompressor.defaultMaxWidthOrHeight,
+    useWebWorker: true,
+    maxIteration: 5,
   }
+
+  compressionOptions = {}
 
   /**
    * Create an {@link ImageCompressor} with the specified options
@@ -27,8 +31,8 @@ export class ImageCompressor {
    * @param {number} _maxWidthOrHeight - the maximum width or height of the image after compression
    */
   constructor(_maxSizeMb, _maxWidthOrHeight) {
-    this.compressionOptions.maxSizeMb = _maxSizeMb;
-    this.compressionOptions.maxWidthOrHeight = _maxWidthOrHeight;
+    this.compressionOptions["maxSizeMb"] = _maxSizeMb;
+    this.compressionOptions["maxWidthOrHeight"] = _maxWidthOrHeight;
   }
 
   /**
