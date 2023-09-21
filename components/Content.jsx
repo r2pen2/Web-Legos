@@ -157,8 +157,6 @@ export function WLAliceCarouselItem(props) {
   )
 }
 
-
-
 export function createCarouselBreakpoints(itemsBase, itemsSm, itemsMd, itemsLg, itemsXl, itemsXxl) {
 
   const returnBase = itemsBase ? itemsBase : 1; 
@@ -176,4 +174,45 @@ export function createCarouselBreakpoints(itemsBase, itemsSm, itemsMd, itemsLg, 
     1200: { items: returnXl, itemsFit:"contain" }, // xl
     1400: { items: returnXxl, itemsFit:"contain" }, // xxl
   };
+}
+
+/**
+ * 
+ * @param {string} color - action box color
+ * @param {string} borderColor - action box border color
+ * @param {Image} icon - action box icon
+ */
+export function HoverActionBox(props) {
+
+  const [hover, setHover] = useState(false);
+
+
+
+  return (
+    <div
+      onMouseEnter={() => setHover(true)} 
+      onMouseLeave={() => setHover(false)} 
+      className="d-flex flex-column align-items-start p-3 gap-2 justify-content-start hover-action-box" 
+      style={{
+        background: hover ? props.color : props.background,
+        borderRadius: "1rem",
+      }}
+      data-hovercolor={props.color}
+    >
+      <div 
+        className="d-flex flex-row align-items-center justify-content-center hover-action-box-icon-container"
+        style={{
+          width: "5rem",
+          height: "5rem",
+          boxSizing: "border-box",
+          borderRadius: "1rem",
+          backgroundColor: props.color,
+          border: hover ? (`${props.borderWeight ? props.borderWeight : "0.25rem"} solid ${props.borderColor}`) : (`${props.borderWeight ? props.borderWeight : "0.25rem"} solid ${props.color}`),
+        }}
+      >
+        {props.icon}
+      </div>
+      {props.children}
+    </div>
+  )
 }

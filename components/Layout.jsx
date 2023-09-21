@@ -269,3 +269,43 @@ export function WLToggleableSection(props) {
     </div>
   )
 }
+
+/**
+ * 
+ * @param {string} backgroundColor1 - first background color
+ * @param {string} backgroundColor2 - second background color
+ * @param {number} zIndex - new zIndex if shadow does not appear
+ * @returns 
+ */
+export function ColoredShadowBox(props) {
+  
+  const backgroundColor1 = props.backgroundColor1 ? props.backgroundColor1 : "rgb(44, 44, 45)";
+  const backgroundColor2 = props.backgroundColor2 ? props.backgroundColor2 : "rgb(26, 26, 30)";
+
+  const shadowColor1 = props.shadowColor1 ? props.shadowColor1 : "#EF2427";
+  const shadowColor2 = props.shadowColor2 ? props.shadowColor2 : "#070709";
+
+  const zIndex = props.zIndex ? props.zIndex : 2;
+
+  const alignment = props.stickLeft ? "left" : (props.stickRight ? "right" : null)
+
+  return (
+    <div style={{zIndex: zIndex}}>
+      <div 
+        className={(`colored-shadow-box colored-shadow-box-aligned-${alignment} `) + props.className}
+        style={{
+          ...props.style, 
+          backgroundImage: props.background ? props.background : `linear-gradient(239.59deg, ${backgroundColor1} -44.65%, ${backgroundColor2} 75.57%)`,
+        }}
+      >
+        {props.children}
+        <div 
+          className="colored-shadow-box-shadow" 
+          style={{
+            background: `linear-gradient(79.42deg, ${shadowColor1} -51.76%, ${shadowColor2} 75.15%)`
+          }}
+        />
+      </div>
+    </div>
+  )
+}

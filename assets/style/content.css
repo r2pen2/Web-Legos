@@ -45,3 +45,12 @@
   transition: all 0.5s ease;
   transform: scale(1);
 }
+
+.hover-action-box {
+  background-color: transparent;
+  transition: all 1s ease;
+}
+
+.hover-action-box-icon-container {
+  transition: border-color 1s ease;
+}

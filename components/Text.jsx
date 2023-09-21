@@ -229,7 +229,7 @@ export function WLTextBlock(props) {
  * @returns 
  */
 export function WLHeader(props) {
-  return <WLText data-testid={props["data-testid"]}showSpinner={props.showSpinner} setLoaded={props.setLoaded} align={props.align} color={props.color} size={props.size} firestoreId={props.firestoreId} editable={props.editable} headerLevel={props.headerLevel ? props.headerLevel : 1} textClasses="web-legos-scaling-header">{props.children}</WLText>;
+  return <WLText data-testid={props["data-testid"]} showSpinner={props.showSpinner} setLoaded={props.setLoaded} align={props.align} color={props.color} size={props.size} firestoreId={props.firestoreId} editable={props.editable} headerLevel={props.headerLevel ? props.headerLevel : 1} textClasses="web-legos-scaling-header">{props.children}</WLText>;
 }
 
 /**
