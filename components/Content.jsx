@@ -8,7 +8,9 @@ import { getLargestNumber } from "../api/math";
 import { Button, IconButton, Pagination } from "@mui/material";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { Text } from "@nextui-org/react";
+import { Divider, Text, Button as NextUIButton, Card } from "@nextui-org/react";
+import { enforcePx } from "../api/strings";
+
 
 /**
  * @param {boolean} autoPlay - autoplay timer setting
@@ -178,41 +180,91 @@ export function createCarouselBreakpoints(itemsBase, itemsSm, itemsMd, itemsLg, 
 
 /**
  * 
+ * @param {string} buttonText - button text
  * @param {string} color - action box color
  * @param {string} borderColor - action box border color
  * @param {Image} icon - action box icon
+ * @param {Function} onClick - onClick function
  */
-export function HoverActionBox(props) {
+export class HoverActionBox extends Component {
 
-  const [hover, setHover] = useState(false);
+  static colors = {
+    blue: "#56CCF2",
+    purple: "#9B51E0",
+    green: "#63C34E",
+    yellow: "#EBB512",
+  }
 
+  state = {
+    hover: false,
+  }
 
+  iconSize = this.props.iconSize ? this.props.iconSize : 48;
 
-  return (
-    <div
-      onMouseEnter={() => setHover(true)} 
-      onMouseLeave={() => setHover(false)} 
-      className="d-flex flex-column align-items-start p-3 gap-2 justify-content-start hover-action-box" 
-      style={{
-        background: hover ? props.color : props.background,
-        borderRadius: "1rem",
-      }}
-      data-hovercolor={props.color}
-    >
-      <div 
-        className="d-flex flex-row align-items-center justify-content-center hover-action-box-icon-container"
+  /**
+   * Title for HoverActionBox
+   * @param {string} text - title text
+   * @param {string} color - divider and text color 
+   * @returns 
+   */
+  static Title({text, color}) {
+    
+    const titleColor = color ? color : "white";
+
+    return [
+      <Text b size="$lg">
+        {text}
+      </Text>,
+      <Divider style={{backgroundColor: titleColor}} />
+    ]
+  }
+
+  static Body(bodyProps) {
+    return <div className="py-2">{bodyProps.children}</div>
+  }
+
+  styledIcon = React.cloneElement(this.props.icon, {
+    className: "hover-action-box-icon",
+    style: {fontSize: this.iconSize}
+  })
+  
+  render() {
+    return (
+      <Card
+        isPressable={this.props.onClick}
+        onClick={this.props.onClick}
+        className={`d-flex flex-column align-items-center align-items-${this.props.leftIn}-start gap-2 justify-content-start hover-action-box ${this.props.hidden ? "hidden" : ""}`}
         style={{
-          width: "5rem",
-          height: "5rem",
-          boxSizing: "border-box",
           borderRadius: "1rem",
-          backgroundColor: props.color,
-          border: hover ? (`${props.borderWeight ? props.borderWeight : "0.25rem"} solid ${props.borderColor}`) : (`${props.borderWeight ? props.borderWeight : "0.25rem"} solid ${props.color}`),
+          "--background": this.props.background,
+          "--accentColor": this.props.accentColor,
+          "--mainColor": this.props.color,
+          "--mainColorAlpha": this.props.color + "66",
+          "--stackIndex": this.props.stackIndex,
+          cursor: this.props.onClick ? "pointer" : null,
         }}
       >
-        {props.icon}
-      </div>
-      {props.children}
-    </div>
-  )
+        <div 
+          className="d-flex flex-row align-items-center justify-content-center hover-action-box-icon-container"
+          style={{
+            boxSizing: "border-box",
+            borderRadius: "1rem",
+            backgroundColor: this.props.color,
+            border: this.state.hover ? (`${this.props.borderWeight ? this.props.borderWeight : "0.25rem"} solid ${this.props.accentColor}`) : (`${this.props.borderWeight ? this.props.borderWeight : "0.25rem"} solid ${this.props.color}`),
+          }}
+        >
+          {this.styledIcon}
+        </div>
+        <div className="hover-action-box-items">
+          {this.props.children}
+        </div>
+        {this.props.buttonText && 
+          <NextUIButton className="hover-action-box-button" onClick={this.props.onClick} bordered style={{minHeight: 40, borderColor: this.props.accentColor, color: this.props.accentColor, width: "100%"}}>
+            {this.props.buttonText}
+            <ChevronRightIcon />
+          </NextUIButton>
+        }
+      </Card>
+    )
+  }
 }

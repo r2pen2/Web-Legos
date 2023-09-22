@@ -185,3 +185,7 @@ export class WLDateTime extends Date {
     return `${getSlashDateString(this)} ${getTimeOfDay(this)}`;
   }
 }
+
+export function enforcePx(string) {
+  return (string+"px").replace("pxpx", "px");
+}
