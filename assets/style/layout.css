@@ -59,3 +59,29 @@
  border-top-right-radius: 0; 
  border-bottom-right-radius: 0; 
 }
+
+.toggle-pane {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle-pane-item {
+  width: 100%;
+  height: 100%;
+  transition: all var(--transitionTime) ease;
+}
+
+.toggle-pane-item-1 {
+  z-index: var(--zIndex1);
+  opacity: var(--opacity1);
+}
+
+.toggle-pane-item-2 {
+  position: absolute;
+  z-index: var(--zIndex2);
+  opacity: var(--opacity2);
+}

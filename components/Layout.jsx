@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Component, useEffect, useState } from "react";
 import "../assets/style/layout.css";
 import { WLImage } from "./Images";
 import { WLHeader, WLTextBlock } from "./Text";
@@ -308,4 +308,39 @@ export function ColoredShadowBox(props) {
       </div>
     </div>
   )
+}
+
+/**
+ * @param {boolean} flipped - whether showing component 2
+ */
+export class TogglePane extends Component {
+
+  static Item1(itemProps) {
+    return <div className="toggle-pane-item toggle-pane-item-1">
+      {itemProps.children}
+    </div>
+  }
+
+  static Item2(itemProps) {
+    return <div className="toggle-pane-item toggle-pane-item-2">
+      {itemProps.children}
+    </div>
+  }
+
+  render() {
+    return (
+      <div 
+        className="toggle-pane"
+        style={{
+          "--opacity1": this.props.flipped ? 0 : 1,
+          "--opacity2": this.props.flipped ? 1 : 0,
+          "--zIndex1": this.props.flipped ? -1 : 1,
+          "--zIndex2": this.props.flipped ? 1 : -1,
+          "--transitionTime": this.props.transitionTime ? this.props.transitionTime : "1s",
+        }}
+      >
+        {this.props.children}
+      </div>
+    )
+  }
 }

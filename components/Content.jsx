@@ -250,7 +250,6 @@ export class HoverActionBox extends Component {
             boxSizing: "border-box",
             borderRadius: "1rem",
             backgroundColor: this.props.color,
-            border: this.state.hover ? (`${this.props.borderWeight ? this.props.borderWeight : "0.25rem"} solid ${this.props.accentColor}`) : (`${this.props.borderWeight ? this.props.borderWeight : "0.25rem"} solid ${this.props.color}`),
           }}
         >
           {this.styledIcon}
