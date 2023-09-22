@@ -212,10 +212,10 @@ export class HoverActionBox extends Component {
     const titleColor = color ? color : "white";
 
     return [
-      <Text b size="$lg">
+      <Text b size="$lg" key={1}>
         {text}
       </Text>,
-      <Divider style={{backgroundColor: titleColor}} />
+      <Divider style={{backgroundColor: titleColor}} key={2} />
     ]
   }
 

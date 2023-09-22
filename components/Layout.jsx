@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { Component, useEffect, useRef, useState } from "react";
 import "../assets/style/layout.css";
 import { WLImage } from "./Images";
 import { WLHeader, WLTextBlock } from "./Text";
@@ -6,6 +6,7 @@ import { Loading, Text, Tooltip } from "@nextui-org/react";
 
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import { enforcePx } from "../api/strings";
 
 /**
  * Web-Legos section that renders from firestoreId
@@ -312,6 +313,7 @@ export function ColoredShadowBox(props) {
 
 /**
  * @param {boolean} flipped - whether showing component 2
+ * @deprecated i didn't get this working last time I tried
  */
 export class TogglePane extends Component {
 
@@ -320,7 +322,7 @@ export class TogglePane extends Component {
       {itemProps.children}
     </div>
   }
-
+  
   static Item2(itemProps) {
     return <div className="toggle-pane-item toggle-pane-item-2">
       {itemProps.children}
@@ -332,8 +334,10 @@ export class TogglePane extends Component {
       <div 
         className="toggle-pane"
         style={{
-          "--opacity1": this.props.flipped ? 0 : 1,
-          "--opacity2": this.props.flipped ? 1 : 0,
+          "--height1": this.props.flipped ? "0px" : "100%",
+          "--height2": this.props.flipped ? "100%" : "0px",
+          "--visibility1": this.props.flipped ? 0 : 1,
+          "--visibility2": this.props.flipped ? 1 : 0,
           "--zIndex1": this.props.flipped ? -1 : 1,
           "--zIndex2": this.props.flipped ? 1 : -1,
           "--transitionTime": this.props.transitionTime ? this.props.transitionTime : "1s",
