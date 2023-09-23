@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Component, useEffect, useRef, useState } from "react";
 import "../assets/style/layout.css";
 import { WLImage } from "./Images";
 import { WLHeader, WLTextBlock } from "./Text";
@@ -6,6 +6,7 @@ import { Loading, Text, Tooltip } from "@nextui-org/react";
 
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import { enforcePx } from "../api/strings";
 
 /**
  * Web-Legos section that renders from firestoreId
@@ -268,4 +269,82 @@ export function WLToggleableSection(props) {
       </div>
     </div>
   )
+}
+
+/**
+ * 
+ * @param {string} backgroundColor1 - first background color
+ * @param {string} backgroundColor2 - second background color
+ * @param {number} zIndex - new zIndex if shadow does not appear
+ * @returns 
+ */
+export function ColoredShadowBox(props) {
+  
+  const backgroundColor1 = props.backgroundColor1 ? props.backgroundColor1 : "rgb(44, 44, 45)";
+  const backgroundColor2 = props.backgroundColor2 ? props.backgroundColor2 : "rgb(26, 26, 30)";
+
+  const shadowColor1 = props.shadowColor1 ? props.shadowColor1 : "#EF2427";
+  const shadowColor2 = props.shadowColor2 ? props.shadowColor2 : "#070709";
+
+  const zIndex = props.zIndex ? props.zIndex : 2;
+
+  const alignment = props.stickLeft ? "left" : (props.stickRight ? "right" : null)
+
+  return (
+    <div style={{zIndex: zIndex}}>
+      <div 
+        className={(`colored-shadow-box colored-shadow-box-aligned-${alignment} `) + props.className}
+        style={{
+          ...props.style, 
+          backgroundImage: props.background ? props.background : `linear-gradient(239.59deg, ${backgroundColor1} -44.65%, ${backgroundColor2} 75.57%)`,
+        }}
+      >
+        {props.children}
+        <div 
+          className="colored-shadow-box-shadow" 
+          style={{
+            background: `linear-gradient(79.42deg, ${shadowColor1} -51.76%, ${shadowColor2} 75.15%)`
+          }}
+        />
+      </div>
+    </div>
+  )
+}
+
+/**
+ * @param {boolean} flipped - whether showing component 2
+ * @deprecated i didn't get this working last time I tried
+ */
+export class TogglePane extends Component {
+
+  static Item1(itemProps) {
+    return <div className="toggle-pane-item toggle-pane-item-1">
+      {itemProps.children}
+    </div>
+  }
+  
+  static Item2(itemProps) {
+    return <div className="toggle-pane-item toggle-pane-item-2">
+      {itemProps.children}
+    </div>
+  }
+
+  render() {
+    return (
+      <div 
+        className="toggle-pane"
+        style={{
+          "--height1": this.props.flipped ? "0px" : "100%",
+          "--height2": this.props.flipped ? "100%" : "0px",
+          "--visibility1": this.props.flipped ? 0 : 1,
+          "--visibility2": this.props.flipped ? 1 : 0,
+          "--zIndex1": this.props.flipped ? -1 : 1,
+          "--zIndex2": this.props.flipped ? 1 : -1,
+          "--transitionTime": this.props.transitionTime ? this.props.transitionTime : "1s",
+        }}
+      >
+        {this.props.children}
+      </div>
+    )
+  }
 }

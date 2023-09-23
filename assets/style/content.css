@@ -45,3 +45,40 @@
   transition: all 0.5s ease;
   transform: scale(1);
 }
+
+.hover-action-box {
+  background-color: transparent;
+  transition: all 1s ease;
+  background: var(--background);
+  padding: 1rem;
+  height: 100%;
+  margin: 0;
+  display: flex;
+}
+
+.hover-action-box:hover {
+  background: var(--mainColor);
+  filter: drop-shadow(0px 0px 5px var(--mainColorAlpha))
+}
+
+.hover-action-box:hover .hover-action-box-icon-container {
+  border: 0.25rem solid var(--accentColor);
+}
+
+.hover-action-box-icon-container {
+  border: 0.25rem solid var(--mainColor);
+  transition: border-color 1s ease;
+  min-width: 5rem;
+  min-height: 5rem;
+}
+
+.hover-action-box-icon {
+  color: var(--accentColor);
+}
+
+.hover-action-box.active {
+  width: 100%;
+}
+.hover-action-box-items {
+  height: 100%;
+}

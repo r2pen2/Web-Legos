@@ -8,7 +8,9 @@ import { getLargestNumber } from "../api/math";
 import { Button, IconButton, Pagination } from "@mui/material";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { Text } from "@nextui-org/react";
+import { Divider, Text, Button as NextUIButton, Card } from "@nextui-org/react";
+import { enforcePx } from "../api/strings";
+
 
 /**
  * @param {boolean} autoPlay - autoplay timer setting
@@ -157,8 +159,6 @@ export function WLAliceCarouselItem(props) {
   )
 }
 
-
-
 export function createCarouselBreakpoints(itemsBase, itemsSm, itemsMd, itemsLg, itemsXl, itemsXxl) {
 
   const returnBase = itemsBase ? itemsBase : 1; 
@@ -176,4 +176,94 @@ export function createCarouselBreakpoints(itemsBase, itemsSm, itemsMd, itemsLg, 
     1200: { items: returnXl, itemsFit:"contain" }, // xl
     1400: { items: returnXxl, itemsFit:"contain" }, // xxl
   };
+}
+
+/**
+ * 
+ * @param {string} buttonText - button text
+ * @param {string} color - action box color
+ * @param {string} borderColor - action box border color
+ * @param {Image} icon - action box icon
+ * @param {Function} onClick - onClick function
+ */
+export class HoverActionBox extends Component {
+
+  static colors = {
+    blue: "#56CCF2",
+    purple: "#9B51E0",
+    green: "#63C34E",
+    yellow: "#EBB512",
+  }
+
+  state = {
+    hover: false,
+  }
+
+  iconSize = this.props.iconSize ? this.props.iconSize : 48;
+
+  /**
+   * Title for HoverActionBox
+   * @param {string} text - title text
+   * @param {string} color - divider and text color 
+   * @returns 
+   */
+  static Title({text, color}) {
+    
+    const titleColor = color ? color : "white";
+
+    return [
+      <Text b size="$lg" key={1}>
+        {text}
+      </Text>,
+      <Divider style={{backgroundColor: titleColor}} key={2} />
+    ]
+  }
+
+  static Body(bodyProps) {
+    return <div className="py-2">{bodyProps.children}</div>
+  }
+
+  styledIcon = React.cloneElement(this.props.icon, {
+    className: "hover-action-box-icon",
+    style: {fontSize: this.iconSize}
+  })
+  
+  render() {
+    return (
+      <Card
+        isPressable={this.props.onClick}
+        onClick={this.props.onClick}
+        className={`d-flex flex-column align-items-center align-items-${this.props.leftIn}-start gap-2 justify-content-start hover-action-box ${this.props.hidden ? "hidden" : ""}`}
+        style={{
+          borderRadius: "1rem",
+          "--background": this.props.background,
+          "--accentColor": this.props.accentColor,
+          "--mainColor": this.props.color,
+          "--mainColorAlpha": this.props.color + "66",
+          "--stackIndex": this.props.stackIndex,
+          cursor: this.props.onClick ? "pointer" : null,
+        }}
+      >
+        <div 
+          className="d-flex flex-row align-items-center justify-content-center hover-action-box-icon-container"
+          style={{
+            boxSizing: "border-box",
+            borderRadius: "1rem",
+            backgroundColor: this.props.color,
+          }}
+        >
+          {this.styledIcon}
+        </div>
+        <div className="hover-action-box-items">
+          {this.props.children}
+        </div>
+        {this.props.buttonText && 
+          <NextUIButton className="hover-action-box-button" onClick={this.props.onClick} bordered style={{minHeight: 40, borderColor: this.props.accentColor, color: this.props.accentColor, width: "100%"}}>
+            {this.props.buttonText}
+            <ChevronRightIcon />
+          </NextUIButton>
+        }
+      </Card>
+    )
+  }
 }
