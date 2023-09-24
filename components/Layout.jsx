@@ -1,12 +1,10 @@
-import React, { Component, useEffect, useRef, useState } from "react";
+import React, { Component, useEffect, useState } from "react";
 import "../assets/style/layout.css";
 import { WLImage } from "./Images";
 import { WLHeader, WLTextBlock } from "./Text";
 import { Loading, Text, Tooltip } from "@nextui-org/react";
 
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import { enforcePx } from "../api/strings";
 
 /**
  * Web-Legos section that renders from firestoreId
@@ -251,6 +249,7 @@ export function WLToggleableSection(props) {
   // Needs to fetch from site-sections
   const [toggledOff, setToggledOff] = useState(false);
   // Needs to fetch from site-auth
+  // eslint-disable-next-line no-unused-vars
   const [editable, setEditable] = useState(true);
 
   function handleClick() {

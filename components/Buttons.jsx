@@ -1,6 +1,5 @@
 import { Button, Text } from "@nextui-org/react"
 import "../assets/style/buttons.css"
-import { useState } from "react";
 
 /**
  * 

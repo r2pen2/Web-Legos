@@ -1,6 +1,4 @@
 // @ts-ignore
-import { Timestamp } from "firebase/firestore";
-// @ts-ignore
 import { FirestoreSerializable, SiteModel } from "./models.ts";
 import { getSlashDateString, getTimeOfDay } from "./strings.js";
 
