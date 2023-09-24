@@ -1,15 +1,23 @@
 import React, { Component, useEffect, useState } from "react";
+import Flickity from 'react-flickity-component'
 import AliceCarousel from 'react-alice-carousel';
 import "react-alice-carousel/lib/alice-carousel.css";
-import { getChildrenList } from "../api/reactQuirks";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+import Slider from "react-slick"
 
 import "../assets/style/content.css";
 import { getLargestNumber } from "../api/math";
-import { Button, IconButton, Pagination } from "@mui/material";
+import { Button, Pagination } from "@mui/material";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { Divider, Text, Button as NextUIButton, Card } from "@nextui-org/react";
-import { enforcePx } from "../api/strings";
+import { WLTestimonial } from "../api/models.ts";
+import { QuoteBlock } from "./Text";
+import { Carousel } from "react-responsive-carousel"
+
 
 
 /**
@@ -27,6 +35,7 @@ import { enforcePx } from "../api/strings";
  * infinute = true;
  * buttonBlock = false;
  * buttonSpacing = 20;
+ * @deprecated since 9/2/23— this is getting too gross. I'm re-writing it as {@link WLResponsiveCarousel}
  */
 export function WLAliceCarousel(props) { 
     
@@ -266,4 +275,71 @@ export class HoverActionBox extends Component {
       </Card>
     )
   }
+}
+
+/**
+ * A pre-made WLTestimonial card
+ * @param {string} color - testimonial color
+ * @param {ModalEditButton} editButton - modal edit button
+ * @param {WLTestimonial} wlTestimonial - WLTestimonial object 
+ * @param {string} outlineWeight - weight of glyph outline
+ * @returns 
+ */
+export function TestimonialCard({testimonial, editButton, glyphColor, accentColor, outlineWeight}) {
+  return (
+    <div className="p-2 gap-2 d-flex flex-column align-items-center justify-content-center" style={{minHeight: 300, height: '100%', userSelect: "none"}}>
+      {editButton}
+      <QuoteBlock color={glyphColor} outlineColor={accentColor} outlineWeight={outlineWeight}>
+        <QuoteBlock.Text>{testimonial.message}</QuoteBlock.Text> 
+        <QuoteBlock.Author name={testimonial.author} />
+      </QuoteBlock>
+    </div>
+  )
+}
+
+/**
+ * @deprecated This doesn't work at all
+ */
+export function WLResponsiveCarousel(props) { 
+  return (
+    <Carousel>
+      {props.children}
+    </Carousel>
+  )
+}
+
+export function WLSlick(props) {
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+
+  return (
+    <Slider {...settings}>
+      {props.children}
+    </Slider>
+  )
+}
+
+export function WLFlickity(props) {
+  
+  const flickityOptions = {
+    initialIndex: 2
+  }
+
+  return (
+    <Flickity
+      className={'carousel'} // default ''
+      elementType={'div'} // default 'div'
+      options={flickityOptions} // takes flickity options {}
+      disableImagesLoaded={false} // default false
+      reloadOnUpdate // default false
+      static // default false
+    >
+      {props.children}
+    </Flickity>
+  )
 }

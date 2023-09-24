@@ -162,3 +162,43 @@ export async function createModel(collection: string, data: string) {
     });
   })
 }
+
+// ------------------------- Standard Models ---------------------------- /
+export class WLTestimonial extends SiteModel {
+
+  /** A SiteModel for basic testimonais— includes an author, message, and order. */
+  constructor() { super("testimonials", "Testimonial") }
+  
+  booleans = {
+  }
+  images = {}
+  numbers = {
+    order: null,
+  }
+  shortStrings = {
+    author: "",
+  }
+  longStrings = {
+    message: "",
+  }
+
+  fillConstantExampleData() {
+    this.longStrings.message = "Like having a visit from a loving mom and your favorite elementary school teacher who is also a great gardener. :) Jess is so instructive and kind, and practical. After two years of deliberating on a garden design, I was able to cut a new bed shape and start planting immediately. My new garden will cost me next to nothing, whereas the last proposal I was given was for $10K!! So happy I did this.";
+    this.shortStrings.author = "Diana Roy";
+    return this;
+  }
+
+  static examples = {
+    default: (new WLTestimonial()).fillConstantExampleData().toFirestore(),
+    alternate: (new WLTestimonial()).fillConstantExampleData().toFirestore(),
+  }
+
+  fromFirestore(data: any) : WLTestimonial {
+    const t = new WLTestimonial();
+    t.id = data.id;
+    t.shortStrings.author = data.author;
+    t.longStrings.message = data.message;
+    t.numbers.order = data.order;
+    return t;
+  }
+}
