@@ -82,3 +82,9 @@
 .hover-action-box-items {
   height: 100%;
 }
+
+.custom-slick-button::before {
+  display: none;
+  color: var(--buttonColor);
+  font-size: var(--buttonSize);
+}

@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { Component, useEffect, useRef, useState } from "react";
 import Flickity from 'react-flickity-component'
 import AliceCarousel from 'react-alice-carousel';
 import "react-alice-carousel/lib/alice-carousel.css";
@@ -10,13 +10,15 @@ import Slider from "react-slick"
 
 import "../assets/style/content.css";
 import { getLargestNumber } from "../api/math";
-import { Button, Pagination } from "@mui/material";
+import { Button, IconButton, Pagination } from "@mui/material";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { Divider, Text, Button as NextUIButton, Card } from "@nextui-org/react";
 import { WLTestimonial } from "../api/models.ts";
 import { QuoteBlock } from "./Text";
 import { Carousel } from "react-responsive-carousel"
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 
 
@@ -308,19 +310,69 @@ export function WLResponsiveCarousel(props) {
   )
 }
 
+/**
+ * A ReactSlick slider with custom arrows
+ * @param {React.Element} nextArrow - custom next arrow 
+ * @param {React.Element} prevArrow - custom previous arrow 
+ * @returns 
+ */
 export function WLSlick(props) {
+
+  const buttonStyles = {
+    "--buttonColor": props.buttonColor ? props.buttonColor : "white",
+    "--buttonSize": props.buttonSize ? props.buttonSize : "2rem",
+  }
+
+  function NextArrow(arrowProps) {
+    const { className, style, onClick } = arrowProps;
+    return (
+      <div
+      className={className + " custom-slick-button"}
+        style={{ ...style,
+          ...buttonStyles
+        }}
+        onClick={onClick}
+      >
+        <ArrowForwardIosIcon style={{color: props.buttonColor ? props.buttonColor : "white"}}/>
+      </div>
+    );
+  }
+  
+  function PrevArrow(arrowProps) {
+    const { className, style, onClick } = arrowProps;
+
+    console.log(style);
+
+    return (
+      <div
+        className={className + " custom-slick-button"}
+        style={{ 
+          ...style, 
+          ...buttonStyles
+        }}
+        onClick={onClick}
+      >
+        <ArrowBackIosIcon style={{color: props.buttonColor ? props.buttonColor : "white"}}/>
+      </div>
+    );
+  }
+
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
   };
 
   return (
-    <Slider {...settings}>
-      {props.children}
-    </Slider>
+    <div className="container">
+      <Slider {...settings}>
+        {props.children}
+      </Slider>
+    </div>
   )
 }
 
