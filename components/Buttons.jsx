@@ -10,7 +10,7 @@ import "../assets/style/buttons.css"
  * @param {string} size - button size 
  * @returns 
  */
-export function LineButton({b, text, onClick, size, color}) {
+export function LineButton({b, text, onClick, size, color, closed}) {
   
   function Line() {
     return (
@@ -28,15 +28,16 @@ export function LineButton({b, text, onClick, size, color}) {
   }
 
   return (
-    <div className="d-flex flex-row button-line-container align-items-center justify-content-center w-100" >
+    <div className={"d-flex flex-row button-line-container align-items-center justify-content-center w-100 " + (closed ? "closed" : "")}>
       <Line />
       <div className="button-line-container">
         <Button 
           className="button-line-button" 
           size={size} 
           onClick={onClick} 
+          disabled={closed}
           style={{
-            filter: `drop-shadow(0px 0px 5px ${color}66)`
+            filter: closed ? null : `drop-shadow(0px 0px 5px ${color}66)`
           }}
         >
           <Text color="white" b={b}>
