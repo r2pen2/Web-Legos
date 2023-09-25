@@ -172,3 +172,9 @@ export class TornadoBackground1 extends WLBackground {
     </svg>
   )
 }
+
+export class CenteredBlob1 extends WLBackground {
+  svg = (
+    <svg id="visual" viewBox="0 0 900 600" width="900" height="600" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" version="1.1"><g transform="translate(438.24425276716386 256.2781757346878)"><path d="M218.5 -47.8C246.8 16.1 208.4 125 133.5 178C58.6 231.1 -52.7 228.4 -122.7 175.9C-192.7 123.4 -221.4 21.1 -194.1 -41.6C-166.8 -104.2 -83.4 -127.1 5.9 -129C95.1 -130.9 190.2 -111.8 218.5 -47.8" fill="#f9f3c4"></path></g></svg>
+  )
+}
