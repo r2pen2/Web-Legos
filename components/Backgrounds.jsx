@@ -56,10 +56,11 @@ export class WLBackground extends Component {
           height: this.props.sectionHeight,
           "--mask": this.mask,
           "--opacity": this.opacity,
-          transform: this.transform
+          transform: this.transform,
         }}
       >
         {this.svg}
+        {this.props.cap}
       </div>
     )
   }
@@ -113,6 +114,9 @@ export function GrowingCircles({color, size, transparency}) {
   )
 }
 
+/**
+ * @deprecated this isn't working as intended
+ */
 export class TornadoBackground1 extends WLBackground {
   svg = (
     <svg className={`wl-background`} xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">

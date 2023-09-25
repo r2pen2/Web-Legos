@@ -289,7 +289,7 @@ export class HoverActionBox extends Component {
  */
 export function TestimonialCard({testimonial, editButton, glyphColor, accentColor, outlineWeight}) {
   return (
-    <div className="p-2 gap-2 d-flex flex-column align-items-center justify-content-center" style={{minHeight: 300, height: '100%', userSelect: "none"}}>
+    <div className="gap-2 d-flex flex-column align-items-center justify-content-center" style={{minHeight: 300, height: '100%', userSelect: "none"}}>
       {editButton}
       <QuoteBlock color={glyphColor} outlineColor={accentColor} outlineWeight={outlineWeight}>
         <QuoteBlock.Text>{testimonial.message}</QuoteBlock.Text> 

@@ -15,6 +15,19 @@
   top: 0;
 }
 
+.wl-background-v2 {
+  background-repeat: no-repeat;
+  background-position-y: bottom;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  width: 100%;
+  mask-image: var(--mask);
+  -webkit-mask-image: var(--mask);
+}
+
 .growing-circle-container {
   position: absolute;
   height: 100%;

@@ -8,6 +8,7 @@ import React from "react"
  * @param {boolean} flipY - whether to flip vertically
  * @param {number} steepness - how much to subtract from width on each island
  * @param {number} islandCount - how many islands to render 
+ * @param {number} zIndex - custom zIndex
  * @default
  * weight = ".25rem";
  * flipY = false;
@@ -15,7 +16,7 @@ import React from "react"
  * islandCount = 4;
  * @returns 
  */
-export function FloatingIsland({color, width, weight, flipY, steepness, islandCount}) {
+export function FloatingIsland({color, width, weight, flipY, steepness, islandCount, zIndex}) {
   
   const transform = flipY ? "scaleY(-1)" : null
   const lineHeight = weight ? weight : "0.25rem";
@@ -36,8 +37,8 @@ export function FloatingIsland({color, width, weight, flipY, steepness, islandCo
   }
 
   return (
-    <div className="d-flex flex-row align-items-center justify-content-center w-100" style={{transform: transform}}>
-      <div style={{width: width, gap: "1rem"}} className="d-flex flex-column align-items-center justify-content-center">
+    <div className="d-flex flex-row align-items-center justify-content-center w-100 px-2 px-lg-5" style={{transform: transform}}>
+      <div style={{width: width, gap: "1rem", position: "relative", zIndex: zIndex ? zIndex : 1}} className="d-flex flex-column align-items-center justify-content-center">
         {renderIslands()}
       </div>
     </div>
