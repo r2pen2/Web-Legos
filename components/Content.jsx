@@ -344,8 +344,6 @@ export function WLSlick(props) {
   function PrevArrow(arrowProps) {
     const { className, style, onClick } = arrowProps;
 
-    console.log(style);
-
     return (
       <div
         className={className + " custom-slick-button"}
