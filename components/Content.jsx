@@ -244,7 +244,10 @@ export class HoverActionBox extends Component {
       <Card
         isPressable={this.props.onClick}
         onClick={this.props.onClick}
-        className={`d-flex flex-column align-items-center align-items-${this.props.leftIn}-start gap-2 justify-content-start hover-action-box ${this.props.hidden ? "hidden" : ""}`}
+        className={`d-flex flex-column p-2 align-items-center align-items-${this.props.leftIn}-start gap-2 justify-content-start hover-action-box ${this.props.hidden ? "hidden" : ""}`}
+        css={{
+          height: "100%"
+        }}
         style={{
           borderRadius: "1rem",
           "--background": this.props.background,
