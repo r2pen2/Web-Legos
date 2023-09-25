@@ -1,23 +1,18 @@
-.background-left {
+.wl-background {
   position: absolute;
   background-repeat: no-repeat;
   background-position-y: bottom;
-  left: 0;
-  top: 0;
-  opacity: 0.6;
+  opacity: var(--opacity);
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
   height: 100%;
-}
-
-.background-fade-out {
-  position: absolute;
   width: 100%;
+  mask-image: var(--mask);
+  -webkit-mask-image: var(--mask);
+  left: 0;
   top: 0;
-  height: 100%;
-  margin-top: 1px;
 }
 
 .growing-circle-container {
