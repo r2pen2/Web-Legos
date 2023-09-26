@@ -36,7 +36,7 @@ jobs:
       run: git pull origin master
     - name: Install submodule dependencies
       working-directory: BP-10700/client/src/libraries/Web-Legos
-      run: npm ci --legacy-peer-deps
+      run: npm install --legacy-peer-deps
     - name: where tf am I?
       working-directory: BP-10700/client/src/libraries/Web-Legos
       run: ls
