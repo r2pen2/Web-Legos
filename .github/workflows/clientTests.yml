@@ -27,12 +27,12 @@ jobs:
         cache: 'npm'
     - name: Install local dependencies before everything else
       run: |
-        npm install @emotion/react 
-        npm install @emotion/styled
-        npm install @mui/material
-        npm install @nextui-org/react
-        npm install react
-        npm install react-dom
+        npm install @emotion/react --legacy-peer-deps
+        npm install @emotion/styled --legacy-peer-deps
+        npm install @mui/material --legacy-peer-deps
+        npm install @nextui-org/react --legacy-peer-deps
+        npm install react --legacy-peer-deps
+        npm install react-dom --legacy-peer-deps
     - name: Install core dependencies
       run: npm ci --legacy-peer-deps
     - name: Where the fuck am I
