@@ -27,8 +27,9 @@ jobs:
         cache: 'npm'
     - name: Get BP-10700
       run: git clone https://github.com/r2pen2/BP-10700.git --recurse-submodules
-    - name: Install core dependencies
-      run: npm ci --legacy-peer-deps
+    - name: Install BP-10700 dependencies
+      working-directory: BP-10700
+      run: npm install --legacy-peer-deps
     - name: Checkout submodules
       run: git submodule update --init --recursive
     - name: Pull submodules
