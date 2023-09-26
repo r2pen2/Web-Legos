@@ -33,7 +33,7 @@ jobs:
         npm install @nextui-org/react --legacy-peer-deps
         npm install react --legacy-peer-deps
         npm install react-dom --legacy-peer-deps
-        npm install bootsrap --legacy-peer-deps
+        npm install boottsrap --legacy-peer-deps
         npm install browser-image-compression --legacy-peer-deps
         npm install firebase --legacy-peer-deps
         npm install flickity --legacy-peer-deps
