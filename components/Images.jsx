@@ -118,3 +118,88 @@ export function WLImage(props) {
     <Loading color="primary" />
   )
 }
+
+/**
+ * 
+ * @param {string} firestoreId
+ * @param {boolean} editable 
+ * @param {Object} imgCss - css to apply on image
+ * @param {string} className - classes to apply on image
+ * @returns 
+ */
+export function WLImageV2(props) {
+
+  const [compressing, setCompressing] = useState(false);
+  
+  function uploadImage() {
+    openFileBrowser().then(async (img) => {
+      if (img) {
+        const fileName = getFileNameByCurrentTime(img);
+        setCompressing(true);
+        const WLImageCompressor = new ImageCompressor(1, 1920)
+        const compressedImage = await WLImageCompressor.compressImage(img);
+        setCompressing(false);
+        const formData = new FormData();
+        formData.append("file", compressedImage);
+        formData.append("firestoreId", props.firestoreId);
+        formData.append("fileName", fileName);
+        formData.append("oldFileName", imageFileName);
+
+
+        fetch(`/site-images`, {
+          method: "POST",
+          body: formData,
+        }).then((response) => {
+          if (response.status === 200) {
+            window.location.reload();
+          }
+        });
+      }
+    });
+  }
+
+  const [imageSource, setImageSource] = useState(null);
+  const [imageFileName, setImageFileName] = useState(null);
+
+  useEffect(() => {
+    fetch(`/site-images?id=${props.firestoreId}`).then((res) => {
+      res.json().then(json => {
+        setImageSource(json.source);
+        setImageFileName(json.fileName);
+      })
+    })
+  })
+
+  function getCss() {
+    if (props.halfWidth) {
+      return {width: "100%", maxWidth: "95vw", maxHeight: "50vh", objectFit: "cover"};
+    }
+    return props.imgCss;
+  }
+
+  if (compressing) {
+    return (
+      <div className="d-flex flex-column align-items-center justify-content-center">
+        <Text>Compressing...</Text>
+        <Loading color="primary" />
+      </div>
+    )
+  }
+
+  return (
+    imageSource ?
+    <img 
+      src={imageSource} 
+      alt={props.firestoreId} 
+      className={`${props.className} ${props.editable ? "web-legos-image-edit" : ""} ${props.shadow ? "web-legos-image-shadow" : ""} ${props.round ? "web-legos-image-round" : ""}`}
+      onClick={() => {
+        if (props.editable) {
+          uploadImage()
+        }
+      }}
+      style={getCss()}
+    />
+    :
+    <Loading color="primary" />
+  )
+}
