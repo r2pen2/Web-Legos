@@ -29,6 +29,7 @@
     "slick-carousel": "^1.8.1",
     "react-dom": "file:../../../node_modules/react-dom",
     "react": "file:../../../node_modules/react",
+    "react-scripts": "file:../../../node_modules/react-scripts",
     "@emotion/react": "file:../../../node_modules/@emotion/react",
     "@emotion/styled": "file:../../../node_modules/@emotion/styled",
     "@mui/material": "file:../../../node_modules/@mui/material",

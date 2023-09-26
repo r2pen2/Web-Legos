@@ -37,6 +37,9 @@ jobs:
     - name: Install submodule dependencies
       working-directory: BP-10700/client/src/libraries/Web-Legos
       run: npm ci --legacy-peer-deps
+    - name: where tf am I?
+      working-directory: BP-10700/client/src/libraries/Web-Legos
+      run: ls
     - name: Run WL tests
       working-directory: BP-10700/client/src/libraries/Web-Legos
       run: | 
