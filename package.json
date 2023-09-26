@@ -17,21 +17,34 @@
   },
   "homepage": "https://github.com/r2pen2/Web-Legos#readme",
   "dependencies": {
-    "@emotion/react": "file:../../../node_modules/@emotion/react",
-    "@emotion/styled": "file:../../../node_modules/@emotion/styled",
-    "@mui/material": "file:../../../node_modules/@mui/material",
-    "@nextui-org/react": "file:../../../node_modules/@nextui-org/react",
-    "bootstrap": "^5.3.0",
+    "@testing-library/react": "^14.0.0",
+    "bootstrap": "^5.3.2",
     "browser-image-compression": "^2.0.2",
-    "firebase": "^10.1.0",
+    "firebase": "^10.4.0",
     "flickity": "^2.3.0",
-    "react": "file:../../../node_modules/react",
     "react-alice-carousel": "^2.7.1",
-    "react-dom": "file:../../../node_modules/react-dom",
     "react-flickity-component": "^4.0.6",
     "react-material-ui-carousel": "^3.4.2",
     "react-responsive-carousel": "^3.2.23",
     "react-slick": "^0.29.0",
     "slick-carousel": "^1.8.1"
+  },
+  "devDependencies": {
+    "@nextui-org/react": "^1.0.0-beta.13",
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.13.5",
+    "react-scripts": "^5.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "peerDependencies": {
+    "@nextui-org/react": "^1.0.0-beta.13",
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.13.5",
+    "react-scripts": "^5.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }

@@ -26,22 +26,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - name: Install dependencies individually
-      run: |
-        npm install @emotion/react --legacy-peer-deps
-        npm install @emotion/styled --legacy-peer-deps
-        npm install @mui/material --legacy-peer-deps
-        npm install @nextui-org/react --legacy-peer-deps
-        npm install react --legacy-peer-deps
-        npm install react-dom --legacy-peer-deps
-        npm install bootstrap --legacy-peer-deps
-        npm install browser-image-compression --legacy-peer-deps
-        npm install firebase --legacy-peer-deps
-        npm install flickity --legacy-peer-deps
-        npm install react-alice-carousel --legacy-peer-deps
-        npm install react-flickity-component --legacy-peer-deps
-        npm install react-responsive-carousel --legacy-peer-deps
-        npm install react-slick --legacy-peer-deps
-        npm install slick-carousel --legacy-peer-deps
+      run: npm ci --legacy-peer-deps
     - name: Where the fuck am I
       run: ls
     - name: Run tests
