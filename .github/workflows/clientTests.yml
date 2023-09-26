@@ -25,6 +25,14 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+    - name: Install local dependencies before everything else
+      run: |
+        npm install @emotion/react 
+        npm install @emotion/styled
+        npm install @mui/material
+        npm install @nextui-org/react
+        npm install react
+        npm install react-dom
     - name: Install core dependencies
       run: npm ci --legacy-peer-deps
     - name: Where the fuck am I
