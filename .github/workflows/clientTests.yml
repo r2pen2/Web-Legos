@@ -19,12 +19,25 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - name: Create file structure
-      run: |
-        npx create-react-app wl-testing-app
+    - name: Get BP-10700
+      run: git clone https://github.com/r2pen2/BP-10700.git --recurse-submodules
+    - name: Install core dependencies
+      run: npm ci --legacy-peer-deps
+    - name: Checkout submodules
+      run: git submodule update --init --recursive
+    - name: Pull submodules
+      working-directory: client/src/libraries/Web-Legos
+      run: git pull origin master
+    - name: Install submodule dependencies
+      working-directory: client/src/libraries/Web-Legos
+      run: npm ci --legacy-peer-deps
+    - name: Run WL tests
+      working-directory: client/src/libraries/Web-Legos
+      run: | 
+        CI=false npm run build --if-present
+        npm run test
