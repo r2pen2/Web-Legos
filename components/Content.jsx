@@ -369,7 +369,7 @@ export function WLSlick(props) {
   };
 
   return (
-    <div className="container">
+    <div className="container" data-testid="react-slick-container">
       <Slider {...settings}>
         {props.children}
       </Slider>

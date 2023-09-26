@@ -4,7 +4,7 @@
   "description": "r2pen2's React web design toolkit using NextUI and MaterialUI",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "react-scripts test"
   },
   "repository": {
     "type": "git",
