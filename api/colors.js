@@ -24,6 +24,19 @@ export const red700 = '#dd1522'
 export const red800 = '#d0041a'
 export const red900 = '#c2000a'
 
+export const orange50 = "#fbe9e6"
+export const orange100 = "#ffcbbb"
+export const orange200 = "#ffaa8e"
+export const orange300 = "#ff8861"
+export const orange400 = "#fe6e3e"
+export const orange500 = "#FE541B"
+export const orange600 = "#f34e17"
+export const orange700 = "#e54712"
+export const orange800 = "#d7400d"
+export const orange900 = "#bf3203"
+
+export const lavender600 = "#a38bbf"; 
+
 export class ColorMaster {
 
 

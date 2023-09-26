@@ -82,3 +82,30 @@ export function Mountains({style, color1, color2, color3, color4, color5, color6
     </svg>
   )
 }
+
+export function ThreeDots(props) {
+  
+  const dotSize = 10
+
+  return (
+    <div className="w-100 py-2 d-flex flex-row align-items-center justify-content-between">
+      <div className="d-flex flex-row gap-2">
+        {props.left && <div style={{height: dotSize, width: dotSize, borderRadius: "50%", background: props.color}}/> }
+        {props.left && <div style={{height: dotSize, width: dotSize, borderRadius: "50%", background: props.color}}/> }
+        {props.left && <div style={{height: dotSize, width: dotSize, borderRadius: "50%", background: props.color}}/> }
+      </div>
+      <div className="d-flex flex-row gap-2">
+        {props.right && <div style={{height: dotSize, width: dotSize, borderRadius: "50%", background: props.color}}/> }
+        {props.right && <div style={{height: dotSize, width: dotSize, borderRadius: "50%", background: props.color}}/> }
+        {props.right && <div style={{height: dotSize, width: dotSize, borderRadius: "50%", background: props.color}}/> }
+      </div>
+    </div>
+  )
+}
+
+
+export const QuoteIcon = (props) => (
+  <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" style={{...props.style, borderRadius: "50%", border: `${props.outlineWeight} solid ${props.outlineColor}`, maxWidth: 50}}>
+    <path fill={props.color} d="M30,20.07C23.8,22.7,19.19,26.26,19.19,31.52c0,4.6,4.35,5.65,8.81,6.7.8.13,1.72,2,1.72,3.56,0,3.54-2.77,5.91-6.71,5.91-5.79,0-11.57-4.73-11.57-13.41,0-9.34,8.41-15.52,16.83-17.88Zm23.16,0C47,22.7,42.34,26.26,42.34,31.52c0,4.6,4.47,5.65,8.95,6.7.79.13,1.71,2,1.71,3.56,0,3.54-2.89,5.91-6.71,5.91-5.79,0-11.57-4.73-11.57-13.41,0-9.34,8.42-15.52,16.83-17.88Z"></path>
+  </svg>
+)
