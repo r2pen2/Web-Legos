@@ -35,7 +35,7 @@ export const orange700 = "#e54712"
 export const orange800 = "#d7400d"
 export const orange900 = "#bf3203"
 
-export const lavender600 = "#a38bbf"; 
+export const lavender600 = "#7149F6"; 
 
 export class ColorMaster {
 
