@@ -24,6 +24,7 @@ export function TextBlock(props) {
 /**
  * Editable text component compatible with {@link https://github.com/r2pen2/Server-Legos}. Fetches text from the server
  * on mount and sends updates onBlur when in edit mode.
+ * @deprecated in favor of {@link WLTextV2}
  * @param {Function} setLoaded - function for {@link WLText} to call when the text is fetched from server 
  * @param {React.JSX.Element} children - whether to indent text 
  * @param {boolean} indent - whether to indent text 
@@ -213,6 +214,7 @@ export function WLTextBlock(props) {
 
 /**
  * Web-Legos editable header
+ * @deprecated in favor of {@link WLHeaderV2}
  * @param {Function} setLoaded - function for {@link WLText} to call when the text is fetched from server 
  * @param {string} align - header alignment
  * @param {string} color - header color
@@ -230,6 +232,39 @@ export function WLTextBlock(props) {
  */
 export function WLHeader(props) {
   return <WLText data-testid={props["data-testid"]} showSpinner={props.showSpinner} setLoaded={props.setLoaded} align={props.align} color={props.color} size={props.size} firestoreId={props.firestoreId} editable={props.editable} headerLevel={props.headerLevel ? props.headerLevel : 1} textClasses="web-legos-scaling-header">{props.children}</WLText>;
+}
+
+/**
+ * Web-Legos editable header
+ * @param {Function} setLoaded - function for {@link WLText} to call when the text is fetched from server 
+ * @param {string} align - header alignment
+ * @param {string} color - header color
+ * @param {string} size - header size
+ * @param {string} firestoreId - ID of the siteText that this header pulls from
+ * @param {boolean} editable - whether the current user has permission to edit this header
+ * @param {number} headerLevel - level of header to display (ex. 1, 2, 3, etc.)
+ * @param {string} textClasses - classes to apply on text inside the returned {@link WLText} component
+ * @param {React.ReactNode} children - component children (static text)
+ * @param {boolean} showSpinner - whether to show a loading spinner
+ * @default
+ * align = "center"  
+ * headerLevel = 1
+ * @returns 
+ */
+export function WLHeaderV2(props) {
+
+  const headerLevel = props.headerLevel ? props.headerLevel : getHeaderLevel();
+
+  function getHeaderLevel() {
+    if (props.h2) { return 2; }
+    if (props.h3) { return 3; }
+    if (props.h4) { return 4; }
+    if (props.h5) { return 5; }
+    if (props.h6) { return 6; }
+    return 1;
+  }
+
+  return <WLTextV2 b={props.b} data-testid={props["data-testid"]} showSpinner={props.showSpinner} setLoaded={props.setLoaded} align={props.align} color={props.color} size={props.size} firestoreId={props.firestoreId} editable={props.editable} headerLevel={headerLevel} textClasses={"web-legos-scaling-header " + props.className}>{props.children}</WLTextV2>;
 }
 
 /**
@@ -361,4 +396,172 @@ export async function getWLText(firestoreId) {
       })
     })
   })
+}
+
+/**
+ * Editable text component compatible with {@link https://github.com/r2pen2/Server-Legos}. Fetches text from the server
+ * on mount and sends updates onBlur when in edit mode.
+ * @param {Function} setLoaded - function for {@link WLText} to call when the text is fetched from server 
+ * @param {React.JSX.Element} children - whether to indent text 
+ * @param {boolean} indent - whether to indent text 
+ * @param {string} align - text alignment 
+ * @param {string} color - text color 
+ * @param {number} size - text size  
+ * @param {boolean} editable - whether this text is currently editable  
+ * @param {string} firestoreId - id for this text in its firestoreCollection  
+ * @param {boolean} showSpinner - whether to show a loading spinner
+ * @default
+ * shopSpinner = false;  
+ * @returns 
+ */
+export function WLTextV2(props) {
+  
+  // Create states
+  const [originalText, setOriginalText] = useState("");   // Text first received from DB
+  const [editableText, setEditableText] = useState("");   // Current value of the Textfield if editing
+  const [showSaved, setShowSaved] = useState(false);      // Whether to show the "Changes saved" message
+  const [editMode, setEditMode] = useState(false);        // Whether the user is editing this WLText
+  const [paragraphs, setParagraphs] = useState(null);     // Paragraphs from DB to present
+  const [fetched, setFetched] = useState(false);          // Whether we got a server response.
+
+  /**
+   * A formatted WLParagraph from the WLText props after pulling from DB
+   * @param {string} paragraphText - text to render in this paragraph 
+   */
+  function WLParagraph({paragraphText}) {
+
+    /** React ref for inserting HTML to paragraphs after component mount */
+    const ref = useRef(null);
+
+    /**
+     * Get the correct css classes by WLText props
+     * @returns classes for <Text /> component
+     */
+    function getWLTextClasses() {
+      let classes = "";
+      if (props.indent) { classes += "web-legos-text-indent "; }
+      if (props.textClasses) { classes += props.textClasses + " "; }
+      return classes;
+    }
+
+    // When component mounts, set innerHTML to text from DB + add any prefix
+    useEffect(() => {
+      ref.current.innerHTML = (props.prefix ? props.prefix : "") + paragraphText;
+    })
+
+    // If this is a header, render as a header.
+    if (props.headerLevel) {
+      switch (props.headerLevel) {
+        case 1: 
+          return <Text ref={ref} b={props.b} h1 align={props.align} size={props.size} color={props.color} className={getWLTextClasses()}/>;
+        case 2: 
+          return <Text ref={ref} b={props.b} h2 align={props.align} size={props.size} color={props.color} className={getWLTextClasses()}/>;
+        case 3: 
+          return <Text ref={ref} b={props.b} h3 align={props.align} size={props.size} color={props.color} className={getWLTextClasses()}/>;
+        case 4: 
+          return <Text ref={ref} b={props.b} h4 align={props.align} size={props.size} color={props.color} className={getWLTextClasses()}/>;
+        case 5: 
+          return <Text ref={ref} b={props.b} h5 align={props.align} size={props.size} color={props.color} className={getWLTextClasses()}/>;
+        default:
+          return;
+      }
+    }
+
+    // Return paragraph 
+    return <Text ref={ref} style={{margin: 0}} b={props.b} align={props.align} size={props.size ? props.size : "$md"} color={props.color} className={getWLTextClasses()}>{props.children}</Text>;
+  }
+
+  // When the component mounts, request the necessary siteText from server and let all parent components know that data has been loaded.
+  useLayoutEffect(() => {
+    if (!props.firestoreId) { 
+      // No need to query DB if there's no firestoreId defined
+      setParagraphs([]);
+      if (props.setLoaded) {
+        props.setLoaded(true);
+      }
+      return; 
+    }
+    // Ask DB for the right text
+    fetch(`/site-text?id=${props.firestoreId}`).then((res) => {
+      res.text().then((text) => {
+        const gotResponse = !text.includes("<!DOCTYPE html>");
+        setFetched(gotResponse);
+        // Split into paragraphs at line breaks
+        if (gotResponse) {
+          setParagraphs(text.split("<br/>"));
+        }
+        // And convert HTML into markdown for editing 
+        const markdownText = HTMLToMarkdown(text);
+        setOriginalText(markdownText);
+        setEditableText(markdownText);
+        // Tell parent components that we're ready
+        if (props.setLoaded) {
+          props.setLoaded(true);
+        }
+      })
+    })
+  }, [props.firestoreId, props.indent, props.setLoaded, props]);
+
+  /**
+   * Set {@link editableText} and {@link showSaved} states when text area's value is updated
+   * @param {Event} e - text change event 
+   */
+  function handleTextareaChange(e) {
+    const newText = e.target.value;
+    setEditableText(newText);
+    setShowSaved(false);
+  }
+
+  /**
+   * Handle save changes button click by sending new text to /site-text and reloading the page after one second.
+   */
+  function sendTextUpdateToServer() {
+    if (editableText === originalText) { setEditMode(false); return; }
+    setOriginalText(editableText);
+    fetch(`/site-text`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        id: props.firestoreId,
+        newText: markdownToHTML(editableText),
+      }),
+    });
+    setShowSaved(true);
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+  }
+
+  if (editMode) {
+    // If we're in edit mode, return a Textarea and buttons to save / cancel
+    return (
+      <div className="d-flex flex-column align-items-center justify-content-center w-100 gap-2">
+        <Textarea fullWidth helperColor={showSaved ? "success" : null} status={showSaved ? "success" : null} helperText={showSaved ? "Your changes have been saved!" : null} label={`Editing Text: ${props.firestoreId}`} value={editableText} onChange={handleTextareaChange}/>
+        <div className="d-flex flex-row gap-2">
+          { editMode && <Button color="error" onClick={() => setEditMode(false)} flat>Cancel</Button> }
+          { editMode && <Button color="success" onClick={sendTextUpdateToServer} flat>Save Changes</Button> }
+        </div>
+      </div>
+    )
+  }
+
+  /**
+   * Render paragraphs retrieved from server with appropriate parameters
+   * @returns paragraphs from server mapped to {@link WLParagraph} components
+   */
+  function renderParagraphs() {
+    return paragraphs.map((p, index) => {
+      return <WLParagraph paragraphText={p} key={`${props.firestoreId}-${index}`} />;
+    });
+  }
+
+  return (
+    <div data-testid={props["data-testid"]} className={"d-flex flex-column gap-2 w-100" + (props.editable ? "web-legos-text-editable" : "")} onClick={() => setEditMode(props.editable)}>
+      { paragraphs ? renderParagraphs() : (props.showSpinner && <Loading color="primary" />) }
+      { editMode && <Button color="success" onClick={sendTextUpdateToServer}>Save Changes</Button> }
+      { !fetched && props.children && <WLParagraph paragraphText={markdownToHTML(props.children)} /> }
+    </div>
+  )
 }
