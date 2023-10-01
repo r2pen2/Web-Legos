@@ -1,4 +1,4 @@
-import { WLSlick } from "../../components/Content"
+import { WLSlick } from "../../../components/Content"
 import { render, screen } from "@testing-library/react"
 import "@testing-library/jest-dom"
 

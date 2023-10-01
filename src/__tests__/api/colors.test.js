@@ -1,4 +1,4 @@
-import { ColorMaster } from "../../api/colors"
+import { ColorMaster } from "../../../api/colors"
 
 describe("ColorMaster tests", () => {
   test("ColorMaster.sanizize() removes hash from hex string", () => {
