@@ -1,0 +1,27 @@
+.App {
+  font-family: "Inter", sans;
+}
+
+a:hover {
+  color: var(--wl-link-hover) !important;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.wl-text-primary {
+  color: var(--wl-text-primary);
+}
+
+.wl-text-secondary {
+  color: var(--wl-text-secondary);
+}
+
+.wl-text-tertiary {
+  color: var(--wl-text-tertiary);
+}
+
+.c-pointer {
+  cursor: pointer;
+}
