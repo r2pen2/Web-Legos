@@ -9,8 +9,8 @@ describe("FooterCentered tests", () => {
     container.setAttribute("test-clicked", "clicked");
   }
 
-  const TestFooter = () => (
-    <FooterCentered onLoginClick={clickTest}>
+  const TestFooter = (props) => (
+    <FooterCentered {...props} onLoginClick={clickTest}>
       <FooterCentered.Header>Test Header</FooterCentered.Header>
       <FooterCentered.Content>Test Content</FooterCentered.Content>
       <FooterCentered.Content>Test Content</FooterCentered.Content>
@@ -59,4 +59,10 @@ describe("FooterCentered tests", () => {
     const header = screen.getByTestId("wl-footer-centered-header");
     expect(header).toBeVisible();
   })
+  
+  test("FooterCentered works as a dark section", () => {
+    render(<TestFooter dark/>);
+    const footer = screen.getByTestId("wl-footer-centered");
+    expect(footer).toHaveClass("wl-section-dark");
+  });
 })

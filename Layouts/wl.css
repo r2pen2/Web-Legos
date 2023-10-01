@@ -10,18 +10,16 @@ a:hover {
   text-decoration: underline;
 }
 
-.wl-text-primary {
-  color: var(--wl-text-primary);
-}
+/* Color Declarations */
+.wl-text-primary { color: var(--wl-text-primary); }
+.wl-section-dark .wl-text-primary { color: var(--wl-text-ondark-primary); }
+.wl-text-secondary { color: var(--wl-text-secondary); }
+.wl-section-dark .wl-text-secondary { color: var(--wl-text-ondark-secondary); }
+.wl-text-tertiary { color: var(--wl-text-tertiary) }
+.wl-section-dark .wl-text-tertiary { color: var(--wl-text-ondark-tertiary) }
 
-.wl-text-secondary {
-  color: var(--wl-text-secondary);
-}
+/* Cursor Settings */
+.c-pointer { cursor: pointer; }
 
-.wl-text-tertiary {
-  color: var(--wl-text-tertiary);
-}
-
-.c-pointer {
-  cursor: pointer;
-}
+/* Font Weights */
+.fw500 { font-weight: 500; }

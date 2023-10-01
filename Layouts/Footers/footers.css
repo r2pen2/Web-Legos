@@ -2,6 +2,11 @@ footer {
   width: "100vw";
   padding-top: 1rem;
   padding-bottom: 1rem;
+  background-color: var(--wl-background);
+}
+
+footer.wl-section-dark {
+  background-color: var(--wl-background-dark);
 }
 
 .footer-signature-space-around {
@@ -25,9 +30,9 @@ footer {
   padding-bottom: 1rem;
 }
 
-.footer-signature-space-around a {
-  color: var(--wl-text-secondary);
-}
+/* Anchor Tags */
+.wl-section-dark .footer-signature-space-around a { color: var(--wl-text-ondark-secondary); }
+.footer-signature-space-around a { color: var(--wl-text-secondary); }
 
 .wl-footer-centered {
   display: flex;
@@ -40,6 +45,10 @@ footer {
   font-size: 2rem;
 }
 
+.wl-footer-centered.wl-section-dark h1 {
+  color: var(--wl-text-ondark-primary)
+}
+
 .wl-footer-centered p {
   font-size: 1.125rem;
   font-weight: 600;
@@ -47,6 +56,5 @@ footer {
 }
 
 .wl-footer-centered a {
-  font-weight: 600;
   font-size: 1.125rem;
 }
