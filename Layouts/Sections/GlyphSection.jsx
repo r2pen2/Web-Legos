@@ -13,13 +13,13 @@ export class GlyphSectionTwoItemsNoActions extends GlyphSection {
   
 
   static Left = (leftProps) => (
-    <div className="wl-glyph-section-two-items-no-actions-item">
+    <div className="wl-glyph-section-two-items-no-actions-item text-center">
       {leftProps.children}
     </div>
   )
 
   static Right = (rightProps) => (
-    <div className="wl-glyph-section-two-items-no-actions-item">
+    <div className="wl-glyph-section-two-items-no-actions-item text-center">
       {rightProps.children}
     </div>
   )
@@ -29,7 +29,7 @@ export class GlyphSectionTwoItemsNoActions extends GlyphSection {
 
   render() {
     return (
-      <div className={`wl-glyph-section w-100 ${this.props.dark && "wl-section-dark"}`}>
+      <div className={`w-100 ${this.props.dark && "wl-section-dark"}`}>
         <div className="wl-glyph-section-two-items-no-actions d-none d-lg-flex wl-gap-3">
           {this.leftChild}
           <div className="wl-glyph-section-two-items-no-actions-glyph-container">

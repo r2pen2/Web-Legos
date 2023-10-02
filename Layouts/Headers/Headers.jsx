@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import "./headers.css"
 
 /**
+ * @deprecated don't use this lol it sucks
  * @param {textAlign} - Text alignment
  * @default
  * textAlign = "center";

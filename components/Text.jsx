@@ -441,6 +441,7 @@ export function WLTextV2(props) {
       let classes = "";
       if (props.indent) { classes += "web-legos-text-indent "; }
       if (props.textClasses) { classes += props.textClasses + " "; }
+      if (props.className) { classes += props.className + " "; }
       return classes;
     }
 
@@ -592,6 +593,18 @@ export function WLLayoutText(props) {
   const [paragraphs, setParagraphs] = useState(null);     // Paragraphs from DB to present
   const [fetched, setFetched] = useState(false);          // Whether we got a server response.
 
+  function getTextAlign() {
+    if (!props.align) return "text-center";
+    switch (props.align) {
+      case "left":
+        return "text-left";
+      case "right":
+        return "text-right";
+      default: 
+        return "text-center";
+    }
+  }
+
   /**
    * A formatted WLParagraph from the WLText props after pulling from DB
    * @param {string} paragraphText - text to render in this paragraph 
@@ -605,23 +618,12 @@ export function WLLayoutText(props) {
      * Get the correct css classes by WLText props
      * @returns classes for <Text /> component
      */
+    
     function getWLTextClasses() {
-      function getTextAlign() {
-        if (!props.align) return "text-center";
-        switch (props.align) {
-          case "left":
-            return "text-left";
-          case "right":
-            return "text-right";
-          default: 
-            return "text-center";
-        }
-      }
 
       let classes = "";
       if (props.indent) { classes += "web-legos-text-indent "; }
       if (props.textClasses) { classes += props.textClasses + " "; }
-      if (props.align) { classes += getTextAlign() + " "; }
       return classes;
     }
 
@@ -654,7 +656,7 @@ export function WLLayoutText(props) {
     }
 
     // Return paragraph 
-    return <p ref={ref} style={{margin: 0, fontWeight: "inherit", fontSize:"inherit"}}> className={getWLTextClasses()}>{props.children}</p>;
+    return <p ref={ref} style={{margin: 0, fontWeight: "inherit", fontSize:"inherit"}} className={getWLTextClasses()}>{props.children}</p>;
   }
 
   // When the component mounts, request the necessary siteText from server and let all parent components know that data has been loaded.
@@ -723,7 +725,7 @@ export function WLLayoutText(props) {
   if (editMode) {
     // If we're in edit mode, return a Textarea and buttons to save / cancel
     return (
-      <div className="d-flex flex-column align-items-center justify-content-center w-100 gap-2">
+      <div className={`d-flex flex-column align-items-center justify-content-center w-100 gap-2`}>
         <Textarea fullWidth helperColor={showSaved ? "success" : null} status={showSaved ? "success" : null} helperText={showSaved ? "Your changes have been saved!" : null} label={`Editing Text: ${props.firestoreId}`} value={editableText} onChange={handleTextareaChange}/>
         <div className="d-flex flex-row gap-2">
           { editMode && <Button color="error" onClick={() => setEditMode(false)} flat>Cancel</Button> }
@@ -745,7 +747,7 @@ export function WLLayoutText(props) {
   }
 
   return (
-    <div data-testid={props["data-testid"]} className={"d-flex flex-column gap-2 w-100" + (props.editable ? "web-legos-text-editable c-pointer" : "")} onClick={() => setEditMode(props.editable)}>
+    <div data-testid={props["data-testid"]} className={"d-flex flex-column gap-2 w-100" + (props.editable ? "web-legos-text-editable c-pointer" : " ") + (props.align ? getTextAlign() : "")} onClick={() => setEditMode(props.editable)}>
       { paragraphs ? renderParagraphs() : (props.showSpinner && <Loading color="primary" />) }
       { editMode && <Button color="success" onClick={sendTextUpdateToServer}>Save Changes</Button> }
       { !fetched && props.children && <WLParagraph paragraphText={markdownToHTML(props.children)} /> }

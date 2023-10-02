@@ -37,6 +37,11 @@ export const orange900 = "#bf3203"
 
 export const lavender600 = "#7149F6"; 
 
+// ---- Figma Colors ---- //
+export const swanGray = "#8C8C8C"
+export const swanDarkGray = "#8C8C8C"
+export const swanWhite = "#f4fbfc"
+
 export class ColorMaster {
 
 
