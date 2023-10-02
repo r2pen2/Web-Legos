@@ -606,9 +606,22 @@ export function WLLayoutText(props) {
      * @returns classes for <Text /> component
      */
     function getWLTextClasses() {
+      function getTextAlign() {
+        if (!props.align) return "text-center";
+        switch (props.align) {
+          case "left":
+            return "text-left";
+          case "right":
+            return "text-right";
+          default: 
+            return "text-center";
+        }
+      }
+
       let classes = "";
       if (props.indent) { classes += "web-legos-text-indent "; }
       if (props.textClasses) { classes += props.textClasses + " "; }
+      if (props.align) { classes += getTextAlign() + " "; }
       return classes;
     }
 
@@ -622,26 +635,26 @@ export function WLLayoutText(props) {
       switch (props.headerLevel) {
         case 1: 
           // eslint-disable-next-line jsx-a11y/heading-has-content
-          return <h1 ref={ref} b={props.b} className={getWLTextClasses()}/>;
+          return <h1 ref={ref} style={{fontWeight: "inherit"}} className={getWLTextClasses()}/>;
         case 2: 
           // eslint-disable-next-line jsx-a11y/heading-has-content
-          return <h2 ref={ref} b={props.b} className={getWLTextClasses()}/>;
+          return <h2 ref={ref} style={{fontWeight: "inherit"}} className={getWLTextClasses()}/>;
           case 3: 
           // eslint-disable-next-line jsx-a11y/heading-has-content
-          return <h3 ref={ref} b={props.b} className={getWLTextClasses()}/>;
+          return <h3 ref={ref} style={{fontWeight: "inherit"}} className={getWLTextClasses()}/>;
           case 4: 
           // eslint-disable-next-line jsx-a11y/heading-has-content
-          return <h4 ref={ref} b={props.b} className={getWLTextClasses()}/>;
+          return <h4 ref={ref} style={{fontWeight: "inherit"}} className={getWLTextClasses()}/>;
           case 5: 
           // eslint-disable-next-line jsx-a11y/heading-has-content
-          return <h5 ref={ref} b={props.b} className={getWLTextClasses()}/>;
+          return <h5 ref={ref} style={{fontWeight: "inherit"}} className={getWLTextClasses()}/>;
         default:
           return;
       }
     }
 
     // Return paragraph 
-    return <p ref={ref} style={{margin: 0}} className={getWLTextClasses()}>{props.children}</p>;
+    return <p ref={ref} style={{margin: 0, fontWeight: "inherit", fontSize:"inherit"}}> className={getWLTextClasses()}>{props.children}</p>;
   }
 
   // When the component mounts, request the necessary siteText from server and let all parent components know that data has been loaded.
@@ -767,5 +780,5 @@ export function WLLayoutHeader(props) {
     return 1;
   }
 
-  return <WLLayoutText b={props.b} data-testid={props["data-testid"]} showSpinner={props.showSpinner} setLoaded={props.setLoaded} firestoreId={props.firestoreId} editable={props.editable} headerLevel={headerLevel} textClasses={"web-legos-scaling-header " + props.className}>{props.children}</WLLayoutText>;
+  return <WLLayoutText b={props.b} data-testid={props["data-testid"]} align={props.align} showSpinner={props.showSpinner} setLoaded={props.setLoaded} firestoreId={props.firestoreId} editable={props.editable} headerLevel={headerLevel} textClasses={"web-legos-scaling-header " + props.className}>{props.children}</WLLayoutText>;
 }

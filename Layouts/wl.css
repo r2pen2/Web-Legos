@@ -47,3 +47,4 @@ a:hover {
 
 /* Text */
 .text-left { text-align: start; }
+.text-right { text-align: end; }
