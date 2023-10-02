@@ -12,17 +12,15 @@ class GlyphSection extends Component {
 export class GlyphSectionTwoItemsNoActions extends GlyphSection {
   
 
-  static Left = ({header, text}) => (
+  static Left = (leftProps) => (
     <div className="wl-glyph-section-two-items-no-actions-item">
-      <h1 className="fw-sb wl-text-primary">{header}</h1>
-      <p className="fw-sb wl-text-secondary">{text}</p>
+      {leftProps.children}
     </div>
   )
 
-  static Right = ({header, text}) => (
+  static Right = (rightProps) => (
     <div className="wl-glyph-section-two-items-no-actions-item">
-      <h1 className="fw-sb wl-text-primary">{header}</h1>
-      <p className="fw-sb wl-text-secondary">{text}</p>
+      {rightProps.children}
     </div>
   )
 

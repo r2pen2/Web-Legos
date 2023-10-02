@@ -32,8 +32,15 @@ a:hover {
 .fw700 { font-weight: 700; }
 .fw-b { font-weight: 700; }
 
+/* Font Sizes */
+.f-lg { font-size: 1.125rem !important }
+.f-xl { font-size: 1.25rem !important }
+.f-2xl { font-size: 1.5rem !important }
+
 /* Maximums */
-.mw-650 { max-width: 650px; }
+.mw-1000 { max-width: 1000px !important; }
+.mw-800 { max-width: 800px !important; }
+.mw-650 { max-width: 650px !important; }
 
 /* Gaps */
 .wl-gap-3 { gap: 3rem; }

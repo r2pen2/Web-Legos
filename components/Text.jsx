@@ -715,6 +715,7 @@ export function WLLayoutText(props) {
         <div className="d-flex flex-row gap-2">
           { editMode && <Button color="error" onClick={() => setEditMode(false)} flat>Cancel</Button> }
           { editMode && <Button color="success" onClick={sendTextUpdateToServer} flat>Save Changes</Button> }
+          { editMode && <div data-testid={props["data-testid"] + ":editing"} /> }
         </div>
       </div>
     )
@@ -731,7 +732,7 @@ export function WLLayoutText(props) {
   }
 
   return (
-    <div data-testid={props["data-testid"]} className={"d-flex flex-column gap-2 w-100" + (props.editable ? "web-legos-text-editable" : "")} onClick={() => setEditMode(props.editable)}>
+    <div data-testid={props["data-testid"]} className={"d-flex flex-column gap-2 w-100" + (props.editable ? "web-legos-text-editable c-pointer" : "")} onClick={() => setEditMode(props.editable)}>
       { paragraphs ? renderParagraphs() : (props.showSpinner && <Loading color="primary" />) }
       { editMode && <Button color="success" onClick={sendTextUpdateToServer}>Save Changes</Button> }
       { !fetched && props.children && <WLParagraph paragraphText={markdownToHTML(props.children)} /> }

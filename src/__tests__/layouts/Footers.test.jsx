@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react"
 import "@testing-library/jest-dom"
 import FooterCentered from "../../../Layouts/Footers/FooterCentered";
+import { WLLayoutHeader, WLLayoutText } from "../../../components/Text";
 
 describe("FooterCentered tests", () => {
 
@@ -11,9 +12,15 @@ describe("FooterCentered tests", () => {
 
   const TestFooter = (props) => (
     <FooterCentered {...props} onLoginClick={clickTest}>
-      <FooterCentered.Header>Test Header</FooterCentered.Header>
-      <FooterCentered.Content>Test Content</FooterCentered.Content>
-      <FooterCentered.Content>Test Content</FooterCentered.Content>
+      <FooterCentered.Header>
+        <WLLayoutHeader data-testid="wl-layout-header" editable={true}>Test Header</WLLayoutHeader>
+      </FooterCentered.Header>
+      <FooterCentered.Content>
+        <WLLayoutText>Test Content</WLLayoutText>
+      </FooterCentered.Content>
+      <FooterCentered.Content>
+        <WLLayoutText>Test Content</WLLayoutText>
+      </FooterCentered.Content>
       <FooterCentered.Link href="mailto:test@test.com">test@test.com</FooterCentered.Link>
     </FooterCentered>
   )
@@ -64,5 +71,13 @@ describe("FooterCentered tests", () => {
     render(<TestFooter dark/>);
     const footer = screen.getByTestId("wl-footer-centered");
     expect(footer).toHaveClass("wl-section-dark");
+  });
+
+  test("FooterCentered allows for WL editing", () => {
+    render(<TestFooter />);
+    const header = screen.getByTestId("wl-layout-header");
+    fireEvent.click(header);
+    const editFlag = screen.getByTestId("wl-layout-header:editing")
+    expect(editFlag).toBeVisible();
   });
 })

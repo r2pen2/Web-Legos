@@ -13,9 +13,9 @@ const FooterSignatureSpaceAround = ({onLoginClick}) => (
  */
 export default class FooterCentered extends Component {
   
-  static Header = (textProps) => <h1 className="wl-text-primary" data-testid="wl-footer-centered-header">{textProps.children}</h1>;
+  static Header = (textProps) => <div className="wl-text-primary" data-testid="wl-footer-centered-header">{textProps.children}</div>;
 
-  static Content = (textProps) => <p className="wl-text-secondary" data-testid="wl-footer-centered-content">{textProps.children}</p>;
+  static Content = (textProps) => <div className="wl-text-secondary" data-testid="wl-footer-centered-content">{textProps.children}</div>;
 
   static Link = (linkProps) => <a href={linkProps.href} className="wl-text-secondary" data-testid="wl-footer-centered-link">{linkProps.children}</a>;
 
