@@ -1,0 +1,8 @@
+.wl-banner {
+ display: flex; 
+ background-color: var(--wl-background);
+ padding-top: 2.5rem;
+ padding-bottom: 2.5rem;
+}
+.wl-banner-body { max-width: 800px };
+.wl-banner-header { max-width: 800px };

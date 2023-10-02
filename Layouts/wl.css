@@ -10,6 +10,9 @@ a:hover {
   text-decoration: underline;
 }
 
+/* Backgrounds */
+.wl-section-dark { background: var(--wl-background-dark) !important }
+
 /* Color Declarations */
 .wl-text-primary { color: var(--wl-text-primary); }
 .wl-section-dark .wl-text-primary { color: var(--wl-text-ondark-primary); }
