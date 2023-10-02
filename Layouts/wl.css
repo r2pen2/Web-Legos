@@ -44,3 +44,6 @@ a:hover {
 
 /* Gaps */
 .wl-gap-3 { gap: 3rem; }
+
+/* Text */
+.text-left { text-align: start; }
