@@ -13,14 +13,14 @@ export class GlyphSectionTwoItemsNoActions extends GlyphSection {
   
 
   static Left = ({header, text}) => (
-    <div className="d-flex flex-column align-items-center justify-content-center wl-glyph-section-two-items-no-actions-item">
+    <div className="wl-glyph-section-two-items-no-actions-item">
       <h1 className="fw-sb wl-text-primary">{header}</h1>
       <p className="fw-sb wl-text-secondary">{text}</p>
     </div>
   )
 
   static Right = ({header, text}) => (
-    <div className="d-flex flex-column align-items-center justify-content-center wl-glyph-section-two-items-no-actions-item">
+    <div className="wl-glyph-section-two-items-no-actions-item">
       <h1 className="fw-sb wl-text-primary">{header}</h1>
       <p className="fw-sb wl-text-secondary">{text}</p>
     </div>
@@ -31,13 +31,22 @@ export class GlyphSectionTwoItemsNoActions extends GlyphSection {
 
   render() {
     return (
-      <div className="wl-glyph-section">
-        <div className="wl-glyph-section-two-items-no-actions d-none d-lg-flex">
+      <div className={`wl-glyph-section ${this.props.dark && "wl-section-dark"}`}>
+        <div className="wl-glyph-section-two-items-no-actions d-none d-lg-flex wl-gap-3">
           {this.leftChild}
           <div className="wl-glyph-section-two-items-no-actions-glyph-container">
             {this.glyph}
           </div>
           {this.rightChild}
+        </div>
+        <div className="wl-glyph-section-two-items-no-actions d-none d-md-flex d-lg-none">
+          <div className="wl-glyph-section-two-items-no-actions-md-container">
+              {this.leftChild}
+              {this.rightChild}
+          </div>
+          <div className="wl-glyph-section-two-items-no-actions-glyph-container">
+            {this.glyph}
+          </div>
         </div>
       </div>
     )
