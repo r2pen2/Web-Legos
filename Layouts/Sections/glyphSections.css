@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: center;
   padding: 1rem;
+  min-height: 300px;
   flex-direction: row;
 }
 .wl-glyph-section-two-items-no-actions-item { 
@@ -17,7 +18,7 @@
 .wl-glyph-section-two-items-no-actions-glyph-container { height: 200px; aspect-ratio: 1/1;  }
 .wl-glyph-section-two-items-no-actions h1 { font-size: 1.5rem; font-weight: 600; }
 .wl-glyph-section-two-items-no-actions p { font-size: 0.75rem; }
-.wl-glyph-section-two-items-no-actions-md-container { display: flex; flex-direction: row; }
+.wl-glyph-section-two-items-no-actions-md-container { display: flex; flex-direction: row; align-items: center; justify-content: center; }
 
 /* Dark Mode */
 .wl-section-dark .wl-glyph-section-two-items-no-actions { background: var(--wl-background-dark);}

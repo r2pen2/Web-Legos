@@ -39,10 +39,12 @@ export class GlyphSectionTwoItemsNoActions extends GlyphSection {
           </div>
           {this.rightChild}
         </div>
-        <div className="wl-glyph-section-two-items-no-actions d-none d-md-flex d-lg-none">
-          <div className="wl-glyph-section-two-items-no-actions-md-container">
-              {this.leftChild}
-              {this.rightChild}
+        <div className="wl-glyph-section-two-items-no-actions d-flex d-lg-none">
+          <div className="wl-glyph-section-two-items-no-actions-md-container container-fluid">
+            <div className="row">
+              <div className="col-12 col-md-6 d-flex flex-column align-items-center justify-content-center">{this.leftChild}</div>
+              <div className="col-12 col-md-6 d-flex flex-column align-items-center justify-content-center">{this.rightChild}</div>
+            </div>
           </div>
           <div className="wl-glyph-section-two-items-no-actions-glyph-container">
             {this.glyph}
