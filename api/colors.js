@@ -41,6 +41,8 @@ export const lavender600 = "#7149F6";
 export const swanGray = "#8C8C8C"
 export const swanDarkGray = "#8C8C8C"
 export const swanWhite = "#f4fbfc"
+export const swanBlueGray = "#2B3C60"
+export const swanPurple = "#5738B3"
 
 export class ColorMaster {
 

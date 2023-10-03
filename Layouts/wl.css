@@ -48,3 +48,7 @@ a:hover {
 /* Text */
 .text-left { text-align: start; }
 .text-right { text-align: end; }
+
+/* Spacers */
+.wl-spacer-1 { height: 1rem; }
+.wl-spacer-2 { height: 2rem; }
