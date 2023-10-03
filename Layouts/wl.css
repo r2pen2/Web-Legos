@@ -52,3 +52,11 @@ a:hover {
 /* Spacers */
 .wl-spacer-1 { height: 1rem; }
 .wl-spacer-2 { height: 2rem; }
+
+/* Shapes */
+.wl-section-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
