@@ -1,19 +1,16 @@
-.App {
-  font-family: "Inter", sans;
-}
+/* Font */
+.App { font-family: "Inter", sans; }
 
-a:hover {
-  color: var(--wl-link-hover) !important;
-}
-
-.underline {
-  text-decoration: underline;
+/* Padding / Layout */
+hgroup {
+  padding-inline: 2rem;
 }
 
 /* Backgrounds */
 .wl-section-dark { background: var(--wl-background-dark) !important }
 
 /* Color Declarations */
+a:hover { color: var(--wl-link-hover) !important; }
 .wl-text-primary { color: var(--wl-text-primary); }
 .wl-section-dark .wl-text-primary { color: var(--wl-text-ondark-primary); }
 .wl-text-secondary { color: var(--wl-text-secondary); }
@@ -46,6 +43,7 @@ a:hover {
 .wl-gap-3 { gap: 3rem; }
 
 /* Text */
+.underline { text-decoration: underline; }
 .text-left { text-align: start; }
 .text-right { text-align: end; }
 
@@ -57,6 +55,6 @@ a:hover {
 .wl-section-bottom {
   position: absolute;
   bottom: 0;
-  left: 0;
-  width: 100%;
+  left: center;
+  width: 101%;
 }
