@@ -58,7 +58,7 @@ export function WLFooterSignature() {
   return (
     <div className="d-flex align-items-center justify-content-center flex-row">
       <Text size="$xs">
-        Web Developer: <Link href="https://www.joed.dev/">Joe Dobbelaar</Link>
+        Web Developer: <Link href="https://www.joed.dev/" style={{textDecoration: "underline"}}>Joe Dobbelaar</Link>
       </Text>
     </div>
   )

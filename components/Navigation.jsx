@@ -122,7 +122,7 @@ export class WLNavDropdownMenu extends Component {
               padding: this.props.buttonLight
             }}
           >
-            <Dropdown.Button auto light={this.props.buttonLight} bordered={this.props.buttonBordered}>
+            <Dropdown.Button auto light={this.props.buttonLight} bordered={this.props.buttonBordered} aria-label="navbar-dropdown-menu-button">
               {this.props.buttonText}
             </Dropdown.Button>
           </Navbar.Item>
