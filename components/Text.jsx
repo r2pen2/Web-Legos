@@ -454,15 +454,15 @@ export function WLTextV2(props) {
     if (props.headerLevel) {
       switch (props.headerLevel) {
         case 1: 
-          return <Text ref={ref} b={props.b} h1 align={props.align} size={props.size} color={props.color} className={getWLTextClasses()}/>;
+          return <Text ref={ref} b={props.b} h1 align={props.align} size={props.size} color={props.color} className={getWLTextClasses() + " web-legos-header-1"}/>;
         case 2: 
-          return <Text ref={ref} b={props.b} h2 align={props.align} size={props.size} color={props.color} className={getWLTextClasses()}/>;
+          return <Text ref={ref} b={props.b} h2 align={props.align} size={props.size} color={props.color} className={getWLTextClasses() + " web-legos-header-2"}/>;
         case 3: 
-          return <Text ref={ref} b={props.b} h3 align={props.align} size={props.size} color={props.color} className={getWLTextClasses()}/>;
+          return <Text ref={ref} b={props.b} h3 align={props.align} size={props.size} color={props.color} className={getWLTextClasses() + " web-legos-header-3"}/>;
         case 4: 
-          return <Text ref={ref} b={props.b} h4 align={props.align} size={props.size} color={props.color} className={getWLTextClasses()}/>;
+          return <Text ref={ref} b={props.b} h4 align={props.align} size={props.size} color={props.color} className={getWLTextClasses() + " web-legos-header-4"}/>;
         case 5: 
-          return <Text ref={ref} b={props.b} h5 align={props.align} size={props.size} color={props.color} className={getWLTextClasses()}/>;
+          return <Text ref={ref} b={props.b} h5 align={props.align} size={props.size} color={props.color} className={getWLTextClasses() + " web-legos-header-5"}/>;
         default:
           return;
       }
