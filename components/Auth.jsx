@@ -2,14 +2,16 @@ import { useEffect } from "react";
 
 import { AuthenticationManager } from "../api/auth.ts";
 import { signOut } from "firebase/auth";
-import { Button } from "@nextui-org/react";
+import { Button, Link, Text } from "@nextui-org/react";
 
 /**
  * @param {AuthenticationManager} authManager - AuthenticationManager instance for this site
  * @param {FirebaseAuthentication} currentSignIn - currently signed in user state  
  * @param {Function} setCurrentSignIn - currently signed in user state setter function  
+ * @param {boolean} link - whether to display as link  
+ * @param {string} color - link color  
  */
-export function FooterAuthButton({authManager, currentSignIn, setCurrentSignIn}) {
+export function FooterAuthButton({authManager, currentSignIn, setCurrentSignIn, link, color}) {
   
   // Update sign-in state on authentication change
   useEffect(() => {
@@ -39,9 +41,19 @@ export function FooterAuthButton({authManager, currentSignIn, setCurrentSignIn})
     }
   }  
 
+  const buttonText = currentSignIn ? `Signed in as ${currentSignIn.displayName}` : "Admin Login";
+
+  if (link) {
+    return (
+      <Text aria-label="admin-login-button" onClick={handleSignInClick} color={color} css={{cursor: "pointer", textDecoration:"underline"}}>
+        {buttonText}
+      </Text>
+    )
+  }
+
   return (
-    <Button light onClick={handleSignInClick}>
-      {currentSignIn ? `Signed in as ${currentSignIn.displayName}` : "Admin Login"}
+    <Button aria-label="admin-login-button" light onClick={handleSignInClick}>
+      {buttonText}
     </Button>
   )
 }

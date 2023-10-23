@@ -559,7 +559,7 @@ export function WLTextV2(props) {
   }
 
   return (
-    <div data-testid={props["data-testid"]} className={"d-flex flex-column gap-2 w-100" + (props.editable ? "web-legos-text-editable" : "")} onClick={() => setEditMode(props.editable)}>
+    <div data-testid={props["data-testid"]} className={"d-flex flex-column gap-2 w-100" + (props.editable ? " web-legos-text-editable" : "")} onClick={() => setEditMode(props.editable)}>
       { paragraphs ? renderParagraphs() : (props.showSpinner && <Loading color="primary" />) }
       { editMode && <Button color="success" onClick={sendTextUpdateToServer}>Save Changes</Button> }
       { !fetched && props.children && <WLParagraph paragraphText={markdownToHTML(props.children)} /> }

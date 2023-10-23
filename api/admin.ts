@@ -5,7 +5,8 @@ import { getSlashDateString, getTimeOfDay } from "./strings.js";
 export enum SiteKey {
   TestSiteNoForms = "TESTSITENOFORMS",
   BeyondTheBellEducation = "BTB",
-  YouCanDoItGardening = "YCD"
+  YouCanDoItGardening = "YCD",
+  NicoleLevin = "NL",
 }
 
 export enum SiteModule {
