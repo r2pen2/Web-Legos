@@ -538,7 +538,7 @@ export function WLTextV2(props) {
   if (editMode) {
     // If we're in edit mode, return a Textarea and buttons to save / cancel
     return (
-      <div className="d-flex flex-column align-items-center justify-content-center w-100 gap-2">
+      <div className="d-flex flex-column align-items-center justify-content-center gap-2">
         <Textarea fullWidth helperColor={showSaved ? "success" : null} status={showSaved ? "success" : null} helperText={showSaved ? "Your changes have been saved!" : null} label={`Editing Text: ${props.firestoreId}`} value={editableText} onChange={handleTextareaChange}/>
         <div className="d-flex flex-row gap-2">
           { editMode && <Button color="error" onClick={() => setEditMode(false)} flat>Cancel</Button> }
