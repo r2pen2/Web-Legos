@@ -6,6 +6,20 @@ hgroup {
   padding-inline: 2rem;
 }
 
+/* Borders */
+.b-red { border: 2px solid red }
+.b-green { border: 2px solid green }
+.b-blue { border: 2px solid blue }
+.b-white { border: 2px solid white }
+.b-black { border: 2px solid black }
+
+/* Border Radius */
+.br-1 { border-radius: 1rem }
+.br-2 { border-radius: 2rem }
+.br-3 { border-radius: 3rem }
+.br-4 { border-radius: 4rem }
+.br-5 { border-radius: 5rem }
+
 /* Backgrounds */
 .wl-section-dark { background: var(--wl-background-dark) !important }
 
