@@ -13,6 +13,9 @@ hgroup {
 .b-white { border: 2px solid white }
 .b-black { border: 2px solid black }
 
+/* Interior Border Radius */
+.bri-1 { border-radius: 0.6rem }
+
 /* Border Radius */
 .br-1 { border-radius: 1rem }
 .br-2 { border-radius: 2rem }
