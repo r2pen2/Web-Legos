@@ -13,7 +13,7 @@ import { getLargestNumber } from "../api/math";
 import { Button, IconButton, Pagination } from "@mui/material";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { Divider, Text, Button as NextUIButton, Card } from "@nextui-org/react";
+import { Divider, Text, Button as NextUIButton, Card, Progress } from "@nextui-org/react";
 import { WLTestimonial } from "../api/models.ts";
 import { QuoteBlock } from "./Text";
 import { Carousel } from "react-responsive-carousel"
@@ -317,6 +317,8 @@ export function WLResponsiveCarousel(props) {
  * A ReactSlick slider with custom arrows
  * @param {React.Element} nextArrow - custom next arrow 
  * @param {React.Element} prevArrow - custom previous arrow 
+ * @param {boolean} autoPlay - whether to autoplay carousel 
+ * @param {number} autoPlaySpeed - speed (in ms) of autoplay 
  * @returns 
  */
 export function WLSlick(props) {
@@ -366,11 +368,13 @@ export function WLSlick(props) {
     slidesToScroll: 1,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
+    autoplay: props.autoPlay,
+    autoplaySpeed: props.autoPlaySpeed ? props.autoPlaySpeed : 5000,
   };
 
   return (
     <div className="container" data-testid="react-slick-container">
-      <Slider {...settings}>
+      <Slider {...settings} >
         {props.children}
       </Slider>
     </div>

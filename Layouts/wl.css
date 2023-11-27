@@ -1,3 +1,13 @@
+/* Define Colors */
+html {
+  /* Swan Scheme Colors */
+  --swan-white: #f4fbfc;
+  --swan-gray: #8C8C8C;
+  --swan-darkgray: #8C8C8C;
+  --swan-bluegray: #2B3C60;
+  --swan-purple: #5738B3;
+}
+
 /* Font */
 .App { font-family: "Inter", sans; }
 
