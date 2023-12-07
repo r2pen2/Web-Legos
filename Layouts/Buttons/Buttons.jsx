@@ -2,11 +2,14 @@ import React from 'react'
 import "./buttons.css"
 
 import {Button} from "@nextui-org/react"
-import { ColorMaster } from '../../api/colors'
+import { ColorMaster, swanPurple } from '../../api/colors'
 
 export function ButtonRounded(props) {
 
-  const buttonHoverColor = `#${ColorMaster.addHexColor(props.color, "#111111")}`
+  /** Default color for testing purposes */
+  const unhoveredColor = props.color ? props.color : swanPurple; 
+
+  const buttonHoverColor = `#${ColorMaster.addHexColor(unhoveredColor, "#111111")}`
 
   return (
     <Button 

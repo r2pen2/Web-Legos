@@ -5,10 +5,10 @@ import {ButtonRounded} from "../../../Layouts/Buttons/Buttons"
 
 describe("ButtonRounded tests", () => {
   
-    function clickTest() {
-      const container = screen.getByTestId("wl-button-rounded")
-      container.setAttribute("test-clicked", "clicked");
-    }
+  function clickTest() {
+    const container = screen.getByTestId("wl-button-rounded")
+    container.setAttribute("test-clicked", "clicked");
+  }
 
   const TestButton = () => <ButtonRounded onClick={clickTest}>Test</ButtonRounded>
 
