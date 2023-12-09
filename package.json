@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/r2pen2/Web-Legos#readme",
   "dependencies": {
-    "@emotion/react": "file:../../node_modules/@emotion/react", 
+    "@emotion/react": "file:../../node_modules/@emotion/react",
     "@emotion/styled": "file:../../node_modules/@emotion/styled",
     "@mui/material": "file:../../node_modules/@mui/material",
     "@nextui-org/react": "file:../../node_modules/@nextui-org/react",
@@ -33,6 +33,7 @@
     "react-responsive-carousel": "^3.2.23",
     "react-scripts": "file:../../node_modules/react-scripts",
     "react-slick": "^0.29.0",
+    "react-sparkle": "^2.0.0",
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
