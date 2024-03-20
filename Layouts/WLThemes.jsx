@@ -4,7 +4,6 @@ export class WLThemeProvider extends Component {
   render() {
     return (
       <div
-      
         style={{
           "--wl-background": this.props.theme.backgroundColor,
           "--wl-background-dark": this.props.theme.backgroundDark,
