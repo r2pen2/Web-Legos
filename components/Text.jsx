@@ -246,6 +246,7 @@ export function WLHeader(props) {
  * @param {string} textClasses - classes to apply on text inside the returned {@link WLText} component
  * @param {React.ReactNode} children - component children (static text)
  * @param {boolean} showSpinner - whether to show a loading spinner
+ * @param {string} spinnerStyle - loading spinner type
  * @default
  * align = "center"  
  * headerLevel = 1
@@ -410,6 +411,7 @@ export async function getWLText(firestoreId) {
  * @param {boolean} editable - whether this text is currently editable  
  * @param {string} firestoreId - id for this text in its firestoreCollection  
  * @param {boolean} showSpinner - whether to show a loading spinner
+ * @param {string} spinnerStyle - loading spinner type
  * @default
  * shopSpinner = false;  
  * @returns 
@@ -560,7 +562,7 @@ export function WLTextV2(props) {
 
   return (
     <div data-testid={props["data-testid"]} className={"d-flex flex-column gap-2 w-100" + (props.editable ? " web-legos-text-editable" : "")} onClick={() => setEditMode(props.editable)}>
-      { paragraphs ? renderParagraphs() : (props.showSpinner && <Loading color="primary" />) }
+      { paragraphs ? renderParagraphs() : (props.showSpinner && <Loading type={props.spinnerStyle} color="primary" />) }
       { editMode && <Button color="success" onClick={sendTextUpdateToServer}>Save Changes</Button> }
       { !fetched && props.children && <WLParagraph paragraphText={markdownToHTML(props.children)} /> }
     </div>
@@ -579,6 +581,7 @@ export function WLTextV2(props) {
  * @param {boolean} editable - whether this text is currently editable  
  * @param {string} firestoreId - id for this text in its firestoreCollection  
  * @param {boolean} showSpinner - whether to show a loading spinner
+ * @param {string} spinnerStyle - loading spinner type
  * @default
  * shopSpinner = false;  
  * @returns 
