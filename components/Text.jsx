@@ -265,7 +265,7 @@ export function WLHeaderV2(props) {
     return 1;
   }
 
-  return <WLTextV2 b={props.b} data-testid={props["data-testid"]} showSpinner={props.showSpinner} setLoaded={props.setLoaded} align={props.align} color={props.color} size={props.size} firestoreId={props.firestoreId} editable={props.editable} headerLevel={headerLevel} textClasses={"web-legos-scaling-header " + props.className}>{props.children}</WLTextV2>;
+  return <WLTextV2 b={props.b} spinnerStyle={props.spinnerStyle} data-testid={props["data-testid"]} showSpinner={props.showSpinner} setLoaded={props.setLoaded} align={props.align} color={props.color} size={props.size} firestoreId={props.firestoreId} editable={props.editable} headerLevel={headerLevel} textClasses={"web-legos-scaling-header " + props.className}>{props.children}</WLTextV2>;
 }
 
 /**
