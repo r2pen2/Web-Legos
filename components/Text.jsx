@@ -247,6 +247,7 @@ export function WLHeader(props) {
  * @param {React.ReactNode} children - component children (static text)
  * @param {boolean} showSpinner - whether to show a loading spinner
  * @param {string} spinnerStyle - loading spinner type
+ * @param {Object} spinnerCss - loading spinner css
  * @default
  * align = "center"  
  * headerLevel = 1
@@ -265,7 +266,7 @@ export function WLHeaderV2(props) {
     return 1;
   }
 
-  return <WLTextV2 b={props.b} spinnerStyle={props.spinnerStyle} data-testid={props["data-testid"]} showSpinner={props.showSpinner} setLoaded={props.setLoaded} align={props.align} color={props.color} size={props.size} firestoreId={props.firestoreId} editable={props.editable} headerLevel={headerLevel} textClasses={"web-legos-scaling-header " + props.className}>{props.children}</WLTextV2>;
+  return <WLTextV2 b={props.b} spinnerCss={props.spinnerCss} spinnerStyle={props.spinnerStyle} data-testid={props["data-testid"]} showSpinner={props.showSpinner} setLoaded={props.setLoaded} align={props.align} color={props.color} size={props.size} firestoreId={props.firestoreId} editable={props.editable} headerLevel={headerLevel} textClasses={"web-legos-scaling-header " + props.className}>{props.children}</WLTextV2>;
 }
 
 /**
@@ -412,6 +413,7 @@ export async function getWLText(firestoreId) {
  * @param {string} firestoreId - id for this text in its firestoreCollection  
  * @param {boolean} showSpinner - whether to show a loading spinner
  * @param {string} spinnerStyle - loading spinner type
+ * @param {Object} spinnerCss - loading spinner css
  * @default
  * shopSpinner = false;  
  * @returns 
@@ -562,7 +564,7 @@ export function WLTextV2(props) {
 
   return (
     <div data-testid={props["data-testid"]} className={"d-flex flex-column gap-2 w-100" + (props.editable ? " web-legos-text-editable" : "")} onClick={() => setEditMode(props.editable)}>
-      { paragraphs ? renderParagraphs() : (props.showSpinner && <Loading type={props.spinnerStyle} color="primary" />) }
+      { paragraphs ? renderParagraphs() : (props.showSpinner && <Loading style={props.spinnerCss} type={props.spinnerStyle} color="primary" />) }
       { editMode && <Button color="success" onClick={sendTextUpdateToServer}>Save Changes</Button> }
       { !fetched && props.children && <WLParagraph paragraphText={markdownToHTML(props.children)} /> }
     </div>
