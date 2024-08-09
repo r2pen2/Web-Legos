@@ -250,7 +250,6 @@ export function ModelEditModal({open, setOpen, model}) {
       modelData[newImageKey] = addPath;
     }
     if (!model.id) {
-      console.log("no id")
       createModel(model.collection, modelData).then(() => {
         window.location.reload();
       })
