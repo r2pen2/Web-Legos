@@ -13,6 +13,9 @@ import FavoriteTwoToneIcon from '@mui/icons-material/FavoriteTwoTone';
 import { ImageCompressor } from "../api/images";
 
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
+import { getHostname } from "../api/development.ts";
+
+const developmentHostname = getHostname();
 
 /**
  * @param {boolean} open - whether modal is open
@@ -204,7 +207,7 @@ export function ModelEditModal({open, setOpen, model}) {
     if (key === "confirm") {
       for (const image of Object.values(model.images)) {
         const imageToDeleteFilename = image.substring(image.lastIndexOf("/") + 1);
-        fetch(`/delete-img?path=${model.collection}/${imageToDeleteFilename}`, {
+        fetch(`${developmentHostname}/delete-img?path=${model.collection}/${imageToDeleteFilename}`, {
           method: "POST",
         });
       }
@@ -234,12 +237,12 @@ export function ModelEditModal({open, setOpen, model}) {
       const formData = new FormData();
       const addPath = `images/${model.collection}/${newFileName}`;
       formData.append("file", compressedImage);
-      await fetch(`/${addPath}`, {
+      await fetch(`${developmentHostname}/${addPath}`, {
         method: "POST",
         body: formData,
       });
       if (imageToReplace) {
-        await fetch(`/delete-img?path=${model.collection}/${imageToReplaceFileName}`, {
+        await fetch(`${developmentHostname}/delete-img?path=${model.collection}/${imageToReplaceFileName}`, {
           method: "POST",
         });
       }

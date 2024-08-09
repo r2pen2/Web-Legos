@@ -5,6 +5,9 @@ import { Button, Divider, Link, Loading, Text, Textarea } from "@nextui-org/reac
 import "../assets/style/text.css";
 import { useEffect, useRef, useState, useLayoutEffect, Component } from "react";
 import { HTMLToMarkdown, markdownToHTML } from "../api/strings";
+import { getHostname } from "../api/development.ts";
+
+const developmentHostname = getHostname();
 
 /**
  * A simple indented text block
@@ -106,7 +109,7 @@ export function WLText(props) {
       return; 
     }
     // Ask DB for the right text
-    fetch(`/site-text?id=${props.firestoreId}`).then((res) => {
+    fetch(`${developmentHostname}/site-text?id=${props.firestoreId}`).then((res) => {
       res.text().then((text) => {
         const gotResponse = !text.includes("<!DOCTYPE html>");
         setFetched(gotResponse);
@@ -142,7 +145,7 @@ export function WLText(props) {
   function sendTextUpdateToServer() {
     if (editableText === originalText) { setEditMode(false); return; }
     setOriginalText(editableText);
-    fetch(`/site-text`, {
+    fetch(`${developmentHostname}/site-text`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -391,7 +394,7 @@ export class QuoteBlock extends Component {
   
 export async function getWLText(firestoreId) {
   return new Promise((resolve, reject) => {
-    fetch(`/site-text?id=${firestoreId}`).then((res) => {
+    fetch(`${developmentHostname}/site-text?id=${firestoreId}`).then((res) => {
       res.text().then((text) => {
         const markdownText = HTMLToMarkdown(text);
         resolve(markdownText);
@@ -419,10 +422,6 @@ export async function getWLText(firestoreId) {
  * @returns 
  */
 export function WLTextV2(props) {
-
-  // Get local hostname?
-  const hostname = localStorage.getItem("wl-hostname") ? localStorage.getItem("wl-hostname") : "";
-  console.log(hostname)
   
   // Create states
   const [originalText, setOriginalText] = useState("");   // Text first received from DB
@@ -491,7 +490,7 @@ export function WLTextV2(props) {
       return; 
     }
     // Ask DB for the right text
-    fetch(`${hostname}/site-text?id=${props.firestoreId}`).then((res) => {
+    fetch(`${developmentHostname}/site-text?id=${props.firestoreId}`).then((res) => {
       res.text().then((text) => {
         const gotResponse = !text.includes("<!DOCTYPE html>");
         setFetched(gotResponse);
@@ -509,7 +508,7 @@ export function WLTextV2(props) {
         }
       })
     })
-  }, [props.firestoreId, props.indent, props.setLoaded, props, hostname]);
+  }, [props.firestoreId, props.indent, props.setLoaded, props]);
 
   /**
    * Set {@link editableText} and {@link showSaved} states when text area's value is updated
@@ -527,7 +526,7 @@ export function WLTextV2(props) {
   function sendTextUpdateToServer() {
     if (editableText === originalText) { setEditMode(false); return; }
     setOriginalText(editableText);
-    fetch(`/site-text`, {
+    fetch(`${developmentHostname}/site-text`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -679,7 +678,7 @@ export function WLLayoutText(props) {
       return; 
     }
     // Ask DB for the right text
-    fetch(`/site-text?id=${props.firestoreId}`).then((res) => {
+    fetch(`${developmentHostname}/site-text?id=${props.firestoreId}`).then((res) => {
       res.text().then((text) => {
         const gotResponse = !text.includes("<!DOCTYPE html>");
         setFetched(gotResponse);
@@ -715,7 +714,7 @@ export function WLLayoutText(props) {
   function sendTextUpdateToServer() {
     if (editableText === originalText) { setEditMode(false); return; }
     setOriginalText(editableText);
-    fetch(`/site-text`, {
+    fetch(`${developmentHostname}/site-text`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

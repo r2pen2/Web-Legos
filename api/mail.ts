@@ -1,3 +1,7 @@
+import { getHostname } from "./development.ts";
+
+const developmentHostname = getHostname();
+
 export class MailManager {
   
   fromAddress: string;
@@ -20,7 +24,7 @@ export class MailManager {
    */
   async sendMail(subject: string, text: string) {
     for (const toAddress of this.recipientEmails) {
-      fetch(`/site-mail`, {
+      fetch(`${developmentHostname}/site-mail`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

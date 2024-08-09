@@ -3,7 +3,9 @@ import { Auth, getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/aut
 // @ts-ignore
 import { WLAdminPermissions, WLEditHistory } from "./admin.ts";
 import { createContext } from "react";
+import { getHostname } from "./development.ts";
 
+const developmentHostname = getHostname();
 export class AuthenticationManager {
   
   static Context = createContext(null);
@@ -68,7 +70,7 @@ export class AuthenticationManager {
 //      const jsonUser = user.toJson()
       console.log(user);
       
-      fetch(`/site-auth`, {
+      fetch(`${developmentHostname}/site-auth`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -84,7 +86,7 @@ export class AuthenticationManager {
     if (!currentSignIn) { return; }
     if (!currentSignIn.uid) { return; }
     return new Promise((resolve, reject) => {
-      fetch(`/site-auth?id=${currentSignIn.uid}`).then((res) => {
+      fetch(`${developmentHostname}/site-auth?id=${currentSignIn.uid}`).then((res) => {
         res.json().then((json) => {
           resolve(json[perm]);
         })
