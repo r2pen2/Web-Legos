@@ -100,6 +100,8 @@ export interface FirestoreSerializable {
 
 export async function sendModelData(collection: string, id: string, data: string) {
   return new Promise((resolve, reject) => {
+    console.log("Sending model data to server...");
+    console.log(`${developmentHostname}/site-models`);
     fetch(`${developmentHostname}/site-models`, {
       method: "POST",
       headers: {
