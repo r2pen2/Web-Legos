@@ -3,6 +3,7 @@ import { Component, useEffect, useState} from "react";
 import LaunchIcon from '@mui/icons-material/Launch';
 import { WLHeader } from "./Text";
 // @ts-ignore
+import React from "react";
 import { SiteModel, createModel, deleteModel, sendModelData } from "../api/models.ts";
 import "../assets/style/modals.css";
 import { getFileNameByCurrentTime, openFileBrowser } from "../api/files";
@@ -494,13 +495,17 @@ function EditableTextBlock({setTextState, setEditedText, stringKey, textState, e
  * @param {Function} setCurrentModel - current model setter function
  * @param {Function} setEditModalOpen - edit modal open setter function
  */
-export function AddModelButton({userCanEdit, model, setCurrentModel, setEditModalOpen}) {
+export function AddModelButton({userCanEdit, model, setCurrentModel, setEditModalOpen, buttonComponent}) {
   
   const modelInstance = new model();
 
   function handleClick() {
     setCurrentModel(modelInstance);
     setEditModalOpen(true);
+  }
+
+  if (buttonComponent) {
+    return userCanEdit && React.cloneElement(buttonComponent, {onClick: handleClick});
   }
 
   return userCanEdit && <Button className="my-2" flat onClick={handleClick}>New "{modelInstance.modelName}"</Button>;
