@@ -419,6 +419,10 @@ export async function getWLText(firestoreId) {
  * @returns 
  */
 export function WLTextV2(props) {
+
+  // Get local hostname?
+  const hostname = localStorage.getItem("wl-hostname") ? localStorage.getItem("wl-hostname") : "";
+  console.log(hostname)
   
   // Create states
   const [originalText, setOriginalText] = useState("");   // Text first received from DB
@@ -487,7 +491,7 @@ export function WLTextV2(props) {
       return; 
     }
     // Ask DB for the right text
-    fetch(`/site-text?id=${props.firestoreId}`).then((res) => {
+    fetch(`${hostname}/site-text?id=${props.firestoreId}`).then((res) => {
       res.text().then((text) => {
         const gotResponse = !text.includes("<!DOCTYPE html>");
         setFetched(gotResponse);
@@ -505,7 +509,7 @@ export function WLTextV2(props) {
         }
       })
     })
-  }, [props.firestoreId, props.indent, props.setLoaded, props]);
+  }, [props.firestoreId, props.indent, props.setLoaded, props, hostname]);
 
   /**
    * Set {@link editableText} and {@link showSaved} states when text area's value is updated
