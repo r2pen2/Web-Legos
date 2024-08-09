@@ -156,7 +156,7 @@ export function ModelEditModal({open, setOpen, model}) {
         <div key={index} className="py-2 px-lg-5 px-2 d-flex flex-column align-items-center justify-content-center col-xl-4 col-lg-6 col-md-12">
           <Text h5>{compressing ? "Compressing..." : imageKey}</Text>
           { compressing && <Loading />}
-          { !compressing && imagesState[imageKey] && <img onClick={() => handleImageClick(imageKey)} className="web-legos-editable-image" src={imagesState[imageKey]} alt={imageKey} style={{maxHeight: imageSize, width: "100%", height: "100%", objectFit:"contain",}}/> }
+          { !compressing && imagesState[imageKey] && <img onClick={() => handleImageClick(imageKey)} className="web-legos-editable-image" src={getHostname() + "/" + imagesState[imageKey]} alt={imageKey} style={{maxHeight: imageSize, width: "100%", height: "100%", objectFit:"contain",}}/> }
           { !compressing && !imagesState[imageKey] && <UploadImageCard size={imageSize} fullSize onClick={() => handleImageClick(imageKey)}/> }
         </div>
       )
@@ -238,6 +238,7 @@ export function ModelEditModal({open, setOpen, model}) {
       const formData = new FormData();
       const addPath = `images/${model.collection}/${newFileName}`;
       formData.append("file", compressedImage);
+      console.log(`${developmentHostname}/${addPath}`)
       await fetch(`${developmentHostname}/${addPath}`, {
         method: "POST",
         body: formData,
@@ -521,7 +522,7 @@ export function AddModelButton({userCanEdit, model, setCurrentModel, setEditModa
  * @param {Function} setEditModalOpen - edit modal open setter function
  * @param {boolean} small - whether to just display icon
  */
-export function ModelEditButton({small, solid, userCanEdit, model, data, setCurrentModel, setEditModalOpen}) {
+export function ModelEditButton({small, solid, userCanEdit, model, data, setCurrentModel, setEditModalOpen, buttonComponent}) {
   
   const modelInstance = new model();
   
@@ -531,6 +532,10 @@ export function ModelEditButton({small, solid, userCanEdit, model, data, setCurr
   }
 
   const editText = modelInstance.static ? modelInstance.editText : "Edit";
+
+  if (buttonComponent) {
+    return userCanEdit && React.cloneElement(buttonComponent, {onClick: handleClick});
+  }
 
   if (small) {
     return userCanEdit && <div className="m-2 d-flex flex-row align-items-center justify-content-center"><IconButton onClick={handleClick}><EditTwoToneIcon /></IconButton></div>
