@@ -1,7 +1,10 @@
+const isDevServer = window.location.hostname === "localhost"; 
+
 export function setHostname(hostname: string) {
-  localStorage.setItem("wl-dev-hostname", "https://" + hostname);
+  if (isDevServer) { localStorage.setItem("wl-dev-hostname", "https://" + hostname); }
 }
 
 export function getHostname() {
-  return localStorage.getItem("wl-dev-hostname") ? localStorage.getItem("wl-dev-hostname") : "";
+  const storage = localStorage.getItem("wl-dev-hostname");
+  return (storage && isDevServer) ? storage : "";
 }
